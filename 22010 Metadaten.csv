@@ -1,0 +1,76 @@
+﻿Probenidentifikationsnummer;Alter in Jahren;Studiengruppe;Gegengeschlechtliche Hormontherapie;Zeitpunkt Probenentnahme;Zeitpunkt Einfrieren;Dauer Transport in Tagen;Länge GHAT  in Monaten;Start GHAT  Hormontherapie;GnRh-Analoga ja/nein;Dauer GnRH-Analoga Einnahme in Monaten;Start GnRH-Analoga;Zeitraum seit letzter Regelblutung in Monaten;Datum letzte Regelblutung;Durchschnittliche Zykluslänge in Tagen;Zyklustag bei Probenentnahme;Zeitraum seit Menopause in Jahren;Medikamente;Virgo;Kontrazeption;Art der Kontrazeption;Sexuell aktiv;Zeitpunkt letzter Geschlechtsverkehr;Biologisches Geschlecht Sexualpartner:in;Nugent Score;Testosteronwert (µg/l);Östradiolwert (ng/l)
+101;64;Kontrolle 1;nein;04.07.22;04.07.22;0;0;;;;;;;;;11;ja;nein;nein;;ja;Letzte Woche;Männlich;7-10;;
+102;49;Kontrolle 1;nein;11.07.22;11.07.22;0;0;;;;;;;;;2;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+103;61;Kontrolle 1;nein;11.07.22;11.07.22;0;0;;;;;;;;;10;nein;nein;nein;;ja;Letzte Woche;Männlich;7-10;;
+104;70;Kontrolle 1;nein;11.07.22;11.07.22;0;0;;;;;;;;;22;ja;nein;nein;;ja;Letztes Monat;Männlich;4-6;;
+105;66;Kontrolle 1;nein;11.07.22;11.07.22;0;0;;;;;;;;;12;ja;nein;nein;;ja;Letzte Woche;Männlich;keine Keime;;
+106;71;Kontrolle 1;nein;25.07.22;25.07.22;0;0;;;;;;;;;22;ja;nein;nein;;nein;;Männlich;0-3;;
+107;59;Kontrolle 1;nein;22.08.22;22.08.22;0;0;;;;;;;;;4;ja;nein;nein;;nein;;Männlich;4-6;;
+108;75;Kontrolle 1;nein;05.09.22;05.09.22;0;0;;;;;;;;;28;ja;nein;nein;;nein;;Männlich;keine Keime;;
+109;62;Kontrolle 1;nein;05.09.22;05.09.22;0;0;;;;;;;;;7;ja;nein;nein;;nein;;Männlich;keine Keime;;
+110;68;Kontrolle 1;nein;12.10.22;12.10.22;0;0;;;;;;;;;26;nein;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+111;59;Kontrolle 1;nein;18.10.22;18.10.22;0;0;;;;;;;;;11;ja;nein;nein;;nein;;Männlich;keine Keime;;
+112;55;Kontrolle 1;nein;01.12.22;02.12.22;1;0;;;;;;;;;2;ja;nein;nein;;;;Männlich;keine Keime;;
+113;71;Kontrolle 1;nein;12.12.22;12.12.22;0;0;;;;;;;;;18;ja;nein;nein;;nein;;Männlich;keine Keime;;
+114;70;Kontrolle 1;nein;13.12.22;13.12.22;0;0;;;;;;;;;20;nein;nein;nein;;nein;;Männlich;keine Keime;;
+115;70;Kontrolle 1;nein;13.12.22;13.12.22;0;0;;;;;;;;;17;ja;nein;nein;;nein;;Männlich;keine Keime;;
+116;69;Kontrolle 1;nein;13.12.22;13.12.22;0;0;;;;;;;;;24;ja;nein;nein;;nein;;Männlich;keine Keime;;
+117;73;Kontrolle 1;nein;14.12.22;14.12.22;0;0;;;;;;;;;23;ja;nein;nein;;nein;;Männlich;4-6;;
+118;64;Kontrolle 1;nein;14.12.22;14.12.22;0;0;;;;;;;;;19;ja;nein;nein;;ja;Letztes Monat;Männlich;4-6;;
+119;68;Kontrolle 1;nein;10.01.23;10.01.23;0;0;;;;;;;;;23;ja;nein;nein;;nein;;Männlich;keine Keime;;
+120;76;Kontrolle 1;nein;23.01.23;23.01.23;0;0;;;;;;;;;27;ja;nein;nein;;nein;;Männlich;0-3;;
+121;64;Kontrolle 1;nein;23.01.23;23.01.23;0;0;;;;;;;;;13;ja;nein;nein;;nein;;Männlich;0-3;;
+122;54;Kontrolle 1;nein;30.01.23;30.01.23;0;0;;;;;;;;;1;nein  ;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+123;63;Kontrolle 1;nein;30.01.23;30.01.23;0;0;;;;;;;;;13;Ja;nein;nein;;ja;Letztes Monat;Männlich;4-6;;
+124;57;Kontrolle 1;nein;30.01.23;30.01.23;0;0;;;;;;;;;4;Ja;nein;nein;;nein;;Männlich;keine Keime;;
+125;50;Kontrolle 1;nein;13.06.22;14.06.22;1;0;;;;;;;;;3;ja;nein;nein;;nein;;Männlich;0-3;;
+201;30;Kontrolle 2;nein;23.03.22;23.03.22;0;0;;;;;;;29;10;;ja;nein;nein;;ja;;Männlich;4-6;;
+202;28;Kontrolle 2;nein;23.03.22;23.03.22;0;0;;;;;;;30;10;;ja;nein;nein;;ja;;Männlich;7-10;;
+203;39;Kontrolle 2;nein;23.03.22;23.03.22;0;0;;;;;;;30;13;;nein;nein;nein;;ja;;Männlich;0-3;;
+204;26;Kontrolle 2;nein;23.03.22;23.03.22;0;0;;;;;;;28;20;;nein;nein;nein;;ja;Letzte Woche;Weiblich;0-3;;
+205;27;Kontrolle 2;nein;20.04.22;20.04.22;0;0;;;;;;;28;2;;nein;nein;ja;Kondom;ja;Letzte Woche;Männlich;0-3;;
+206;39;Kontrolle 2;nein;20.04.22;20.04.22;0;0;;;;;;;28;9;;ja;nein;nein;;ja;Letzte Woche;Männlich;keine Keime;;
+207;32;Kontrolle 2;nein;20.04.22;20.04.22;0;0;;;;;;;29;12;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+208;35;Kontrolle 2;nein;20.04.22;20.04.22;0;0;;;;;;;30;29;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+209;27;Kontrolle 2;nein;25.05.22;25.05.22;0;0;;;;;;;28;10;;nein;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+210;32;Kontrolle 2;nein;25.05.22;25.05.22;0;0;;;;;;;28;16;;ja;nein;ja;Kondom;ja;Letzte Woche;Männlich;0-3;;
+211;34;Kontrolle 2;nein;15.06.22;15.06.22;0;0;;;;;;;31;10;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+212;31;Kontrolle 2;nein;15.06.22;15.06.22;0;0;;;;;;;38;9;;nein;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+213;30;Kontrolle 2;nein;15.06.22;15.06.22;0;0;;;;;;;26;7;;ja;nein;nein;;ja;Letztes Monat;Männlich;0-3;;
+214;31;Kontrolle 2;nein;06.07.22;06.07.22;0;0;;;;;;;31;14;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+215;44;Kontrolle 2;nein;06.07.22;06.07.22;0;0;;;;;;;30;11;;nein;nein;nein;;ja;Letzte Woche;Männlich;keine Keime;;
+216;37;Kontrolle 2;nein;24.08.22;24.08.22;0;0;;;;;;;30;14;;nein;nein;nein;;ja;Letztes Monat;Männlich;0-3;;
+217;37;Kontrolle 2;nein;24.08.22;24.08.22;0;0;;;;;;;28;12;;ja;nein;nein;;ja;Letzes Monat;Männlich;0-3;;
+218;36;Kontrolle 2;nein;24.08.22;24.08.22;0;0;;;;;;;27;9;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+219;30;Kontrolle 2;nein;31.08.22;31.08.22;0;0;;;;;;;34;20;;nein;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+220;36;Kontrolle 2;nein;31.08.22;31.08.22;0;0;;;;;;;31;21;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+221;37;Kontrolle 2;nein;31.08.22;31.08.22;0;0;;;;;;;29;9;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+222;40;Kontrolle 2;nein;31.08.22;31.08.22;0;0;;;;;;;24;2;;nein;nein;ja;Kondom;ja;Letzte Woche;Männlich;4-6;;
+223;30;Kontrolle 2;nein;19.10.22;19.10.22;0;0;;;;;;;27;9;;ja;nein;nein;;ja;;Männlich;0-3;;
+224;31;Kontrolle 2;nein;25.01.23;25.01.23;0;0;;;;;;;28;7;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+225;33;Kontrolle 2;nein;01.02.23;01.02.23;0;0;;;;;;;29;21;;nein  ;nein;nein;;ja;Letzte Woche;Männlich;0-3;;
+301;22;Studienteilnehmer;ja;22.12.21;23.12.21;1;40;01.08.18;nein;;;19;23.04.20;;;;ja;nein;nein;;ja;Letzte Woche;Männlich;0-3;7.11;40
+302;21;Studienteilnehmer;ja;10.01.22;12.01.22;2;48;01.01.18;nein;;;42;Juli 2018;;;;ja;ja;nein;;nein;;;keine Keime;7.11;57
+303;19;Studienteilnehmer;ja;12.01.22;12.01.22;0;13;01.12.20;nein;;;2;November 2021 ;;;;ja;ja;nein;;ja;;Weiblich;keine Keime;5.21;96
+304;20;Studienteilnehmer;ja;01.02.22;04.02.22;3;22;03.03.20;nein;;;33;18.04.19;;;;ja;ja;nein;;ja;;Weiblich;4-6;5.83;41
+305;20;Studienteilnehmer;Ja;08.03.22;21.03.22;13;14;10.12.20;nein;;;17;23.09.20;;;;Ja;;;;;;;keine Keime;3.95;39
+306;21;Studienteilnehmer;Ja;02.02.22;04.02.22;2;37;01.01.19;ja;35;27.02.19;35;27.02.19;;;;Ja;nein;ja;Kondom;ja;Letzte Woche;Männlich;keine Keime;9.08;31
+307;30;Studienteilnehmer;Ja;23.03.22;23.03.22;0;146;01.01.10;ja;59;01.04.17;6;15.09.21;;;;Ja;nein;ja;Kondom;Ja;Letzte Woche;Männlich;keine Keime;4.79;<25
+308;19;Studienteilnehmer;ja;27.04.22;29.04.22;2;33;23.07.19;nein;;;2;Februar 2022;;;;ja;nein;ja;Kondom;ja;Letztes Monat;Männlich;4-6;7.66;58
+309;24;Studienteilnehmer;ja;27.04.22;29.04.22;2;38;01.02.19;ja;37;13.03.19;37;13.03.19;;;;ja;nein;;;ja;Letztes Monat;Männlich, Weiblich;4-6;6.64;32
+310;28;Studienteilnehmer;ja;04.05.22;05.05.22;1;21;29.07.20;ja;12;21.04.21;14;März 2021;;;;ja;ja;nein;;nein;;;keine Keime;3.22;34
+311;26;Studienteilnehmer;ja;22.06.22;23.06.22;1;17;20.01.21;nein;;;0;Juni 2022;;;;ja;ja;nein;;nein;;;4-6;7.04;34
+312;24;Studienteilnehmer;ja;10.08.22;12.08.22;2;60;19.07.17;ja;60;19.07.17;60;19.07.17;;;;ja;;;;;;;4-6;2.19;98
+313;31;Studienteilnehmer;ja;24.08.22;25.08.22;1;47;12.09.18;ja;47;12.09.18;46;Oktober 2018;;;;ja;;ja;;ja;Letzte Woche;Weiblich;keine Keime;5.41;32
+314;18;Studienteilnehmer;ja;21.09.22;23.09.22;2;15;09.06.21;nein;;;4;Mai 2022;;;;ja;nein;ja;Kondom;ja;Letzte Woche;Männlich;keine Keime;> 12;63
+315;25;Studienteilnehmer;ja;21.09.22;23.09.22;2;26;15.07.20;nein;;;26;15.07.20;;;;ja;;nein;;ja;Letzte Woche;Weiblich;keine Keime;6.25;37
+316;21;Studienteilnehmer;ja;05.10.22;05.10.22;0;10;24.11.21;nein;;;9;01.01.22;;;;ja;nein;nein;;nein;;Männlich;0-3;2.23;31
+317;32;Studienteilnehmer;ja;14.10.22;24.10.22;10;16;26.05.21;ja;16;26.05.21;16;26.05.21;;;;ja;ja;nein;;nein;;;keine Keime;4.46;29
+318;20;Studienteilnehmer;ja;07.12.22;07.12.22;0;33;06.03.20;nein;;;27;September 2020;;;;ja;ja;nein;;ja;Letzte Woche;Weiblich;0-3;3.8;<25
+319;25;Studienteilnehmer;ja;16.12.22;16.12.22;0;26;17.09.20;ja;18;16.06.21;0;03.12.22;;;;ja;nein;ja;Kondom;ja;Letztes Monat;Männlich, Weiblich;keine Keime;3.99;< 25
+320;23;Studienteilnehmer;ja;21.12.22;22.12.22;1;74;01.10.16;ja;74;01.10.16;74;Oktober 2016;;;;ja;ja;nein;;nein;;;4-6;5.71;< 25
+321;19;Studienteilnehmer;ja;21.12.22;22.12.22;1;12;01.12.21;nein;;;9;März 2022;;;;ja;nein;nein;;nein;;Männlich;4-6;3.23;26
+322;29;Studienteilnehmer;ja;11.01.23;11.01.23;0;26;17.10.20;nein;;;1;Dezember 2022;;;;ja;nein;nein;;nein;;Männlich, Weiblich;keine Keime;6.57;37
+323;21;Studienteilnehmer;ja;18.01.23;18.01.23;0;35;11.02.20;nein;;;35;11.02.20;;;;ja;ja;nein;;nein;;;keine Keime;2.02;40
+324;19;Studienteilnehmer;ja;25.01.23;25.01.23;0;13;14.12.21;nein;;;16;September 2021;;;;ja;ja;nein;;ja;;Weiblich;keine Keime;2.07;38
+325;18;Studienteilnehmer;ja;15.02.23;20.02.23;5;17;13.09.21;ja;18;04.08.21;18;04.08.21;;;;ja;nein;nein;;nein;;Weiblich;keine Keime;3.13;< 25

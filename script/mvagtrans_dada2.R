@@ -1,3 +1,6 @@
+# Script for 16S Analysis of MBVag Trans project (2023)
+# Raw data are 16S sequencing results (Fastq files) in project folder 22010/22010_RawData/, this folder is not included in git
+
 library(tidyverse)
 
 # load fastq files 
@@ -9,7 +12,6 @@ fnRs <- sort(list.files(path, pattern="_R2_001.fastq", full.names = TRUE))
 # Extract sample names, assuming filenames have format: SAMPLENAME_XXX.fastq
 sample.names <- sapply(strsplit(basename(fnFs), "_"), `[`, 1)
 
-# get metadata
 
 # run dada2
 library(dada2); packageVersion("dada2")
@@ -31,28 +33,35 @@ head(out)
 errF <- learnErrors(filtFs, multithread=TRUE)
 errR <- learnErrors(filtRs, multithread=TRUE)
 
-
 plotErrF = plotErrors(errF, nominalQ=TRUE)
 plotErrR = plotErrors(errR, nominalQ=TRUE)
 
-saveRDS(errF, file = "intermediate/errF")
-saveRDS(errR, file = "intermediate/errR")
+saveRDS(errF, file = "intermediate/dada2/errF.rds")
+saveRDS(errR, file = "intermediate/dada2/errR.rds")
+
+ggsave(plotErrF, filename = "results/dada2/errF.png")
+ggsave(plotErrR, filename = "results/dada2/errR.png")
 
 dadaFs <- dada(filtFs, err=errF, multithread=TRUE)
 dadaRs <- dada(filtRs, err=errR, multithread=TRUE)
 
+saveRDS(dadaFs, file = "intermediate/dada2/dadaFs.rds")
+saveRDS(dadaRs, file = "intermediate/dada2/dadaRs.rds")
 
 mergers <- mergePairs(dadaFs, filtFs, dadaRs, filtRs, verbose=TRUE)
 
 seqtab <- makeSequenceTable(mergers)
-
 dim(seqtab)
+saveRDS(seqtab, file = "results/dada2/seqtab.rds")
 
 # Inspect distribution of sequence lengths
 table(nchar(getSequences(seqtab))) 
 seqtab.nochim <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE, verbose=TRUE)
 dim(seqtab.nochim)
-sum(seqtab.nochim)/sum(seqtab)
+sum(seqtab.nochim)/sum(seqtab) # overall frequence of non-chimeric reads is 0.702
+saveRDS(seqtab.nochim, file = "results/dada2/seqtab_nochim.rds")
+
+# track reads
 getN <- function(x) sum(getUniques(x))
 track <- cbind(out, sapply(dadaFs, getN), sapply(dadaRs, getN), sapply(mergers, getN), rowSums(seqtab.nochim))
 # If processing a single sample, remove the sapply calls: e.g. replace sapply(dadaFs, getN) with getN(dadaFs)
@@ -65,9 +74,14 @@ track_long = as.data.frame(track) %>%
   tidyr::pivot_longer(input:nonchim, names_to = "step", values_to = "number") %>%
   mutate(step = factor(step, levels = c("input", "filtered", "denoisedF", "denoisedR", "merged", "nonchim")))
 
-ggplot(track_long, aes(x = step, y = number)) +
+trackplot = ggplot(track_long, aes(x = step, y = number)) +
   geom_boxplot() +
-  geom_jitter()
+  geom_jitter()+
+  theme_bw(base_size = 14) +
+  scale_y_log10()
+
+write_excel_csv2(as.data.frame(track), file = "results/dada2/track.csv")
+ggsave(trackplot, filename = "results/dada2/trackplot.png", width = 7, height = 5)
 
 # summarize percentage of nonchimeric reads as part of merged
 nonchim_retained= track %>%
@@ -77,9 +91,9 @@ nonchim_retained= track %>%
   group_by(sample) %>%
   mutate(retain = nonchim/merged*100)
 
-summary(nonchim_retained$retain)
-
-# chimera statistics are insuspicious
+x = summary(nonchim_retained$retain) %>% broom::tidy()
+write_excel_csv2(x, file = "results/dada2/nochim_sumstat.csv")
+# chimera statistics are ok
 
 taxa <- assignTaxonomy(seqtab.nochim, "resources/silva_nr99_v138.1_train_set.fa", multithread=TRUE)
 taxa <- addSpecies(taxa, "resources/silva_species_assignment_v138.1.fa")
@@ -88,7 +102,8 @@ taxa.print <- taxa # Removing sequence rownames for display only
 rownames(taxa.print) <- NULL
 head(taxa.print)
 
-
+# get metadata
+file-ids = 
 
 #physeq handoff
 library(phyloseq); packageVersion("phyloseq")
