@@ -2,6 +2,9 @@
 # Raw data are 16S sequencing results (Fastq files) in project folder 22010/22010_RawData/, this folder is not included in git
 
 library(tidyverse)
+library(DECIPHER)
+library(Biostrings)
+library(phangorn)
 
 # load fastq files 
 path = "22010/22010_RawData/"
@@ -102,6 +105,23 @@ taxa.print <- taxa # Removing sequence rownames for display only
 rownames(taxa.print) <- NULL
 head(taxa.print)
 
+saveRDS(taxa, file = "results/dada2/taxa.rds")
+
+# Generate a phylogenetic tree
+sequences<-getSequences(seqtab.nochim)
+names(sequences)<-sequences
+
+alignment <- DECIPHER::AlignSeqs(DNAStringSet(sequences), anchor=NA)
+phang.align <- phyDat(as(alignment, "matrix"), type="DNA")
+dm <- dist.ml(phang.align)
+treeNJ <- NJ(dm) # Note, tip order != sequence order
+fit = pml(treeNJ, data=phang.align)
+fitGTR <- update(fit, k=4, inv=0.2)
+fitGTR <- optim.pml(fitGTR, model="GTR", optInv=TRUE, optGamma=TRUE,
+                    rearrangement = "stochastic", control = pml.control(trace = 0))
+
+
+
 # get metadata
 file-ids = 
 
@@ -112,6 +132,16 @@ theme_set(theme_bw())
 ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE), 
                sample_data(samdf), 
                tax_table(taxa))
+
+ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE), 
+               tax_table(taxa.plus),phy_tree(fitGTR$tree))
+
+ps <- merge_phyloseq(ps,map)
+ps
+set.seed(711)
+phy_tree(ps) <- root(phy_tree(ps), sample(taxa_names(ps), 1), resolve.root = TRUE)
+is.rooted(phy_tree(ps))
+
 ps <- prune_samples(sample_names(ps) != "Mock", ps) # Remove mock sample
 dna <- Biostrings::DNAStringSet(taxa_names(ps))
 names(dna) <- taxa_names(ps)
