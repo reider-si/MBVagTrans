@@ -1,0 +1,28 @@
+1+1
+3*2
+plot(2,3)
+setwd("RProjects/MBVagTrans/")
+ls
+covar = read.csv2("22010 Metadaten.csv")
+head(Covar)
+head(covar)
+covar =  read.csv2("22010 Metadaten.csv")
+covar =  read.csv2("22010 Metadaten.csv")
+head(covar)
+library(tidyverse)
+names(covar)
+Estradiole = "Östradiolwert..ng.l.")
+Estradiole = "Östradiolwert..ng.l.")
+dplylr::select(CID = "Probenidentifikationsnummer",
+dplylr::select(covar, CID = "Probenidentifikationsnummer",
+Age = "Alter.in.Jahren", Studiengruppe, GHAT_Length = "Länge.GHAT..in.Monaten", GNRHA = "GnRh.Analoga.ja.nein", Virgo, SexuallyActive = "Sexuell.aktiv", NugentScore = "Nugent.Score", Testosterone = "Testosteronwert..µg.l.", Estradiole = "Östradiolwert..ng.l.")
+factor(covar$GNRHA)
+factor(covar$GnRh.Analoga.ja.nein)
+factor(covar$Virgo)
+summary(factor(covar$Virgo))
+summary(factor(covar$Sexuell.aktiv))
+summary(factor(covar$Nugent.Score))
+summary(covar$Testosteronwert..µg.l.)
+covar$Testosteronwert..µg.l.
+as.numeric(covar$Testosterone)
+as.numeric(covar$Testosteronwert..µg.l.)
