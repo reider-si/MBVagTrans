@@ -1,55 +1,55 @@
-2023-11-07 18:54:34.19779 INFO::Writing function arguments to log file
-2023-11-07 18:54:34.198418 DEBUG::Function arguments
-2023-11-07 18:54:34.198774 DEBUG::Output folder: results/maaslin2/genus_MenopausedurationMonths
-2023-11-07 18:54:34.198928 DEBUG::Min Abundance: 5.000000
-2023-11-07 18:54:34.19907 DEBUG::Min Prevalence: 0.200000
-2023-11-07 18:54:34.199203 DEBUG::Normalization: TSS
-2023-11-07 18:54:34.19933 DEBUG::Transform: LOG
-2023-11-07 18:54:34.19946 DEBUG::Analysis method: LM
-2023-11-07 18:54:34.199585 DEBUG::Max significance: 0.200000
-2023-11-07 18:54:34.199714 DEBUG::Random effects:
-2023-11-07 18:54:34.199835 DEBUG::Fixed effects: DurationCombined
-2023-11-07 18:54:34.199953 DEBUG::Correction method: BH
-2023-11-07 18:54:34.200076 DEBUG::Standardize: TRUE
-2023-11-07 18:54:34.2002 DEBUG::Cores: 1
-2023-11-07 18:54:34.200318 INFO::Verifying options selected are valid
-2023-11-07 18:54:34.200589 INFO::Determining format of input files
-2023-11-07 18:54:34.200827 INFO::Input format is data samples as rows and metadata samples as rows
-2023-11-07 18:54:34.201399 DEBUG::A total of 50 samples were found in both the data and metadata
-2023-11-07 18:54:34.201524 DEBUG::Reordering data/metadata to use same sample ordering
-2023-11-07 18:54:34.20268 INFO::Formula for fixed effects: expr ~  DurationCombined
-2023-11-07 18:54:34.202967 INFO::Filter data based on min abundance and min prevalence
-2023-11-07 18:54:34.203197 INFO::Total samples in data: 50
-2023-11-07 18:54:34.203412 INFO::Min samples required with min abundance for a feature not to be filtered: 10.000000
-2023-11-07 18:54:34.204874 INFO::Total filtered features: 292
-2023-11-07 18:54:34.20515 INFO::Filtered feature names from abundance and prevalence filtering: ASV91, ASV117, ASV120, ASV219, ASV269, ASV326, ASV334, ASV383, ASV399, ASV498, ASV564, ASV636, ASV659, ASV675, ASV687, ASV770, ASV803, ASV866, ASV898, ASV907, ASV945, ASV998, ASV1045, ASV1075, ASV1099, ASV1243, ASV1259, ASV1262, ASV1292, ASV1310, ASV1311, ASV1387, ASV1410, ASV1474, ASV1475, ASV1481, ASV1569, ASV1574, ASV1709, ASV1733, ASV1736, ASV1759, ASV1762, ASV1818, ASV1841, ASV1856, ASV1861, ASV1877, ASV1887, ASV1909, ASV1929, ASV1947, ASV1980, ASV2007, ASV2027, ASV2038, ASV2047, ASV2054, ASV2058, ASV2108, ASV2132, ASV2138, ASV2147, ASV2148, ASV2164, ASV2199, ASV2249, ASV2255, ASV2260, ASV2261, ASV2277, ASV2278, ASV2288, ASV2290, ASV2291, ASV2304, ASV2324, ASV2368, ASV2369, ASV2386, ASV2395, ASV2409, ASV2416, ASV2425, ASV2446, ASV2452, ASV2460, ASV2461, ASV2470, ASV2477, ASV2483, ASV2486, ASV2489, ASV2508, ASV2510, ASV2519, ASV2525, ASV2528, ASV2529, ASV2539, ASV2564, ASV2586, ASV2593, ASV2605, ASV2614, ASV2615, ASV2629, ASV2631, ASV2634, ASV2659, ASV2704, ASV2733, ASV2787, ASV2801, ASV2816, ASV2821, ASV2834, ASV2856, ASV2898, ASV2931, ASV2933, ASV2936, ASV2969, ASV2974, ASV3011, ASV3013, ASV3084, ASV3138, ASV3147, ASV3159, ASV3222, ASV3238, ASV3244, ASV3286, ASV3300, ASV3348, ASV3404, ASV3429, ASV3480, ASV3491, ASV3497, ASV3508, ASV3522, ASV3544, ASV3547, ASV3566, ASV3567, ASV3569, ASV3575, ASV3578, ASV3580, ASV3593, ASV3600, ASV3613, ASV3666, ASV3679, ASV3690, ASV3697, ASV3721, ASV3728, ASV3820, ASV3827, ASV3891, ASV3917, ASV3926, ASV3950, ASV3975, ASV3980, ASV3988, ASV4074, ASV4127, ASV4164, ASV4200, ASV4247, ASV4249, ASV4267, ASV4289, ASV4326, ASV4407, ASV4409, ASV4453, ASV4497, ASV4504, ASV4555, ASV4585, ASV4586, ASV4589, ASV4650, ASV4654, ASV4715, ASV4733, ASV4776, ASV4838, ASV4865, ASV4879, ASV4885, ASV4902, ASV5050, ASV5073, ASV5074, ASV5086, ASV5119, ASV5156, ASV5171, ASV5246, ASV5247, ASV5260, ASV5277, ASV5347, ASV5452, ASV5455, ASV5467, ASV5472, ASV5477, ASV5514, ASV5517, ASV5520, ASV5603, ASV5664, ASV5718, ASV5723, ASV5727, ASV5736, ASV5833, ASV5917, ASV5977, ASV5979, ASV5986, ASV5987, ASV5989, ASV6035, ASV6130, ASV6146, ASV6154, ASV6159, ASV6193, ASV6222, ASV6247, ASV6256, ASV6380, ASV6405, ASV6424, ASV6488, ASV6535, ASV6536, ASV6605, ASV6618, ASV6627, ASV6723, ASV6737, ASV6761, ASV6772, ASV6791, ASV6853, ASV6866, ASV6867, ASV6945, ASV7002, ASV7069, ASV7246, ASV7281, ASV7285, ASV7297, ASV7301, ASV7326, ASV7405, ASV7490, ASV7594, ASV7657, ASV7753, ASV7756, ASV7843, ASV7906, ASV7919, ASV7961, ASV7972, ASV8046, ASV8051, ASV8256, ASV8281, ASV8417, ASV8418, ASV8422, ASV8437, ASV8463, ASV8602, ASV8623, ASV8641, ASV8646, ASV8667, ASV8787, ASV8794
-2023-11-07 18:54:34.205569 INFO::Total filtered features with variance filtering: 0
-2023-11-07 18:54:34.205791 INFO::Filtered feature names from variance filtering:
-2023-11-07 18:54:34.206015 INFO::Running selected normalization method: TSS
-2023-11-07 18:54:34.206431 INFO::Applying z-score to standardize continuous metadata
-2023-11-07 18:54:34.20876 INFO::Running selected transform method: LOG
-2023-11-07 18:54:34.209145 INFO::Running selected analysis method: LM
-2023-11-07 18:54:34.209404 INFO::Fitting model to feature number 1, ASV14
-2023-11-07 18:54:34.210406 INFO::Fitting model to feature number 2, ASV54
-2023-11-07 18:54:34.211267 INFO::Fitting model to feature number 3, ASV82
-2023-11-07 18:54:34.212109 INFO::Fitting model to feature number 4, ASV205
-2023-11-07 18:54:34.212948 INFO::Fitting model to feature number 5, ASV210
-2023-11-07 18:54:34.213816 INFO::Fitting model to feature number 6, ASV369
-2023-11-07 18:54:34.216389 INFO::Counting total values for each feature
-2023-11-07 18:54:34.217035 INFO::Writing filtered data to file results/maaslin2/genus_MenopausedurationMonths/features/filtered_data.tsv
-2023-11-07 18:54:34.217776 INFO::Writing filtered, normalized data to file results/maaslin2/genus_MenopausedurationMonths/features/filtered_data_norm.tsv
-2023-11-07 18:54:34.218424 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_MenopausedurationMonths/features/filtered_data_norm_transformed.tsv
-2023-11-07 18:54:34.219105 WARNING::Deleting existing residuals file: results/maaslin2/genus_MenopausedurationMonths/fits/residuals.rds
-2023-11-07 18:54:34.219514 INFO::Writing residuals to file results/maaslin2/genus_MenopausedurationMonths/fits/residuals.rds
-2023-11-07 18:54:34.219943 WARNING::Deleting existing fitted file: results/maaslin2/genus_MenopausedurationMonths/fits/fitted.rds
-2023-11-07 18:54:34.220575 INFO::Writing fitted values to file results/maaslin2/genus_MenopausedurationMonths/fits/fitted.rds
-2023-11-07 18:54:34.221203 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_MenopausedurationMonths/all_results.tsv
-2023-11-07 18:54:34.221846 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_MenopausedurationMonths/significant_results.tsv
-2023-11-07 18:54:34.222249 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_MenopausedurationMonths/heatmap.pdf
-2023-11-07 18:54:34.222793 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_MenopausedurationMonths
-2023-11-07 18:54:34.223359 INFO::Plotting associations from most to least significant, grouped by metadata
-2023-11-07 18:54:34.223638 INFO::Plotting data for metadata number 1, DurationCombined
-2023-11-07 18:54:34.224117 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV14
-2023-11-07 18:54:34.288932 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV54
-2023-11-07 18:54:34.354709 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV205
-2023-11-07 18:54:34.424093 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV369
+2023-11-07 19:00:40.146002 INFO::Writing function arguments to log file
+2023-11-07 19:00:40.146471 DEBUG::Function arguments
+2023-11-07 19:00:40.146631 DEBUG::Output folder: results/maaslin2/genus_MenopausedurationMonths
+2023-11-07 19:00:40.146768 DEBUG::Min Abundance: 5.000000
+2023-11-07 19:00:40.146902 DEBUG::Min Prevalence: 0.200000
+2023-11-07 19:00:40.147039 DEBUG::Normalization: TSS
+2023-11-07 19:00:40.147164 DEBUG::Transform: LOG
+2023-11-07 19:00:40.147289 DEBUG::Analysis method: LM
+2023-11-07 19:00:40.147411 DEBUG::Max significance: 0.200000
+2023-11-07 19:00:40.147539 DEBUG::Random effects:
+2023-11-07 19:00:40.147663 DEBUG::Fixed effects: DurationCombined
+2023-11-07 19:00:40.147788 DEBUG::Correction method: BH
+2023-11-07 19:00:40.147911 DEBUG::Standardize: TRUE
+2023-11-07 19:00:40.148033 DEBUG::Cores: 1
+2023-11-07 19:00:40.148153 INFO::Verifying options selected are valid
+2023-11-07 19:00:40.148411 INFO::Determining format of input files
+2023-11-07 19:00:40.148641 INFO::Input format is data samples as rows and metadata samples as rows
+2023-11-07 19:00:40.149197 DEBUG::A total of 50 samples were found in both the data and metadata
+2023-11-07 19:00:40.149321 DEBUG::Reordering data/metadata to use same sample ordering
+2023-11-07 19:00:40.150463 INFO::Formula for fixed effects: expr ~  DurationCombined
+2023-11-07 19:00:40.15074 INFO::Filter data based on min abundance and min prevalence
+2023-11-07 19:00:40.150954 INFO::Total samples in data: 50
+2023-11-07 19:00:40.151161 INFO::Min samples required with min abundance for a feature not to be filtered: 10.000000
+2023-11-07 19:00:40.152723 INFO::Total filtered features: 292
+2023-11-07 19:00:40.153022 INFO::Filtered feature names from abundance and prevalence filtering: ASV91, ASV117, ASV120, ASV219, ASV269, ASV326, ASV334, ASV383, ASV399, ASV498, ASV564, ASV636, ASV659, ASV675, ASV687, ASV770, ASV803, ASV866, ASV898, ASV907, ASV945, ASV998, ASV1045, ASV1075, ASV1099, ASV1243, ASV1259, ASV1262, ASV1292, ASV1310, ASV1311, ASV1387, ASV1410, ASV1474, ASV1475, ASV1481, ASV1569, ASV1574, ASV1709, ASV1733, ASV1736, ASV1759, ASV1762, ASV1818, ASV1841, ASV1856, ASV1861, ASV1877, ASV1887, ASV1909, ASV1929, ASV1947, ASV1980, ASV2007, ASV2027, ASV2038, ASV2047, ASV2054, ASV2058, ASV2108, ASV2132, ASV2138, ASV2147, ASV2148, ASV2164, ASV2199, ASV2249, ASV2255, ASV2260, ASV2261, ASV2277, ASV2278, ASV2288, ASV2290, ASV2291, ASV2304, ASV2324, ASV2368, ASV2369, ASV2386, ASV2395, ASV2409, ASV2416, ASV2425, ASV2446, ASV2452, ASV2460, ASV2461, ASV2470, ASV2477, ASV2483, ASV2486, ASV2489, ASV2508, ASV2510, ASV2519, ASV2525, ASV2528, ASV2529, ASV2539, ASV2564, ASV2586, ASV2593, ASV2605, ASV2614, ASV2615, ASV2629, ASV2631, ASV2634, ASV2659, ASV2704, ASV2733, ASV2787, ASV2801, ASV2816, ASV2821, ASV2834, ASV2856, ASV2898, ASV2931, ASV2933, ASV2936, ASV2969, ASV2974, ASV3011, ASV3013, ASV3084, ASV3138, ASV3147, ASV3159, ASV3222, ASV3238, ASV3244, ASV3286, ASV3300, ASV3348, ASV3404, ASV3429, ASV3480, ASV3491, ASV3497, ASV3508, ASV3522, ASV3544, ASV3547, ASV3566, ASV3567, ASV3569, ASV3575, ASV3578, ASV3580, ASV3593, ASV3600, ASV3613, ASV3666, ASV3679, ASV3690, ASV3697, ASV3721, ASV3728, ASV3820, ASV3827, ASV3891, ASV3917, ASV3926, ASV3950, ASV3975, ASV3980, ASV3988, ASV4074, ASV4127, ASV4164, ASV4200, ASV4247, ASV4249, ASV4267, ASV4289, ASV4326, ASV4407, ASV4409, ASV4453, ASV4497, ASV4504, ASV4555, ASV4585, ASV4586, ASV4589, ASV4650, ASV4654, ASV4715, ASV4733, ASV4776, ASV4838, ASV4865, ASV4879, ASV4885, ASV4902, ASV5050, ASV5073, ASV5074, ASV5086, ASV5119, ASV5156, ASV5171, ASV5246, ASV5247, ASV5260, ASV5277, ASV5347, ASV5452, ASV5455, ASV5467, ASV5472, ASV5477, ASV5514, ASV5517, ASV5520, ASV5603, ASV5664, ASV5718, ASV5723, ASV5727, ASV5736, ASV5833, ASV5917, ASV5977, ASV5979, ASV5986, ASV5987, ASV5989, ASV6035, ASV6130, ASV6146, ASV6154, ASV6159, ASV6193, ASV6222, ASV6247, ASV6256, ASV6380, ASV6405, ASV6424, ASV6488, ASV6535, ASV6536, ASV6605, ASV6618, ASV6627, ASV6723, ASV6737, ASV6761, ASV6772, ASV6791, ASV6853, ASV6866, ASV6867, ASV6945, ASV7002, ASV7069, ASV7246, ASV7281, ASV7285, ASV7297, ASV7301, ASV7326, ASV7405, ASV7490, ASV7594, ASV7657, ASV7753, ASV7756, ASV7843, ASV7906, ASV7919, ASV7961, ASV7972, ASV8046, ASV8051, ASV8256, ASV8281, ASV8417, ASV8418, ASV8422, ASV8437, ASV8463, ASV8602, ASV8623, ASV8641, ASV8646, ASV8667, ASV8787, ASV8794
+2023-11-07 19:00:40.153463 INFO::Total filtered features with variance filtering: 0
+2023-11-07 19:00:40.153703 INFO::Filtered feature names from variance filtering:
+2023-11-07 19:00:40.15392 INFO::Running selected normalization method: TSS
+2023-11-07 19:00:40.154315 INFO::Applying z-score to standardize continuous metadata
+2023-11-07 19:00:40.156616 INFO::Running selected transform method: LOG
+2023-11-07 19:00:40.157014 INFO::Running selected analysis method: LM
+2023-11-07 19:00:40.157281 INFO::Fitting model to feature number 1, ASV14
+2023-11-07 19:00:40.158343 INFO::Fitting model to feature number 2, ASV54
+2023-11-07 19:00:40.159301 INFO::Fitting model to feature number 3, ASV82
+2023-11-07 19:00:40.16023 INFO::Fitting model to feature number 4, ASV205
+2023-11-07 19:00:40.161081 INFO::Fitting model to feature number 5, ASV210
+2023-11-07 19:00:40.161925 INFO::Fitting model to feature number 6, ASV369
+2023-11-07 19:00:40.164804 INFO::Counting total values for each feature
+2023-11-07 19:00:40.165653 INFO::Writing filtered data to file results/maaslin2/genus_MenopausedurationMonths/features/filtered_data.tsv
+2023-11-07 19:00:40.166747 INFO::Writing filtered, normalized data to file results/maaslin2/genus_MenopausedurationMonths/features/filtered_data_norm.tsv
+2023-11-07 19:00:40.167442 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_MenopausedurationMonths/features/filtered_data_norm_transformed.tsv
+2023-11-07 19:00:40.168168 WARNING::Deleting existing residuals file: results/maaslin2/genus_MenopausedurationMonths/fits/residuals.rds
+2023-11-07 19:00:40.168602 INFO::Writing residuals to file results/maaslin2/genus_MenopausedurationMonths/fits/residuals.rds
+2023-11-07 19:00:40.169071 WARNING::Deleting existing fitted file: results/maaslin2/genus_MenopausedurationMonths/fits/fitted.rds
+2023-11-07 19:00:40.169421 INFO::Writing fitted values to file results/maaslin2/genus_MenopausedurationMonths/fits/fitted.rds
+2023-11-07 19:00:40.169816 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_MenopausedurationMonths/all_results.tsv
+2023-11-07 19:00:40.170429 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_MenopausedurationMonths/significant_results.tsv
+2023-11-07 19:00:40.170835 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_MenopausedurationMonths/heatmap.pdf
+2023-11-07 19:00:40.1714 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_MenopausedurationMonths
+2023-11-07 19:00:40.171994 INFO::Plotting associations from most to least significant, grouped by metadata
+2023-11-07 19:00:40.172282 INFO::Plotting data for metadata number 1, DurationCombined
+2023-11-07 19:00:40.172801 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV14
+2023-11-07 19:00:40.237519 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV54
+2023-11-07 19:00:40.303043 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV205
+2023-11-07 19:00:40.370367 INFO::Creating scatter plot for continuous data, DurationCombined vs ASV369
