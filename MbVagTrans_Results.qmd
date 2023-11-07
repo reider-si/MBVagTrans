@@ -87,18 +87,18 @@ adiv$data %>%
 
 No comparison is significant.
 
-#### Length of GHAT within patient group
+#### Length of GAHT within patient group
 
 ```{r adiv ghat}
 adiv$data %>%
   filter(grp =="03_trans") %>%
-  group_by(variable,grp) %>%
+  group_by(variable) %>%
   cor_test(value, GHAT_Length) %>%
-  select(grp, variable, cor, statistic, p, conf.low, conf.high) %>%
-  kable()
+  select(variable, cor, statistic, p, conf.low, conf.high) %>%
+  kable(digits = 3, caption = "Pearson Correlation of a-diversity measures with length of GAHT in the Trans patient group")
 ```
 
-In this analysis, a significant effect on Shannon index with length of GHAT could be observed.
+In this analysis, a significant effect on Shannon index with length of hormone replacement therapy could be observed.
 
 #### Influence of Nugent score within patient group
 
@@ -107,14 +107,14 @@ adiv$data %>%
   group_by(variable) %>%
   tukey_hsd(value~NugentScore) %>%
   select(variable, group1, group2, estimate, p.adj, p.adj.signif, conf.low, conf.high) %>%
-  kable()
+  kable(digits = 3, caption = "Tukey Test on alpha diversity measures by Nugent Score")
 ```
 
 Notably, if analysis is split by patient group, none of these differences remain significant. This might be due to a lower sample size.
 
 ## Beta-diversity
 
-This diversity metric compares different samples or groups of samples regarding their similarity or difference in community composition. The distance matrix can be visualized using dimension reduction techniques (e.g. PCA) or pairwise distances can be calculated. For this analysis, the main hypothesis is, that overall community composition differs significantly between the patien group (i.e. *03_trans*) and the two control groups. This will be tested using *adonis.*
+This diversity metric compares different samples or groups of samples regarding their similarity or difference in community composition. The distance matrix can be visualized using dimension reduction techniques (e.g. PCA) or pairwise distances can be calculated. For this analysis, the main hypothesis is, that overall community composition differs significantly between the patient group (i.e. *03_trans*) and the two control groups. This will be tested using *adonis.*
 
 ```{r betadiversity}
 # first, filter out low abundance taxa
@@ -177,9 +177,9 @@ adonis_pw_uf = pairwise.adonis(D_UF, phyloseq::sample_data(ps_filtered_rel)$grp)
 adonis_wUF = vegan::adonis2(D_wUF ~ phyloseq::sample_data(ps_filtered_rel)$grp)
 adonis_pw_wUF = pairwise.adonis(D_wUF, phyloseq::sample_data(ps_filtered_rel)$grp)
 
-kable(adonis_pw_bc, caption = "Bray-Curtis")
-kable(adonis_pw_uf, caption ="Unweigthed Unifrac")
-kable(adonis_pw_wUF, caption = "Weighted Unifrac")
+kable(adonis_pw_bc, digits = 3, caption = "Bray-Curtis")
+kable(adonis_pw_uf, digits = 3, caption ="Unweigthed Unifrac")
+kable(adonis_pw_wUF, digits = 3, caption = "Weighted Unifrac")
 ```
 
 # Differential abundance
@@ -398,11 +398,413 @@ ggsave(plot = familyplot, filename = "results/microbiome/taxplots_family.png", w
 
 ## Genus level
 
-
-
 ```{r genus plot, fig.width=15, height = 6}
 genusplot
 ggsave(plot = genusplot, filename = "results/microbiome/taxplots_genus.pdf", width = 15, height = 6)
 ggsave(plot = genusplot, filename = "results/microbiome/taxplots_family.png", width = 15, height = 6)
+
+```
+
+# Secondary analyses
+
+### Duration of menopause
+
+This analysis is only performed in the postmenopausal group
+
+```{r postmenopausal_menopause duration}
+head(sample_data(ps_samples)) 
+
+# for menopause duration, use maaslin2
+library(Maaslin2)
+
+# only 01_postmenopausal samples
+ps_menopause = subset_samples(ps_samples, grp =="01_postmenopausal") %>%
+  transform_sample_counts(function(x) x/sum(x) * 100) # relative abundances are necessary
+
+asv_durationMenopause = Maaslin2(input_data = otu_table(ps_menopause),
+         input_metadata = as(sample_data(ps_menopause), "data.frame"),
+         output = "results/maaslin2/asv_menopause-duration",
+         min_abundance = 2.5,
+         min_prevalence = 0.1,
+         max_significance = 0.2,
+         fixed_effects = "DurationMenopause")
+
+
+# no significant effect on ASV level, try glom at genuslevel
+ps_menopause_genus = tax_glom(ps_menopause, taxrank = "Genus")
+
+genus_durationMenopause = Maaslin2(input_data = otu_table(ps_menopause_genus),
+         input_metadata = as(sample_data(ps_menopause_genus), "data.frame"),
+         output = "results/maaslin2/genus_menopause-duration",
+         min_abundance = 5,
+         min_prevalence = 0.2,
+         max_significance = 0.2,
+         fixed_effects = "DurationMenopause")
+
+# no significant effect on genus level, try on family level
+ps_menopause_family = tax_glom(ps_menopause, taxrank = "Family")
+
+family_durationMenopause = Maaslin2(input_data = otu_table(ps_menopause_family),
+         input_metadata = as(sample_data(ps_menopause_family), "data.frame"),
+         output = "results/maaslin2/family_menopause-duration",
+         min_abundance = 10,
+         min_prevalence = 0.3,
+         max_significance = 0.2,
+         fixed_effects = "DurationMenopause")
+
+## Alpha diversity by duration of menopause
+ps_menopause_abs = subset_samples(ps_samples, grp =="01_postmenopausal")
+
+adiv_menopause = plot_richness(ps_menopause_abs, measures = c("Observed", "Shannon", "InvSimpson"))
+
+adiv_menopause$data %>%
+  select(DurationMenopause, variable, value) %>%
+  group_by(variable) %>%
+  cor_test(value, DurationMenopause) %>%
+  kable(digits = 3)
+
+adiv_menopause$data %>%
+  ggplot(aes(x = DurationMenopause, y = value)) + 
+  geom_point()+
+  geom_smooth(method ="lm") +
+  facet_wrap(~variable, scales = "free_y")
+
+BC_menopause_genus = vegan::vegdist(otu_table(ps_menopause_genus))
+
+menopauseduration_adonis_bc = vegan::adonis2(BC_menopause_genus ~ phyloseq::sample_data(ps_menopause_genus)$DurationMenopause)
+
+# no significant effect on the beta diversity level as well
+
+# Summary statistics of duration menopause
+sample_data(ps_menopause_genus)$DurationMenopause %>%
+  summary()
+
+```
+
+There is no significant correlation of duration of menopause (years) with alpha diversity of vaginal microbiomes and overall community composition (beta-diversity). Duration of menopause in this sample is rather varied ranging from 1 to 28 years (mean 14.5 years).
+
+### Duration of gender-affirming hormone therapy (GAHT)
+
+This analysis is only performed in the TRANS group.
+
+```{r trans testosterone}
+# only 03_trans samples
+ps_trans = subset_samples(ps_samples, grp =="03_trans") %>%
+  transform_sample_counts(function(x) x/sum(x) * 100) # relative abundances are necessary
+
+asv_GHAT = Maaslin2(input_data = otu_table(ps_trans),
+         input_metadata = as(sample_data(ps_trans), "data.frame"),
+         output = "results/maaslin2/asv_GHAT_Length",
+         min_abundance = 1,
+         min_prevalence = 0.1,
+         max_significance = 0.2,
+         fixed_effects = "GHAT_Length")
+
+tax_table(ps_trans) %>%
+  as.data.frame() %>%
+  rownames_to_column("ASV") %>%
+  filter(ASV %in% asv_GHAT$results$feature)
+
+# all ASVs map to Genus Prevotella
+ps_trans_genus = tax_glom(ps_trans, taxrank = "Genus")
+genus_GHAT = Maaslin2(input_data = otu_table(ps_trans_genus),
+         input_metadata = as(sample_data(ps_trans_genus), "data.frame"),
+         output = "results/maaslin2/genus_GHAT_Length",
+         min_abundance = 5,
+         min_prevalence = 0.1,
+         max_significance = 0.2,
+         fixed_effects = "GHAT_Length")
+
+
+tax_table(ps_trans_genus) %>%
+  as.data.frame() %>%
+  rownames_to_column("ASV") %>%
+  filter(ASV %in% filter(genus_GHAT$results, qval < 0.2)$feature)
+
+# plot correlation for these 3 ASVs
+psmelt_trans_genus = psmelt(ps_trans_genus)
+maaslin_res_genus_ghat = ggplot(filter(psmelt_trans_genus, OTU %in% filter(genus_GHAT$results, qval < 0.2)$feature),
+                                aes(x = GHAT_Length, y = Abundance)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~Genus, scales = "free") +
+  scale_y_continuous(limits = function(x){c(0, max(0.1, x))}) +
+  coord_cartesian(xlim = c(0,100)) +
+  labs(x = "Length of Testosterone Therapy",
+       y = "Genus Abundance (%)",
+       caption = "Maaslin2 results")
+
+maaslin_res_genus_ghat
+ggsave(maaslin_res_genus_ghat, filename = "results/maaslin2/genus_GHAT_Length_panelplot.png",
+       height = 5, width = 6)
+
+
+## Alpha diversity by duration of gaht
+ps_trans_abs = subset_samples(ps_samples, grp =="03_trans")
+ps_trans_genus = tax_glom(ps_trans_abs, taxrank ="Genus") %>%
+  transform_sample_counts(function(x) x/sum(x) * 100)
+
+adiv_trans = plot_richness(ps_trans_abs, measures = c("Observed", "Shannon", "InvSimpson"))
+
+adiv_trans$data %>%
+  select(GHAT_Length, variable, value) %>%
+  group_by(variable) %>%
+  cor_test(value, GHAT_Length) %>%
+  kable(digits = 3)
+
+adiv_trans$data %>%
+  ggplot(aes(x = GHAT_Length, y = value)) + 
+  geom_point()+
+  geom_smooth(method ="lm") +
+  facet_wrap(~variable, scales = "free_y")
+
+
+
+BC_trans_genus = vegan::vegdist(otu_table(ps_trans_genus))
+ord.bc = ordinate(ps_trans_genus,method = "PCoA")
+
+gaht_adonis_bc = vegan::adonis2(BC_trans_genus ~ phyloseq::sample_data(ps_trans_genus)$GHAT_Length)
+
+#This is highly significant on the genus level!
+kable(gaht_adonis_bc)
+  
+# Summary statistics of duration menopause
+sample_data(ps_trans_genus)$GHAT_Length %>%
+  summary()
+
+p_gaht_beta = plot_ordination(ps_trans_genus, ord.bc, type="samples", color="GHAT_Length") +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(color = "Length of GAHT", caption = "Bray-Curtis") +
+  scale_color_continuous(limits = c(0,100))
+p_gaht_beta
+
+```
+
+There is a significant effect of duration of GAHT on the shannon index value in the trans group and on overall community composition although this seems to depend on a single outlier with a duration of 150 of hormone therapy. On the genus level, there are 3 taxa (Anaerococcus, Dialister and Prevotella) who are inversely correlated to duration of testosterone supplementation.
+
+### Absolute Height of Testosterone in TRANS group
+
+```{r testosterone height}
+
+# Height of testosterone
+genus_testosterone = Maaslin2(input_data = otu_table(ps_trans_genus),
+         input_metadata = as(sample_data(ps_trans_genus), "data.frame"),
+         output = "results/maaslin2/genus_Testosterone",
+         min_abundance = 5,
+         min_prevalence = 0.3,
+         max_significance = 0.2,
+         fixed_effects = "Testosterone") # no significant effect
+
+```
+
+No significant associations.
+
+### Duration of GnRH therapy in TRANS group
+
+```{r gnrh duration trans}
+summary(sample_data(ps_trans_genus)$Duration_GNRH) # only 10 values!
+
+genus_gnrh= Maaslin2(input_data = otu_table(ps_trans_genus),
+         input_metadata = as(sample_data(ps_trans_genus), "data.frame"),
+         output = "results/maaslin2/genus_DurationGNRH",
+         min_abundance = 5,
+         min_prevalence = 0.3,
+         max_significance = 0.2,
+         fixed_effects = "Duration_GNRH") # no significant effect
+
+# no significant associations
+```
+
+No significant associations.
+
+### Cycle dependency in premenopausal group
+
+```{r cycle pre}
+ps_pre = subset_samples(ps_samples, grp =="02_premenopausal") %>%
+  transform_sample_counts(function(x) x/sum(x) * 100) # relative abundances are necessary
+
+asv_cycleday = Maaslin2(input_data = otu_table(ps_pre),
+         input_metadata = as(sample_data(ps_pre), "data.frame"),
+         output = "results/maaslin2/asv_cycle_premeno",
+         min_abundance = 3,
+         min_prevalence = 0.1,
+         max_significance = 0.2,
+         fixed_effects = "CycleDaySampling") # no significant effect
+
+ps_pre_genus = tax_glom(ps_pre, "Genus")
+
+genus_cycleday = Maaslin2(input_data = otu_table(ps_pre_genus),
+         input_metadata = as(sample_data(ps_pre_genus), "data.frame"),
+         output = "results/maaslin2/genus_cycle_premeno",
+         min_abundance = 5,
+         min_prevalence = 0.3,
+         max_significance = 0.2,
+         fixed_effects = "CycleDaySampling") 
+
+tax_table(ps_pre_genus) %>%
+  as.data.frame() %>%
+  rownames_to_column("ASV") %>%
+  filter(ASV %in% filter(genus_cycleday$results, qval < 0.2)$feature) %>%
+  kable()
+
+psmelt_pre_genus = psmelt(ps_pre_genus)
+
+maaslin_res_genus_cycleday = ggplot(filter(psmelt_pre_genus, OTU %in% filter(genus_cycleday$results, qval < 0.2)$feature),
+                                aes(x = CycleDaySampling, y = Abundance)) +
+  geom_point(size = 4, alpha = 0.7) +
+  facet_wrap(~Genus, scales = "free") +
+  geom_smooth(method = "lm", se = F, formula = y ~poly(x, 3, raw =T)) +
+  scale_y_continuous(limits = function(x){c(0, max(0.1, x))}) +
+  coord_cartesian(xlim = c(0,28)) +
+  labs(x = "Day of sampling",
+       y = "Genus Abundance (%)",
+       caption = "Maaslin2 results")
+
+
+maaslin_res_genus_cycleday
+ggsave(maaslin_res_genus_cycleday, filename = "results/maaslin2/genus_CycleDay_panelplot.png",
+       height = 5, width = 6)
+```
+
+*Gardnerella* is highest in the early days of the menstrual cycle while *Lactobacillus* during the middle of the cycle. This seems to correspond to Vomstein et al 2022.
+
+### Influence of sexual activity on microbiome composition
+
+```{r sexual activity}
+# Sexual activity
+ps_rel_genus = tax_glom(ps_samples, taxrank = "Genus") %>%
+  transform_sample_counts(function(x) x/sum(x) * 100)
+ps_rel_genus_sexuallyactive = subset_samples(ps_rel_genus, sample_data(ps_rel_genus)$SexuallyActive %in% c("yes", "no")) # for 3 patients, this information is not available
+
+ps_rel_genus_sexuallyactive
+
+genus_SexuallyActive = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyactive),
+         input_metadata = as(sample_data(ps_rel_genus_sexuallyactive), "data.frame"),
+         output = "results/maaslin2/genus_SexuallyActive",
+         min_abundance = 5,
+         min_prevalence = 0.2,
+         max_significance = 0.2,
+         fixed_effects = "SexuallyActive") 
+
+tax_table(ps_rel_genus_sexuallyactive) %>%
+  as.data.frame() %>%
+  rownames_to_column("ASV") %>%
+  filter(ASV %in% filter(genus_SexuallyActive$results, qval < 0.2)$feature)
+
+
+# plot sexuallyActive vs these 2 genera 
+psmelt_rel_genus_sexuallyactive = psmelt(ps_rel_genus_sexuallyactive)
+maaslin_res_genus_sexactive = ggplot(filter(psmelt_rel_genus_sexuallyactive, OTU %in% filter(genus_SexuallyActive$results, qval < 0.2)$feature),
+                                aes(x = SexuallyActive, y = Abundance,fill = SexuallyActive)) +
+  geom_jitter() +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  facet_wrap(~Genus, scales = "free") +
+  scale_y_continuous(limits = function(x){c(0, max(0.1, x))}) +
+  theme(legend.position = "none")+
+  labs(x = "Sexually Active",
+       y = "Genus Abundance (%)",
+       caption = "Maaslin2 results")
+
+maaslin_res_genus_sexactive
+ggsave(maaslin_res_genus_sexactive, filename = "results/maaslin2/genus_SexuallyActive_panelplot.png",
+       height = 5, width = 6)
+```
+
+Sexual activity is associated with lower levels of *Prevotella and Streptococcus.*
+
+### Influence of the duration of amenorrhea on microbiome composition
+
+Both postmenopausal women as well as trans men undergoing GAHT experience amenorrhea. This section explores a potential interaction between time since last menstruation and composition of the vaginal microbiome.
+
+**This analysis is performed within each group separately and results are compared.**
+
+```{r duration-menopause}
+# generate relevant phyloseq object
+ps_menopause = subset_samples(ps_samples, grp !="02_premenopausal")
+
+sample_data(ps_menopause)$DurationMenopause # this is the duration of menopause in postmenopausal women (years)
+sample_data(ps_menopause)$DurationAmenorrhea # duration of amenorrhea in trans group (months)
+sample_data(ps_menopause)$DurationMenopauseMonths = sample_data(ps_menopause)$DurationMenopause*12
+sample_data(ps_menopause)$DurationCombined = ifelse(is.na(sample_data(ps_menopause)$DurationMenopauseMonths), sample_data(ps_menopause)$DurationAmenorrhea, sample_data(ps_menopause)$DurationMenopauseMonths)
+
+ps_menopause_rel =  transform_sample_counts(ps_menopause,function(x) x/sum(x) * 100)
+# Diversity analysis
+adiv_menopause =  plot_richness(ps_menopause, measures = c("Observed", "Shannon", "InvSimpson"))
+  
+adiv_menopause = adiv_menopause$data %>%
+  select(samples, grp, DurationMenopause, DurationAmenorrhea, DurationCombined, variable, value)
+
+corr_trans = filter(adiv_menopause, grp =="03_trans") %>%
+  group_by(variable) %>%
+  rstatix::cor_test(value,DurationAmenorrhea)
+kable(corr_trans)
+
+ggplot(filter(adiv_menopause, grp =="03_trans"), aes(x = DurationAmenorrhea, y = value)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "darkred") +
+  facet_wrap(~variable, scales = "free") +
+  labs(x = "Duration of Amenorrhea in postmenopausal group", y = "Alpha diversity value")
+
+ggplot(filter(adiv_menopause, grp =="01_postmenopausal"), aes(x = DurationMenopause, y = value)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~variable, scales = "free") +
+  labs(x = "Duration of Amenorrhea in Trans group", y = "Alpha diversity value")
+
+corr_postmeno = filter(adiv_menopause, grp =="01_postmenopausal") %>%
+  group_by(variable) %>%
+  rstatix::cor_test(value,DurationMenopause,method = "pearson")
+kable(corr_postmeno)
+
+# correlations are not signficiant for trans and postmenopausal group separately
+
+# Next, both groups are combined: in months
+corr_menopause = adiv_menopause %>%
+  group_by(variable) %>%
+  rstatix::cor_test(value, DurationCombined, method = "pearson")
+kable(corr_menopause)
+
+ggplot(adiv_menopause, aes(x = DurationCombined, y = value)) +
+  geom_point(aes(color = grp)) +
+  geom_smooth(method = "lm", color = "darkgrey") +
+  facet_wrap(~variable, scales = "free") +
+  labs(x = "Duration of Amenorrhea in postmenopausal and trans group (months)", y = "Alpha diversity value")
+
+
+## Maaslin2 analysis of abundance with duration of amenorrhea
+ps_menopause_rel_genus = tax_glom(ps_menopause_rel, taxrank = "Genus")
+
+genus_MenoPauseDurationMonths = Maaslin2(input_data = otu_table(ps_menopause_rel_genus),
+         input_metadata = as(sample_data(ps_menopause_rel_genus), "data.frame"),
+         output = "results/maaslin2/genus_MenopausedurationMonths",
+         min_abundance = 5,
+         min_prevalence = 0.2,
+         max_significance = 0.2,
+         fixed_effects = "DurationCombined") 
+
+# 4 ASVs 
+
+tax_table(ps_menopause_rel_genus) %>%
+  as.data.frame() %>%
+  rownames_to_column("ASV") %>%
+  filter(ASV %in% filter(genus_MenoPauseDurationMonths$results, qval < 0.2)$feature)
+
+# Lactobacillus, dialister, Anaerococcus, Prevotella
+
+# plot DurationCombined vs these 4 genera 
+psmelt_rel_genus_durationComb = psmelt(ps_menopause_rel_genus)
+maaslin_res_genus_durationComb = ggplot(filter(psmelt_rel_genus_durationComb, OTU %in% filter(genus_MenoPauseDurationMonths$results, qval < 0.2)$feature),
+                                aes(x = DurationCombined, y = Abundance,color = grp)) +
+  geom_jitter(size = 3) +
+  facet_wrap(~Genus, scales = "free") +
+  scale_y_continuous(limits = function(x){c(0, max(0.1, x))}) +
+  theme(legend.position = "none")+
+  labs(x = "Sexually Active",
+       y = "Genus Abundance (%)",
+       caption = "Maaslin2 results")
+
+maaslin_res_genus_durationComb
+ggsave(maaslin_res_genus_durationComb, filename = "results/maaslin2/genus_DurationMenopauseCombined_panelplot.png",
+       height = 5, width = 6)
 
 ```

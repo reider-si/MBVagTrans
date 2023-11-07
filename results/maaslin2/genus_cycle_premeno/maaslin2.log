@@ -1,0 +1,50 @@
+2023-11-07 18:54:17.618821 INFO::Writing function arguments to log file
+2023-11-07 18:54:17.619284 DEBUG::Function arguments
+2023-11-07 18:54:17.619702 DEBUG::Output folder: results/maaslin2/genus_cycle_premeno
+2023-11-07 18:54:17.619887 DEBUG::Min Abundance: 5.000000
+2023-11-07 18:54:17.620039 DEBUG::Min Prevalence: 0.300000
+2023-11-07 18:54:17.620177 DEBUG::Normalization: TSS
+2023-11-07 18:54:17.620305 DEBUG::Transform: LOG
+2023-11-07 18:54:17.620429 DEBUG::Analysis method: LM
+2023-11-07 18:54:17.620548 DEBUG::Max significance: 0.200000
+2023-11-07 18:54:17.620668 DEBUG::Random effects:
+2023-11-07 18:54:17.620784 DEBUG::Fixed effects: CycleDaySampling
+2023-11-07 18:54:17.620899 DEBUG::Correction method: BH
+2023-11-07 18:54:17.621017 DEBUG::Standardize: TRUE
+2023-11-07 18:54:17.621133 DEBUG::Cores: 1
+2023-11-07 18:54:17.621244 INFO::Verifying options selected are valid
+2023-11-07 18:54:17.621491 INFO::Determining format of input files
+2023-11-07 18:54:17.621713 INFO::Input format is data samples as rows and metadata samples as rows
+2023-11-07 18:54:17.622246 DEBUG::A total of 25 samples were found in both the data and metadata
+2023-11-07 18:54:17.622364 DEBUG::Reordering data/metadata to use same sample ordering
+2023-11-07 18:54:17.623467 INFO::Formula for fixed effects: expr ~  CycleDaySampling
+2023-11-07 18:54:17.623752 INFO::Filter data based on min abundance and min prevalence
+2023-11-07 18:54:17.623975 INFO::Total samples in data: 25
+2023-11-07 18:54:17.624185 INFO::Min samples required with min abundance for a feature not to be filtered: 7.500000
+2023-11-07 18:54:17.625607 INFO::Total filtered features: 296
+2023-11-07 18:54:17.62589 INFO::Filtered feature names from abundance and prevalence filtering: ASV55, ASV89, ASV117, ASV225, ASV258, ASV383, ASV397, ASV555, ASV557, ASV595, ASV615, ASV622, ASV647, ASV748, ASV823, ASV882, ASV904, ASV907, ASV927, ASV1006, ASV1045, ASV1133, ASV1208, ASV1243, ASV1275, ASV1311, ASV1418, ASV1466, ASV1474, ASV1549, ASV1569, ASV1574, ASV1671, ASV1758, ASV1766, ASV1768, ASV1797, ASV1808, ASV1818, ASV1841, ASV1861, ASV1893, ASV2027, ASV2038, ASV2047, ASV2058, ASV2073, ASV2099, ASV2100, ASV2135, ASV2138, ASV2148, ASV2162, ASV2164, ASV2168, ASV2222, ASV2237, ASV2248, ASV2260, ASV2277, ASV2278, ASV2288, ASV2290, ASV2337, ASV2346, ASV2386, ASV2398, ASV2409, ASV2418, ASV2425, ASV2446, ASV2452, ASV2472, ASV2477, ASV2486, ASV2489, ASV2510, ASV2519, ASV2525, ASV2528, ASV2529, ASV2539, ASV2545, ASV2579, ASV2586, ASV2593, ASV2605, ASV2614, ASV2615, ASV2629, ASV2631, ASV2704, ASV2710, ASV2733, ASV2787, ASV2798, ASV2801, ASV2834, ASV2856, ASV2898, ASV2936, ASV2969, ASV2974, ASV2991, ASV3011, ASV3013, ASV3084, ASV3108, ASV3115, ASV3138, ASV3159, ASV3177, ASV3222, ASV3238, ASV3244, ASV3286, ASV3299, ASV3300, ASV3348, ASV3404, ASV3407, ASV3480, ASV3491, ASV3497, ASV3508, ASV3544, ASV3547, ASV3569, ASV3575, ASV3578, ASV3580, ASV3593, ASV3600, ASV3662, ASV3666, ASV3679, ASV3697, ASV3721, ASV3820, ASV3827, ASV3871, ASV3891, ASV3917, ASV3926, ASV3950, ASV3980, ASV3988, ASV4074, ASV4164, ASV4200, ASV4249, ASV4267, ASV4289, ASV4326, ASV4351, ASV4407, ASV4409, ASV4453, ASV4483, ASV4504, ASV4555, ASV4585, ASV4586, ASV4608, ASV4654, ASV4715, ASV4717, ASV4776, ASV4838, ASV4865, ASV4885, ASV4902, ASV4908, ASV4914, ASV5050, ASV5103, ASV5119, ASV5156, ASV5171, ASV5246, ASV5247, ASV5260, ASV5277, ASV5301, ASV5302, ASV5347, ASV5451, ASV5452, ASV5455, ASV5467, ASV5472, ASV5477, ASV5493, ASV5517, ASV5520, ASV5603, ASV5664, ASV5684, ASV5686, ASV5688, ASV5718, ASV5723, ASV5727, ASV5736, ASV5800, ASV5833, ASV5962, ASV5977, ASV5979, ASV5986, ASV5987, ASV5989, ASV6035, ASV6130, ASV6159, ASV6173, ASV6193, ASV6222, ASV6247, ASV6256, ASV6380, ASV6405, ASV6424, ASV6440, ASV6464, ASV6488, ASV6495, ASV6501, ASV6535, ASV6536, ASV6605, ASV6618, ASV6627, ASV6772, ASV6791, ASV6853, ASV6859, ASV6865, ASV6866, ASV6867, ASV6870, ASV6874, ASV6900, ASV6911, ASV6945, ASV7002, ASV7069, ASV7246, ASV7281, ASV7285, ASV7297, ASV7301, ASV7326, ASV7361, ASV7362, ASV7378, ASV7379, ASV7385, ASV7405, ASV7410, ASV7424, ASV7441, ASV7445, ASV7490, ASV7594, ASV7657, ASV7753, ASV7756, ASV7843, ASV7919, ASV7972, ASV8046, ASV8051, ASV8081, ASV8102, ASV8105, ASV8127, ASV8137, ASV8141, ASV8144, ASV8147, ASV8150, ASV8256, ASV8281, ASV8417, ASV8418, ASV8422, ASV8437, ASV8463, ASV8602, ASV8623, ASV8641, ASV8646, ASV8667, ASV8787, ASV8794
+2023-11-07 18:54:17.626626 INFO::Total filtered features with variance filtering: 0
+2023-11-07 18:54:17.627034 INFO::Filtered feature names from variance filtering:
+2023-11-07 18:54:17.627291 INFO::Running selected normalization method: TSS
+2023-11-07 18:54:17.627729 INFO::Applying z-score to standardize continuous metadata
+2023-11-07 18:54:17.630493 INFO::Running selected transform method: LOG
+2023-11-07 18:54:17.630996 INFO::Running selected analysis method: LM
+2023-11-07 18:54:17.631312 INFO::Fitting model to feature number 1, ASV1
+2023-11-07 18:54:17.632475 INFO::Fitting model to feature number 2, ASV66
+2023-11-07 18:54:17.635068 INFO::Counting total values for each feature
+2023-11-07 18:54:17.635709 INFO::Writing filtered data to file results/maaslin2/genus_cycle_premeno/features/filtered_data.tsv
+2023-11-07 18:54:17.636288 INFO::Writing filtered, normalized data to file results/maaslin2/genus_cycle_premeno/features/filtered_data_norm.tsv
+2023-11-07 18:54:17.63677 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_cycle_premeno/features/filtered_data_norm_transformed.tsv
+2023-11-07 18:54:17.637257 WARNING::Deleting existing residuals file: results/maaslin2/genus_cycle_premeno/fits/residuals.rds
+2023-11-07 18:54:17.637696 INFO::Writing residuals to file results/maaslin2/genus_cycle_premeno/fits/residuals.rds
+2023-11-07 18:54:17.638122 WARNING::Deleting existing fitted file: results/maaslin2/genus_cycle_premeno/fits/fitted.rds
+2023-11-07 18:54:17.638473 INFO::Writing fitted values to file results/maaslin2/genus_cycle_premeno/fits/fitted.rds
+2023-11-07 18:54:17.638831 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_cycle_premeno/all_results.tsv
+2023-11-07 18:54:17.639473 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_cycle_premeno/significant_results.tsv
+2023-11-07 18:54:17.639954 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_cycle_premeno/heatmap.pdf
+2023-11-07 18:54:17.640543 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_cycle_premeno
+2023-11-07 18:54:17.641122 INFO::Plotting associations from most to least significant, grouped by metadata
+2023-11-07 18:54:17.641434 INFO::Plotting data for metadata number 1, CycleDaySampling
+2023-11-07 18:54:17.642255 INFO::Creating scatter plot for continuous data, CycleDaySampling vs ASV66
+2023-11-07 18:54:17.702096 INFO::Creating scatter plot for continuous data, CycleDaySampling vs ASV1
+2023-11-07 18:54:25.711399 WARNING::Input is a matrix, passing through as.data.frame() .

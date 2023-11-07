@@ -7,6 +7,7 @@ library(tidyverse)
 library(phyloseq)
 library(ggpubr)
 library(psadd)
+library(DECIPHER)
 theme_set(theme_bw())
 
 # Get sample metadata
@@ -25,7 +26,11 @@ covar =  read.csv2("22010 Metadaten.csv") %>%
                  SexuallyActive = "Sexuell.aktiv", 
                  NugentScore = "Nugent.Score", 
                  Testosterone = "Testosteronwert..µg.l.", 
-                 Estradiole = "Östradiolwert..ng.l.") %>%
+                 Estradiole = "Östradiolwert..ng.l.",
+                DurationMenopause = "Zeitraum.seit.Menopause.in.Jahren",
+                DurationAmenorrhea = "Zeitraum.seit.letzter.Regelblutung.in.Monaten",
+                CycleDaySampling = "Zyklustag.bei.Probenentnahme",
+                Duration_GNRH = "Dauer.GnRH.Analoga.Einnahme.in.Monaten") %>%
   dplyr::mutate(GNRHA = factor(GNRHA, labels = c(NA, "yes", "no")),
                 Virgo = factor(Virgo, labels = c(NA, "yes", "no")),
                 SexuallyActive=ifelse(SexuallyActive=="Ja", "ja", SexuallyActive),
@@ -57,8 +62,8 @@ ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE),
 
 ps
 set.seed(711)
-phy_tree(ps) <- root(phy_tree(ps), sample(taxa_names(ps), 1), resolve.root = TRUE)
-is.rooted(phy_tree(ps))
+phy_tree(ps) <- ape::root(phy_tree(ps), sample(taxa_names(ps), 1), resolve.root = TRUE)
+ape::is.rooted(phy_tree(ps))
 
 #### Analysis of PBS Control ####
 # export pbs sample into separate phyloseq object and analyse its taxnomic distribution
