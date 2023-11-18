@@ -1,50 +1,50 @@
-2023-11-07 19:00:12.668838 INFO::Writing function arguments to log file
-2023-11-07 19:00:12.669364 DEBUG::Function arguments
-2023-11-07 19:00:12.669528 DEBUG::Output folder: results/maaslin2/genus_Testosterone
-2023-11-07 19:00:12.669685 DEBUG::Min Abundance: 5.000000
-2023-11-07 19:00:12.669829 DEBUG::Min Prevalence: 0.300000
-2023-11-07 19:00:12.669965 DEBUG::Normalization: TSS
-2023-11-07 19:00:12.670091 DEBUG::Transform: LOG
-2023-11-07 19:00:12.670214 DEBUG::Analysis method: LM
-2023-11-07 19:00:12.670344 DEBUG::Max significance: 0.200000
-2023-11-07 19:00:12.67047 DEBUG::Random effects:
-2023-11-07 19:00:12.670595 DEBUG::Fixed effects: Testosterone
-2023-11-07 19:00:12.670718 DEBUG::Correction method: BH
-2023-11-07 19:00:12.670835 DEBUG::Standardize: TRUE
-2023-11-07 19:00:12.670952 DEBUG::Cores: 1
-2023-11-07 19:00:12.671066 INFO::Verifying options selected are valid
-2023-11-07 19:00:12.671312 INFO::Determining format of input files
-2023-11-07 19:00:12.671541 INFO::Input format is data samples as rows and metadata samples as rows
-2023-11-07 19:00:12.672075 DEBUG::A total of 25 samples were found in both the data and metadata
-2023-11-07 19:00:12.672202 DEBUG::Reordering data/metadata to use same sample ordering
-2023-11-07 19:00:12.673349 INFO::Formula for fixed effects: expr ~  Testosterone
-2023-11-07 19:00:12.673617 INFO::Filter data based on min abundance and min prevalence
-2023-11-07 19:00:12.673845 INFO::Total samples in data: 25
-2023-11-07 19:00:12.674057 INFO::Min samples required with min abundance for a feature not to be filtered: 7.500000
-2023-11-07 19:00:12.675472 INFO::Total filtered features: 292
-2023-11-07 19:00:12.675759 INFO::Filtered feature names from abundance and prevalence filtering: ASV120, ASV159, ASV269, ASV326, ASV383, ASV419, ASV443, ASV487, ASV498, ASV565, ASV636, ASV687, ASV770, ASV866, ASV904, ASV940, ASV970, ASV998, ASV1045, ASV1075, ASV1078, ASV1133, ASV1134, ASV1175, ASV1243, ASV1259, ASV1262, ASV1268, ASV1302, ASV1310, ASV1311, ASV1387, ASV1410, ASV1474, ASV1475, ASV1481, ASV1569, ASV1574, ASV1671, ASV1709, ASV1736, ASV1759, ASV1797, ASV1817, ASV1818, ASV1856, ASV1861, ASV1863, ASV1879, ASV1887, ASV1893, ASV1929, ASV1980, ASV2027, ASV2038, ASV2058, ASV2078, ASV2082, ASV2100, ASV2138, ASV2162, ASV2164, ASV2199, ASV2222, ASV2237, ASV2249, ASV2260, ASV2261, ASV2277, ASV2278, ASV2288, ASV2290, ASV2304, ASV2309, ASV2369, ASV2398, ASV2409, ASV2425, ASV2452, ASV2460, ASV2461, ASV2470, ASV2486, ASV2489, ASV2490, ASV2510, ASV2519, ASV2525, ASV2528, ASV2529, ASV2580, ASV2586, ASV2593, ASV2605, ASV2614, ASV2615, ASV2629, ASV2631, ASV2634, ASV2641, ASV2659, ASV2668, ASV2704, ASV2710, ASV2742, ASV2786, ASV2787, ASV2798, ASV2801, ASV2803, ASV2834, ASV2856, ASV2874, ASV2898, ASV2912, ASV2936, ASV2969, ASV2974, ASV2991, ASV3011, ASV3013, ASV3084, ASV3138, ASV3159, ASV3177, ASV3222, ASV3238, ASV3244, ASV3286, ASV3299, ASV3300, ASV3316, ASV3320, ASV3348, ASV3480, ASV3497, ASV3508, ASV3534, ASV3544, ASV3547, ASV3567, ASV3569, ASV3578, ASV3580, ASV3593, ASV3600, ASV3666, ASV3690, ASV3697, ASV3721, ASV3728, ASV3820, ASV3827, ASV3891, ASV3917, ASV3926, ASV3927, ASV3950, ASV3975, ASV3980, ASV3988, ASV4037, ASV4074, ASV4164, ASV4184, ASV4200, ASV4249, ASV4253, ASV4267, ASV4268, ASV4289, ASV4326, ASV4407, ASV4409, ASV4453, ASV4496, ASV4497, ASV4504, ASV4555, ASV4585, ASV4586, ASV4598, ASV4643, ASV4650, ASV4654, ASV4715, ASV4717, ASV4776, ASV4838, ASV4865, ASV4879, ASV4885, ASV4902, ASV4972, ASV5050, ASV5119, ASV5149, ASV5156, ASV5171, ASV5246, ASV5247, ASV5260, ASV5277, ASV5347, ASV5451, ASV5452, ASV5455, ASV5467, ASV5472, ASV5477, ASV5514, ASV5517, ASV5520, ASV5525, ASV5572, ASV5603, ASV5718, ASV5723, ASV5727, ASV5736, ASV5800, ASV5833, ASV5977, ASV5979, ASV5986, ASV5987, ASV5989, ASV6035, ASV6044, ASV6154, ASV6159, ASV6173, ASV6193, ASV6222, ASV6247, ASV6256, ASV6299, ASV6405, ASV6424, ASV6488, ASV6535, ASV6536, ASV6585, ASV6605, ASV6612, ASV6618, ASV6627, ASV6642, ASV6772, ASV6791, ASV6853, ASV6865, ASV6866, ASV6867, ASV6924, ASV6945, ASV7002, ASV7069, ASV7246, ASV7268, ASV7281, ASV7285, ASV7297, ASV7301, ASV7326, ASV7405, ASV7490, ASV7594, ASV7657, ASV7753, ASV7756, ASV7919, ASV7972, ASV8046, ASV8051, ASV8256, ASV8281, ASV8367, ASV8417, ASV8418, ASV8422, ASV8436, ASV8437, ASV8463, ASV8519, ASV8602, ASV8623, ASV8641, ASV8646, ASV8667, ASV8787, ASV8794
-2023-11-07 19:00:12.676205 INFO::Total filtered features with variance filtering: 0
-2023-11-07 19:00:12.676433 INFO::Filtered feature names from variance filtering:
-2023-11-07 19:00:12.676639 INFO::Running selected normalization method: TSS
-2023-11-07 19:00:12.677015 INFO::Applying z-score to standardize continuous metadata
-2023-11-07 19:00:12.67939 INFO::Running selected transform method: LOG
-2023-11-07 19:00:12.679779 INFO::Running selected analysis method: LM
-2023-11-07 19:00:12.680039 INFO::Fitting model to feature number 1, ASV14
-2023-11-07 19:00:12.68123 INFO::Fitting model to feature number 2, ASV54
-2023-11-07 19:00:12.682158 INFO::Fitting model to feature number 3, ASV66
-2023-11-07 19:00:12.683041 INFO::Fitting model to feature number 4, ASV87
-2023-11-07 19:00:12.683918 INFO::Fitting model to feature number 5, ASV205
-2023-11-07 19:00:12.684827 INFO::Fitting model to feature number 6, ASV568
-2023-11-07 19:00:12.687528 INFO::Counting total values for each feature
-2023-11-07 19:00:12.688188 INFO::Writing filtered data to file results/maaslin2/genus_Testosterone/features/filtered_data.tsv
-2023-11-07 19:00:12.688842 INFO::Writing filtered, normalized data to file results/maaslin2/genus_Testosterone/features/filtered_data_norm.tsv
-2023-11-07 19:00:12.689395 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_Testosterone/features/filtered_data_norm_transformed.tsv
-2023-11-07 19:00:12.689978 WARNING::Deleting existing residuals file: results/maaslin2/genus_Testosterone/fits/residuals.rds
-2023-11-07 19:00:12.690394 INFO::Writing residuals to file results/maaslin2/genus_Testosterone/fits/residuals.rds
-2023-11-07 19:00:12.690814 WARNING::Deleting existing fitted file: results/maaslin2/genus_Testosterone/fits/fitted.rds
-2023-11-07 19:00:12.69119 INFO::Writing fitted values to file results/maaslin2/genus_Testosterone/fits/fitted.rds
-2023-11-07 19:00:12.691604 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_Testosterone/all_results.tsv
-2023-11-07 19:00:12.692167 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_Testosterone/significant_results.tsv
-2023-11-07 19:00:12.692519 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_Testosterone/heatmap.pdf
-2023-11-07 19:00:12.692974 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_Testosterone
-2023-11-07 19:00:12.699004 WARNING::Input is a matrix, passing through as.data.frame() .
+2023-11-18 17:25:57.987135 INFO::Writing function arguments to log file
+2023-11-18 17:25:57.987682 DEBUG::Function arguments
+2023-11-18 17:25:57.988162 DEBUG::Output folder: results/maaslin2/genus_Testosterone
+2023-11-18 17:25:57.988338 DEBUG::Min Abundance: 5.000000
+2023-11-18 17:25:57.988501 DEBUG::Min Prevalence: 0.300000
+2023-11-18 17:25:57.988656 DEBUG::Normalization: TSS
+2023-11-18 17:25:57.98881 DEBUG::Transform: LOG
+2023-11-18 17:25:57.988957 DEBUG::Analysis method: LM
+2023-11-18 17:25:57.989106 DEBUG::Max significance: 0.200000
+2023-11-18 17:25:57.989255 DEBUG::Random effects:
+2023-11-18 17:25:57.989403 DEBUG::Fixed effects: Testosterone
+2023-11-18 17:25:57.989553 DEBUG::Correction method: BH
+2023-11-18 17:25:57.989696 DEBUG::Standardize: TRUE
+2023-11-18 17:25:57.989844 DEBUG::Cores: 1
+2023-11-18 17:25:57.989984 INFO::Verifying options selected are valid
+2023-11-18 17:25:57.990288 INFO::Determining format of input files
+2023-11-18 17:25:57.990567 INFO::Input format is data samples as rows and metadata samples as rows
+2023-11-18 17:25:57.99123 DEBUG::A total of 25 samples were found in both the data and metadata
+2023-11-18 17:25:57.991383 DEBUG::Reordering data/metadata to use same sample ordering
+2023-11-18 17:25:57.992731 INFO::Formula for fixed effects: expr ~  Testosterone
+2023-11-18 17:25:57.99307 INFO::Filter data based on min abundance and min prevalence
+2023-11-18 17:25:57.993345 INFO::Total samples in data: 25
+2023-11-18 17:25:57.993598 INFO::Min samples required with min abundance for a feature not to be filtered: 7.500000
+2023-11-18 17:25:57.995372 INFO::Total filtered features: 292
+2023-11-18 17:25:57.995713 INFO::Filtered feature names from abundance and prevalence filtering: ASV120, ASV159, ASV269, ASV326, ASV383, ASV419, ASV443, ASV487, ASV498, ASV565, ASV636, ASV687, ASV770, ASV866, ASV904, ASV940, ASV970, ASV998, ASV1045, ASV1075, ASV1078, ASV1133, ASV1134, ASV1175, ASV1243, ASV1259, ASV1262, ASV1268, ASV1302, ASV1310, ASV1311, ASV1387, ASV1410, ASV1474, ASV1475, ASV1481, ASV1569, ASV1574, ASV1671, ASV1709, ASV1736, ASV1759, ASV1797, ASV1817, ASV1818, ASV1856, ASV1861, ASV1863, ASV1879, ASV1887, ASV1893, ASV1929, ASV1980, ASV2027, ASV2038, ASV2058, ASV2078, ASV2082, ASV2100, ASV2138, ASV2162, ASV2164, ASV2199, ASV2222, ASV2237, ASV2249, ASV2260, ASV2261, ASV2277, ASV2278, ASV2288, ASV2290, ASV2304, ASV2309, ASV2369, ASV2398, ASV2409, ASV2425, ASV2452, ASV2460, ASV2461, ASV2470, ASV2486, ASV2489, ASV2490, ASV2510, ASV2519, ASV2525, ASV2528, ASV2529, ASV2580, ASV2586, ASV2593, ASV2605, ASV2614, ASV2615, ASV2629, ASV2631, ASV2634, ASV2641, ASV2659, ASV2668, ASV2704, ASV2710, ASV2742, ASV2786, ASV2787, ASV2798, ASV2801, ASV2803, ASV2834, ASV2856, ASV2874, ASV2898, ASV2912, ASV2936, ASV2969, ASV2974, ASV2991, ASV3011, ASV3013, ASV3084, ASV3138, ASV3159, ASV3177, ASV3222, ASV3238, ASV3244, ASV3286, ASV3299, ASV3300, ASV3316, ASV3320, ASV3348, ASV3480, ASV3497, ASV3508, ASV3534, ASV3544, ASV3547, ASV3567, ASV3569, ASV3578, ASV3580, ASV3593, ASV3600, ASV3666, ASV3690, ASV3697, ASV3721, ASV3728, ASV3820, ASV3827, ASV3891, ASV3917, ASV3926, ASV3927, ASV3950, ASV3975, ASV3980, ASV3988, ASV4037, ASV4074, ASV4164, ASV4184, ASV4200, ASV4249, ASV4253, ASV4267, ASV4268, ASV4289, ASV4326, ASV4407, ASV4409, ASV4453, ASV4496, ASV4497, ASV4504, ASV4555, ASV4585, ASV4586, ASV4598, ASV4643, ASV4650, ASV4654, ASV4715, ASV4717, ASV4776, ASV4838, ASV4865, ASV4879, ASV4885, ASV4902, ASV4972, ASV5050, ASV5119, ASV5149, ASV5156, ASV5171, ASV5246, ASV5247, ASV5260, ASV5277, ASV5347, ASV5451, ASV5452, ASV5455, ASV5467, ASV5472, ASV5477, ASV5514, ASV5517, ASV5520, ASV5525, ASV5572, ASV5603, ASV5718, ASV5723, ASV5727, ASV5736, ASV5800, ASV5833, ASV5977, ASV5979, ASV5986, ASV5987, ASV5989, ASV6035, ASV6044, ASV6154, ASV6159, ASV6173, ASV6193, ASV6222, ASV6247, ASV6256, ASV6299, ASV6405, ASV6424, ASV6488, ASV6535, ASV6536, ASV6585, ASV6605, ASV6612, ASV6618, ASV6627, ASV6642, ASV6772, ASV6791, ASV6853, ASV6865, ASV6866, ASV6867, ASV6924, ASV6945, ASV7002, ASV7069, ASV7246, ASV7268, ASV7281, ASV7285, ASV7297, ASV7301, ASV7326, ASV7405, ASV7490, ASV7594, ASV7657, ASV7753, ASV7756, ASV7919, ASV7972, ASV8046, ASV8051, ASV8256, ASV8281, ASV8367, ASV8417, ASV8418, ASV8422, ASV8436, ASV8437, ASV8463, ASV8519, ASV8602, ASV8623, ASV8641, ASV8646, ASV8667, ASV8787, ASV8794
+2023-11-18 17:25:57.996225 INFO::Total filtered features with variance filtering: 0
+2023-11-18 17:25:57.996504 INFO::Filtered feature names from variance filtering:
+2023-11-18 17:25:57.996754 INFO::Running selected normalization method: TSS
+2023-11-18 17:25:57.997201 INFO::Applying z-score to standardize continuous metadata
+2023-11-18 17:25:57.999951 INFO::Running selected transform method: LOG
+2023-11-18 17:25:58.000411 INFO::Running selected analysis method: LM
+2023-11-18 17:25:58.000731 INFO::Fitting model to feature number 1, ASV14
+2023-11-18 17:25:58.002137 INFO::Fitting model to feature number 2, ASV54
+2023-11-18 17:25:58.003258 INFO::Fitting model to feature number 3, ASV66
+2023-11-18 17:25:58.004351 INFO::Fitting model to feature number 4, ASV87
+2023-11-18 17:25:58.005426 INFO::Fitting model to feature number 5, ASV205
+2023-11-18 17:25:58.006502 INFO::Fitting model to feature number 6, ASV568
+2023-11-18 17:25:58.009605 INFO::Counting total values for each feature
+2023-11-18 17:25:58.010366 INFO::Writing filtered data to file results/maaslin2/genus_Testosterone/features/filtered_data.tsv
+2023-11-18 17:25:58.011117 INFO::Writing filtered, normalized data to file results/maaslin2/genus_Testosterone/features/filtered_data_norm.tsv
+2023-11-18 17:25:58.011771 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_Testosterone/features/filtered_data_norm_transformed.tsv
+2023-11-18 17:25:58.012511 WARNING::Deleting existing residuals file: results/maaslin2/genus_Testosterone/fits/residuals.rds
+2023-11-18 17:25:58.01306 INFO::Writing residuals to file results/maaslin2/genus_Testosterone/fits/residuals.rds
+2023-11-18 17:25:58.013566 WARNING::Deleting existing fitted file: results/maaslin2/genus_Testosterone/fits/fitted.rds
+2023-11-18 17:25:58.014026 INFO::Writing fitted values to file results/maaslin2/genus_Testosterone/fits/fitted.rds
+2023-11-18 17:25:58.014476 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_Testosterone/all_results.tsv
+2023-11-18 17:25:58.015173 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_Testosterone/significant_results.tsv
+2023-11-18 17:25:58.01558 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_Testosterone/heatmap.pdf
+2023-11-18 17:25:58.01616 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_Testosterone
+2023-11-18 17:25:58.023913 WARNING::Input is a matrix, passing through as.data.frame() .

@@ -617,7 +617,7 @@ genus_gnrh= Maaslin2(input_data = otu_table(ps_trans_genus),
 
 No significant associations.
 
-### Cycle dependency in premenopausal group
+### Cycle dependency in pre-menopausal group
 
 ```{r cycle pre}
 ps_pre = subset_samples(ps_samples, grp =="02_premenopausal") %>%
@@ -807,4 +807,96 @@ maaslin_res_genus_durationComb
 ggsave(maaslin_res_genus_durationComb, filename = "results/maaslin2/genus_DurationMenopauseCombined_panelplot.png",
        height = 5, width = 6)
 
+```
+
+## Influence of sex of partner
+
+```{r partnersex_Adiv}
+
+## Analysis in complete cohort
+### alpha diversity
+rstatix::shapiro_test(filter(adiv$data, variable=="Observed"), value)
+rstatix::shapiro_test(filter(adiv$data, variable=="Shannon"), value)
+rstatix::shapiro_test(filter(adiv$data, variable=="InvSimpson"), value)
+adiv$data %>% 
+  filter(variable %in% c("Observed", "Shannon", "InvSimpson")) %>%
+  group_by(variable) %>%
+  rstatix::kruskal_test(value~SexOfPartner)
+
+adiv$data %>% 
+  filter(variable %in% c("Observed", "Shannon", "InvSimpson")) %>%
+  group_by(variable) %>%
+  rstatix::anova_test(value~SexOfPartner)
+```
+
+Observed is not distributed normally, and no significant effect of sex of partner is detected using Kruskal Wallis test. However, Shannon and InvSimpson indices show a significant effect.
+
+```{r partnersex_bdiv}
+adonis_bc_partnersex = vegan::adonis2(D_BC ~ phyloseq::sample_data(ps_filtered_rel)$SexOfPartner) 
+adonis_pw_bc_partnersex = pairwise.adonis(D_BC, phyloseq::sample_data(ps_filtered_rel)$SexOfPartner)
+
+adonis_uf_partnersex = vegan::adonis2(D_UF ~ phyloseq::sample_data(ps_filtered_rel)$SexOfPartner)
+adonis_pw_uf_partnersex = pairwise.adonis(D_UF, phyloseq::sample_data(ps_filtered_rel)$SexOfPartner)
+
+adonis_wUF_partnersex = vegan::adonis2(D_wUF ~ phyloseq::sample_data(ps_filtered_rel)$SexOfPartner)
+adonis_pw_wUF_partnersex = pairwise.adonis(D_wUF, phyloseq::sample_data(ps_filtered_rel)$SexOfPartner)
+
+kable(adonis_pw_bc, digits = 3, caption = "Bray-Curtis")
+kable(adonis_pw_uf, digits = 3, caption ="Unweigthed Unifrac")
+kable(adonis_pw_wUF, digits = 3, caption = "Weighted Unifrac")
+```
+
+Adonis identifies significant influence of sex of partner on bray curtis dissimilarities overall. Pairwise uncorrected p value is only significant for comparison of M vs M+F and borderline sig for comaprison of M vs F.
+
+Using unweighted Unicfrac, there is a uncorrected singificant p value of 0.021 for the comparison of male vs female.
+
+```{r maaslin2}
+genus_SexOfPartner = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyactive),
+         input_metadata = as(sample_data(ps_rel_genus_sexuallyactive), "data.frame"),
+         output = "results/maaslin2/genus_SexOfPartner",
+         min_abundance = 5,
+         min_prevalence = 0.2,
+         max_significance = 0.2,
+         fixed_effects = "SexOfPartner") 
+genus_SexOfPartner2  = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyactive),
+         input_metadata = as(sample_data(ps_rel_genus_sexuallyactive), "data.frame"),
+         output = "results/maaslin2/genus_SexOfPartnergrp",
+         min_abundance = 5,
+         min_prevalence = 0.2,
+         max_significance = 0.2,
+         fixed_effects = c("SexOfPartner", "grp"))
+
+tax_table(ps_rel_genus_sexuallyactive) %>%
+  as.data.frame() %>%
+  rownames_to_column("ASV") %>%
+  filter(ASV %in% filter(genus_SexOfPartner2$results, qval < 0.2)$feature)
+
+# plot abundance of Provetella
+maaslin_res_genus_sexpartner = ggplot(filter(psmelt_rel_genus_sexuallyactive, OTU %in% filter(genus_SexOfPartner2$results, qval < 0.2)$feature),
+                                aes(x = SexOfPartner, y = Abundance,fill = SexOfPartner)) +
+  geom_jitter() +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  facet_grid(grp~Genus, scales = "free") +
+  scale_y_continuous(limits = function(x){c(0, max(0.1, x))}) +
+  theme(legend.position = "none")+
+  labs(x = "Sex of Partner",
+       y = "Genus Abundance (%)",
+       caption = "Maaslin2 results")
+
+maaslin_res_genus_sexpartner
+ggsave(maaslin_res_genus_sexpartner, filename = "results/maaslin2/genus_SexOfPartner_panelplot.png",
+       height = 5, width = 6)
+
+
+# M/F distinction only in trans - filter for this group
+ps_rel_genus_sexuallyactive_trans = subset_samples(ps_rel_genus_sexuallyactive, grp =="03_trans")
+genus_SexOfPartnerTrans = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyactive_trans),
+         input_metadata = as(sample_data(ps_rel_genus_sexuallyactive_trans), "data.frame"),
+         output = "results/maaslin2/genus_SexOfPartnerTrans",
+         min_abundance = 5,
+         min_prevalence = 0.2,
+         max_significance = 0.2,
+         fixed_effects = "SexOfPartner") 
+
+# no significant results in trans group only
 ```

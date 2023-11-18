@@ -1,77 +1,77 @@
-IMGM;CID;grp;Age;GHAT_Length;GNRHA;Virgo;SexuallyActive;NugentScore;Testosterone;Estradiole;DurationMenopause;DurationAmenorrhea;CycleDaySampling;Duration_GNRH
-22010-0001;101;01_postmenopausal;64;0;NA;no;yes;7-10;NA;NA;11;NA;NA;NA
-22010-0002;102;01_postmenopausal;49;0;NA;no;yes;0-3;NA;NA;2;NA;NA;NA
-22010-0003;103;01_postmenopausal;61;0;NA;no;yes;7-10;NA;NA;10;NA;NA;NA
-22010-0004;104;01_postmenopausal;70;0;NA;no;yes;4-6;NA;NA;22;NA;NA;NA
-22010-0005;105;01_postmenopausal;66;0;NA;no;yes;no bacteria;NA;NA;12;NA;NA;NA
-22010-0006;106;01_postmenopausal;71;0;NA;no;no;0-3;NA;NA;22;NA;NA;NA
-22010-0007;107;01_postmenopausal;59;0;NA;no;no;4-6;NA;NA;4;NA;NA;NA
-22010-0008;108;01_postmenopausal;75;0;NA;no;no;no bacteria;NA;NA;28;NA;NA;NA
-22010-0009;109;01_postmenopausal;62;0;NA;no;no;no bacteria;NA;NA;7;NA;NA;NA
-22010-0010;110;01_postmenopausal;68;0;NA;no;yes;0-3;NA;NA;26;NA;NA;NA
-22010-0011;111;01_postmenopausal;59;0;NA;no;no;no bacteria;NA;NA;11;NA;NA;NA
-22010-0012;112;01_postmenopausal;55;0;NA;no;NA;no bacteria;NA;NA;2;NA;NA;NA
-22010-0013;113;01_postmenopausal;71;0;NA;no;no;no bacteria;NA;NA;18;NA;NA;NA
-22010-0014;114;01_postmenopausal;70;0;NA;no;no;no bacteria;NA;NA;20;NA;NA;NA
-22010-0015;115;01_postmenopausal;70;0;NA;no;no;no bacteria;NA;NA;17;NA;NA;NA
-22010-0016;116;01_postmenopausal;69;0;NA;no;no;no bacteria;NA;NA;24;NA;NA;NA
-22010-0017;117;01_postmenopausal;73;0;NA;no;no;4-6;NA;NA;23;NA;NA;NA
-22010-0018;118;01_postmenopausal;64;0;NA;no;yes;4-6;NA;NA;19;NA;NA;NA
-22010-0019;119;01_postmenopausal;68;0;NA;no;no;no bacteria;NA;NA;23;NA;NA;NA
-22010-0020;120;01_postmenopausal;76;0;NA;no;no;0-3;NA;NA;27;NA;NA;NA
-22010-0021;121;01_postmenopausal;64;0;NA;no;no;0-3;NA;NA;13;NA;NA;NA
-22010-0022;122;01_postmenopausal;54;0;NA;no;yes;0-3;NA;NA;1;NA;NA;NA
-22010-0023;123;01_postmenopausal;63;0;NA;no;yes;4-6;NA;NA;13;NA;NA;NA
-22010-0024;124;01_postmenopausal;57;0;NA;no;no;no bacteria;NA;NA;4;NA;NA;NA
-22010-0025;125;01_postmenopausal;50;0;NA;no;no;0-3;NA;NA;3;NA;NA;NA
-22010-0026;201;02_premenopausal;30;0;NA;no;yes;4-6;NA;NA;NA;NA;10;NA
-22010-0027;202;02_premenopausal;28;0;NA;no;yes;7-10;NA;NA;NA;NA;10;NA
-22010-0028;203;02_premenopausal;39;0;NA;no;yes;0-3;NA;NA;NA;NA;13;NA
-22010-0029;204;02_premenopausal;26;0;NA;no;yes;0-3;NA;NA;NA;NA;20;NA
-22010-0030;205;02_premenopausal;27;0;NA;no;yes;0-3;NA;NA;NA;NA;2;NA
-22010-0031;206;02_premenopausal;39;0;NA;no;yes;no bacteria;NA;NA;NA;NA;9;NA
-22010-0032;207;02_premenopausal;32;0;NA;no;yes;0-3;NA;NA;NA;NA;12;NA
-22010-0033;208;02_premenopausal;35;0;NA;no;yes;0-3;NA;NA;NA;NA;29;NA
-22010-0034;209;02_premenopausal;27;0;NA;no;yes;0-3;NA;NA;NA;NA;10;NA
-22010-0035;210;02_premenopausal;32;0;NA;no;yes;0-3;NA;NA;NA;NA;16;NA
-22010-0036;211;02_premenopausal;34;0;NA;no;yes;0-3;NA;NA;NA;NA;10;NA
-22010-0037;212;02_premenopausal;31;0;NA;no;yes;0-3;NA;NA;NA;NA;9;NA
-22010-0038;213;02_premenopausal;30;0;NA;no;yes;0-3;NA;NA;NA;NA;7;NA
-22010-0039;214;02_premenopausal;31;0;NA;no;yes;0-3;NA;NA;NA;NA;14;NA
-22010-0040;215;02_premenopausal;44;0;NA;no;yes;no bacteria;NA;NA;NA;NA;11;NA
-22010-0041;216;02_premenopausal;37;0;NA;no;yes;0-3;NA;NA;NA;NA;14;NA
-22010-0042;217;02_premenopausal;37;0;NA;no;yes;0-3;NA;NA;NA;NA;12;NA
-22010-0043;218;02_premenopausal;36;0;NA;no;yes;0-3;NA;NA;NA;NA;9;NA
-22010-0044;219;02_premenopausal;30;0;NA;no;yes;0-3;NA;NA;NA;NA;20;NA
-22010-0045;220;02_premenopausal;36;0;NA;no;yes;0-3;NA;NA;NA;NA;21;NA
-22010-0046;221;02_premenopausal;37;0;NA;no;yes;0-3;NA;NA;NA;NA;9;NA
-22010-0047;222;02_premenopausal;40;0;NA;no;yes;4-6;NA;NA;NA;NA;2;NA
-22010-0048;223;02_premenopausal;30;0;NA;no;yes;0-3;NA;NA;NA;NA;9;NA
-22010-0049;224;02_premenopausal;31;0;NA;no;yes;0-3;NA;NA;NA;NA;7;NA
-22010-0050;225;02_premenopausal;33;0;NA;no;yes;0-3;NA;NA;NA;NA;21;NA
-22010-0051;301;03_trans;22;40;no;no;yes;0-3;7,11;40;NA;19;NA;NA
-22010-0052;302;03_trans;21;48;no;yes;no;no bacteria;7,11;57;NA;42;NA;NA
-22010-0053;303;03_trans;19;13;no;yes;yes;no bacteria;5,21;96;NA;2;NA;NA
-22010-0054;304;03_trans;20;22;no;yes;yes;4-6;5,83;41;NA;33;NA;NA
-22010-0055;305;03_trans;20;14;no;NA;NA;no bacteria;3,95;39;NA;17;NA;NA
-22010-0056;306;03_trans;21;37;yes;no;yes;no bacteria;9,08;31;NA;35;NA;35
-22010-0057;307;03_trans;30;146;yes;no;yes;no bacteria;4,79;NA;NA;6;NA;59
-22010-0058;308;03_trans;19;33;no;no;yes;4-6;7,66;58;NA;2;NA;NA
-22010-0059;309;03_trans;24;38;yes;no;yes;4-6;6,64;32;NA;37;NA;37
-22010-0060;310;03_trans;28;21;yes;yes;no;no bacteria;3,22;34;NA;14;NA;12
-22010-0061;311;03_trans;26;17;no;yes;no;4-6;7,04;34;NA;0;NA;NA
-22010-0062;312;03_trans;24;60;yes;NA;NA;4-6;2,19;98;NA;60;NA;60
-22010-0063;313;03_trans;31;47;yes;NA;yes;no bacteria;5,41;32;NA;46;NA;47
-22010-0064;314;03_trans;18;15;no;no;yes;no bacteria;NA;63;NA;4;NA;NA
-22010-0065;315;03_trans;25;26;no;NA;yes;no bacteria;6,25;37;NA;26;NA;NA
-22010-0066;316;03_trans;21;10;no;no;no;0-3;2,23;31;NA;9;NA;NA
-22010-0067;317;03_trans;32;16;yes;yes;no;no bacteria;4,46;29;NA;16;NA;16
-22010-0068;318;03_trans;20;33;no;yes;yes;0-3;3,80;NA;NA;27;NA;NA
-22010-0069;319;03_trans;25;26;yes;no;yes;no bacteria;3,99;NA;NA;0;NA;18
-22010-0070;320;03_trans;23;74;yes;yes;no;4-6;5,71;NA;NA;74;NA;74
-22010-0071;321;03_trans;19;12;no;no;no;4-6;3,23;26;NA;9;NA;NA
-22010-0072;322;03_trans;29;26;no;no;no;no bacteria;6,57;37;NA;1;NA;NA
-22010-0073;323;03_trans;21;35;no;yes;no;no bacteria;2,02;40;NA;35;NA;NA
-22010-0074;324;03_trans;19;13;no;yes;yes;no bacteria;2,07;38;NA;16;NA;NA
-22010-0075;325;03_trans;18;17;yes;no;no;no bacteria;3,13;NA;NA;18;NA;18
-22010-PBS01-IKO;0;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+IMGM;CID;grp;Age;GHAT_Length;GNRHA;Virgo;SexuallyActive;SexOfPartner;NugentScore;Testosterone;Estradiole;DurationMenopause;DurationAmenorrhea;CycleDaySampling;Duration_GNRH
+22010-0001;101;01_postmenopausal;64;0;NA;no;yes;M;7-10;NA;NA;11;NA;NA;NA
+22010-0002;102;01_postmenopausal;49;0;NA;no;yes;M;0-3;NA;NA;2;NA;NA;NA
+22010-0003;103;01_postmenopausal;61;0;NA;no;yes;M;7-10;NA;NA;10;NA;NA;NA
+22010-0004;104;01_postmenopausal;70;0;NA;no;yes;M;4-6;NA;NA;22;NA;NA;NA
+22010-0005;105;01_postmenopausal;66;0;NA;no;yes;M;no bacteria;NA;NA;12;NA;NA;NA
+22010-0006;106;01_postmenopausal;71;0;NA;no;no;M;0-3;NA;NA;22;NA;NA;NA
+22010-0007;107;01_postmenopausal;59;0;NA;no;no;M;4-6;NA;NA;4;NA;NA;NA
+22010-0008;108;01_postmenopausal;75;0;NA;no;no;M;no bacteria;NA;NA;28;NA;NA;NA
+22010-0009;109;01_postmenopausal;62;0;NA;no;no;M;no bacteria;NA;NA;7;NA;NA;NA
+22010-0010;110;01_postmenopausal;68;0;NA;no;yes;M;0-3;NA;NA;26;NA;NA;NA
+22010-0011;111;01_postmenopausal;59;0;NA;no;no;M;no bacteria;NA;NA;11;NA;NA;NA
+22010-0012;112;01_postmenopausal;55;0;NA;no;NA;M;no bacteria;NA;NA;2;NA;NA;NA
+22010-0013;113;01_postmenopausal;71;0;NA;no;no;M;no bacteria;NA;NA;18;NA;NA;NA
+22010-0014;114;01_postmenopausal;70;0;NA;no;no;M;no bacteria;NA;NA;20;NA;NA;NA
+22010-0015;115;01_postmenopausal;70;0;NA;no;no;M;no bacteria;NA;NA;17;NA;NA;NA
+22010-0016;116;01_postmenopausal;69;0;NA;no;no;M;no bacteria;NA;NA;24;NA;NA;NA
+22010-0017;117;01_postmenopausal;73;0;NA;no;no;M;4-6;NA;NA;23;NA;NA;NA
+22010-0018;118;01_postmenopausal;64;0;NA;no;yes;M;4-6;NA;NA;19;NA;NA;NA
+22010-0019;119;01_postmenopausal;68;0;NA;no;no;M;no bacteria;NA;NA;23;NA;NA;NA
+22010-0020;120;01_postmenopausal;76;0;NA;no;no;M;0-3;NA;NA;27;NA;NA;NA
+22010-0021;121;01_postmenopausal;64;0;NA;no;no;M;0-3;NA;NA;13;NA;NA;NA
+22010-0022;122;01_postmenopausal;54;0;NA;no;yes;M;0-3;NA;NA;1;NA;NA;NA
+22010-0023;123;01_postmenopausal;63;0;NA;no;yes;M;4-6;NA;NA;13;NA;NA;NA
+22010-0024;124;01_postmenopausal;57;0;NA;no;no;M;no bacteria;NA;NA;4;NA;NA;NA
+22010-0025;125;01_postmenopausal;50;0;NA;no;no;M;0-3;NA;NA;3;NA;NA;NA
+22010-0026;201;02_premenopausal;30;0;NA;no;yes;M;4-6;NA;NA;NA;NA;10;NA
+22010-0027;202;02_premenopausal;28;0;NA;no;yes;M;7-10;NA;NA;NA;NA;10;NA
+22010-0028;203;02_premenopausal;39;0;NA;no;yes;M;0-3;NA;NA;NA;NA;13;NA
+22010-0029;204;02_premenopausal;26;0;NA;no;yes;F;0-3;NA;NA;NA;NA;20;NA
+22010-0030;205;02_premenopausal;27;0;NA;no;yes;M;0-3;NA;NA;NA;NA;2;NA
+22010-0031;206;02_premenopausal;39;0;NA;no;yes;M;no bacteria;NA;NA;NA;NA;9;NA
+22010-0032;207;02_premenopausal;32;0;NA;no;yes;M;0-3;NA;NA;NA;NA;12;NA
+22010-0033;208;02_premenopausal;35;0;NA;no;yes;M;0-3;NA;NA;NA;NA;29;NA
+22010-0034;209;02_premenopausal;27;0;NA;no;yes;M;0-3;NA;NA;NA;NA;10;NA
+22010-0035;210;02_premenopausal;32;0;NA;no;yes;M;0-3;NA;NA;NA;NA;16;NA
+22010-0036;211;02_premenopausal;34;0;NA;no;yes;M;0-3;NA;NA;NA;NA;10;NA
+22010-0037;212;02_premenopausal;31;0;NA;no;yes;M;0-3;NA;NA;NA;NA;9;NA
+22010-0038;213;02_premenopausal;30;0;NA;no;yes;M;0-3;NA;NA;NA;NA;7;NA
+22010-0039;214;02_premenopausal;31;0;NA;no;yes;M;0-3;NA;NA;NA;NA;14;NA
+22010-0040;215;02_premenopausal;44;0;NA;no;yes;M;no bacteria;NA;NA;NA;NA;11;NA
+22010-0041;216;02_premenopausal;37;0;NA;no;yes;M;0-3;NA;NA;NA;NA;14;NA
+22010-0042;217;02_premenopausal;37;0;NA;no;yes;M;0-3;NA;NA;NA;NA;12;NA
+22010-0043;218;02_premenopausal;36;0;NA;no;yes;M;0-3;NA;NA;NA;NA;9;NA
+22010-0044;219;02_premenopausal;30;0;NA;no;yes;M;0-3;NA;NA;NA;NA;20;NA
+22010-0045;220;02_premenopausal;36;0;NA;no;yes;M;0-3;NA;NA;NA;NA;21;NA
+22010-0046;221;02_premenopausal;37;0;NA;no;yes;M;0-3;NA;NA;NA;NA;9;NA
+22010-0047;222;02_premenopausal;40;0;NA;no;yes;M;4-6;NA;NA;NA;NA;2;NA
+22010-0048;223;02_premenopausal;30;0;NA;no;yes;M;0-3;NA;NA;NA;NA;9;NA
+22010-0049;224;02_premenopausal;31;0;NA;no;yes;M;0-3;NA;NA;NA;NA;7;NA
+22010-0050;225;02_premenopausal;33;0;NA;no;yes;M;0-3;NA;NA;NA;NA;21;NA
+22010-0051;301;03_trans;22;40;no;no;yes;M;0-3;7,11;40;NA;19;NA;NA
+22010-0052;302;03_trans;21;48;no;yes;no;NA;no bacteria;7,11;57;NA;42;NA;NA
+22010-0053;303;03_trans;19;13;no;yes;yes;F;no bacteria;5,21;96;NA;2;NA;NA
+22010-0054;304;03_trans;20;22;no;yes;yes;F;4-6;5,83;41;NA;33;NA;NA
+22010-0055;305;03_trans;20;14;no;NA;NA;NA;no bacteria;3,95;39;NA;17;NA;NA
+22010-0056;306;03_trans;21;37;yes;no;yes;M;no bacteria;9,08;31;NA;35;NA;35
+22010-0057;307;03_trans;30;146;yes;no;yes;M;no bacteria;4,79;NA;NA;6;NA;59
+22010-0058;308;03_trans;19;33;no;no;yes;M;4-6;7,66;58;NA;2;NA;NA
+22010-0059;309;03_trans;24;38;yes;no;yes;M+F;4-6;6,64;32;NA;37;NA;37
+22010-0060;310;03_trans;28;21;yes;yes;no;NA;no bacteria;3,22;34;NA;14;NA;12
+22010-0061;311;03_trans;26;17;no;yes;no;NA;4-6;7,04;34;NA;0;NA;NA
+22010-0062;312;03_trans;24;60;yes;NA;NA;NA;4-6;2,19;98;NA;60;NA;60
+22010-0063;313;03_trans;31;47;yes;NA;yes;F;no bacteria;5,41;32;NA;46;NA;47
+22010-0064;314;03_trans;18;15;no;no;yes;M;no bacteria;NA;63;NA;4;NA;NA
+22010-0065;315;03_trans;25;26;no;NA;yes;F;no bacteria;6,25;37;NA;26;NA;NA
+22010-0066;316;03_trans;21;10;no;no;no;M;0-3;2,23;31;NA;9;NA;NA
+22010-0067;317;03_trans;32;16;yes;yes;no;NA;no bacteria;4,46;29;NA;16;NA;16
+22010-0068;318;03_trans;20;33;no;yes;yes;F;0-3;3,80;NA;NA;27;NA;NA
+22010-0069;319;03_trans;25;26;yes;no;yes;M+F;no bacteria;3,99;NA;NA;0;NA;18
+22010-0070;320;03_trans;23;74;yes;yes;no;NA;4-6;5,71;NA;NA;74;NA;74
+22010-0071;321;03_trans;19;12;no;no;no;M;4-6;3,23;26;NA;9;NA;NA
+22010-0072;322;03_trans;29;26;no;no;no;M+F;no bacteria;6,57;37;NA;1;NA;NA
+22010-0073;323;03_trans;21;35;no;yes;no;NA;no bacteria;2,02;40;NA;35;NA;NA
+22010-0074;324;03_trans;19;13;no;yes;yes;F;no bacteria;2,07;38;NA;16;NA;NA
+22010-0075;325;03_trans;18;17;yes;no;no;F;no bacteria;3,13;NA;NA;18;NA;18
+22010-PBS01-IKO;0;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA

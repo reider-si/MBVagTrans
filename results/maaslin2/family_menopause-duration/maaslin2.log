@@ -1,48 +1,48 @@
-2023-11-07 18:59:53.879861 INFO::Writing function arguments to log file
-2023-11-07 18:59:53.880297 DEBUG::Function arguments
-2023-11-07 18:59:53.880457 DEBUG::Output folder: results/maaslin2/family_menopause-duration
-2023-11-07 18:59:53.880592 DEBUG::Min Abundance: 10.000000
-2023-11-07 18:59:53.880725 DEBUG::Min Prevalence: 0.300000
-2023-11-07 18:59:53.880848 DEBUG::Normalization: TSS
-2023-11-07 18:59:53.880972 DEBUG::Transform: LOG
-2023-11-07 18:59:53.881094 DEBUG::Analysis method: LM
-2023-11-07 18:59:53.881212 DEBUG::Max significance: 0.200000
-2023-11-07 18:59:53.881328 DEBUG::Random effects:
-2023-11-07 18:59:53.881449 DEBUG::Fixed effects: DurationMenopause
-2023-11-07 18:59:53.881568 DEBUG::Correction method: BH
-2023-11-07 18:59:53.881687 DEBUG::Standardize: TRUE
-2023-11-07 18:59:53.881806 DEBUG::Cores: 1
-2023-11-07 18:59:53.881921 INFO::Verifying options selected are valid
-2023-11-07 18:59:53.882163 INFO::Determining format of input files
-2023-11-07 18:59:53.882384 INFO::Input format is data samples as rows and metadata samples as rows
-2023-11-07 18:59:53.882738 DEBUG::A total of 25 samples were found in both the data and metadata
-2023-11-07 18:59:53.882857 DEBUG::Reordering data/metadata to use same sample ordering
-2023-11-07 18:59:53.883437 INFO::Formula for fixed effects: expr ~  DurationMenopause
-2023-11-07 18:59:53.883695 INFO::Filter data based on min abundance and min prevalence
-2023-11-07 18:59:53.883904 INFO::Total samples in data: 25
-2023-11-07 18:59:53.884102 INFO::Min samples required with min abundance for a feature not to be filtered: 7.500000
-2023-11-07 18:59:53.884807 INFO::Total filtered features: 111
-2023-11-07 18:59:53.885039 INFO::Filtered feature names from abundance and prevalence filtering: ASV91, ASV117, ASV219, ASV269, ASV370, ASV526, ASV564, ASV659, ASV673, ASV712, ASV803, ASV1045, ASV1099, ASV1291, ASV1328, ASV1554, ASV1567, ASV1569, ASV1574, ASV1679, ASV1709, ASV1856, ASV1947, ASV1971, ASV1972, ASV2058, ASV2110, ASV2115, ASV2240, ASV2243, ASV2260, ASV2288, ASV2290, ASV2343, ASV2369, ASV2395, ASV2398, ASV2409, ASV2440, ASV2444, ASV2486, ASV2508, ASV2528, ASV2564, ASV2720, ASV2733, ASV2823, ASV2856, ASV2936, ASV2969, ASV2971, ASV3159, ASV3212, ASV3222, ASV3404, ASV3491, ASV3544, ASV3547, ASV3566, ASV3669, ASV3673, ASV3679, ASV3751, ASV3820, ASV3917, ASV3926, ASV3988, ASV4083, ASV4211, ASV4267, ASV4445, ASV4453, ASV4497, ASV4548, ASV4586, ASV4589, ASV4654, ASV4885, ASV5050, ASV5074, ASV5084, ASV5256, ASV5260, ASV5277, ASV5474, ASV5477, ASV5517, ASV5727, ASV5736, ASV5986, ASV6130, ASV6134, ASV6146, ASV6193, ASV6222, ASV6247, ASV6380, ASV6424, ASV6469, ASV6605, ASV6638, ASV6665, ASV6797, ASV6801, ASV6945, ASV7069, ASV7092, ASV7267, ASV7297, ASV7972, ASV8787
-2023-11-07 18:59:53.885366 INFO::Total filtered features with variance filtering: 0
-2023-11-07 18:59:53.885578 INFO::Filtered feature names from variance filtering:
-2023-11-07 18:59:53.885774 INFO::Running selected normalization method: TSS
-2023-11-07 18:59:53.886112 INFO::Applying z-score to standardize continuous metadata
-2023-11-07 18:59:53.888342 INFO::Running selected transform method: LOG
-2023-11-07 18:59:53.888684 INFO::Running selected analysis method: LM
-2023-11-07 18:59:53.88893 INFO::Fitting model to feature number 1, ASV16
-2023-11-07 18:59:53.889923 INFO::Fitting model to feature number 2, ASV82
-2023-11-07 18:59:53.890774 INFO::Fitting model to feature number 3, ASV120
-2023-11-07 18:59:53.891594 INFO::Fitting model to feature number 4, ASV271
-2023-11-07 18:59:53.893944 INFO::Counting total values for each feature
-2023-11-07 18:59:53.894513 INFO::Writing filtered data to file results/maaslin2/family_menopause-duration/features/filtered_data.tsv
-2023-11-07 18:59:53.895107 INFO::Writing filtered, normalized data to file results/maaslin2/family_menopause-duration/features/filtered_data_norm.tsv
-2023-11-07 18:59:53.895615 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/family_menopause-duration/features/filtered_data_norm_transformed.tsv
-2023-11-07 18:59:53.896124 WARNING::Deleting existing residuals file: results/maaslin2/family_menopause-duration/fits/residuals.rds
-2023-11-07 18:59:53.896547 INFO::Writing residuals to file results/maaslin2/family_menopause-duration/fits/residuals.rds
-2023-11-07 18:59:53.896953 WARNING::Deleting existing fitted file: results/maaslin2/family_menopause-duration/fits/fitted.rds
-2023-11-07 18:59:53.897434 INFO::Writing fitted values to file results/maaslin2/family_menopause-duration/fits/fitted.rds
-2023-11-07 18:59:53.897784 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/family_menopause-duration/all_results.tsv
-2023-11-07 18:59:53.898325 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/family_menopause-duration/significant_results.tsv
-2023-11-07 18:59:53.898661 INFO::Writing heatmap of significant results to file: results/maaslin2/family_menopause-duration/heatmap.pdf
-2023-11-07 18:59:53.899102 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/family_menopause-duration
-2023-11-07 18:59:54.221031 WARNING::Input is a matrix, passing through as.data.frame() .
+2023-11-18 17:25:34.960218 INFO::Writing function arguments to log file
+2023-11-18 17:25:34.960751 DEBUG::Function arguments
+2023-11-18 17:25:34.960948 DEBUG::Output folder: results/maaslin2/family_menopause-duration
+2023-11-18 17:25:34.961122 DEBUG::Min Abundance: 10.000000
+2023-11-18 17:25:34.961288 DEBUG::Min Prevalence: 0.300000
+2023-11-18 17:25:34.961446 DEBUG::Normalization: TSS
+2023-11-18 17:25:34.961602 DEBUG::Transform: LOG
+2023-11-18 17:25:34.961761 DEBUG::Analysis method: LM
+2023-11-18 17:25:34.961915 DEBUG::Max significance: 0.200000
+2023-11-18 17:25:34.962065 DEBUG::Random effects:
+2023-11-18 17:25:34.962213 DEBUG::Fixed effects: DurationMenopause
+2023-11-18 17:25:34.962363 DEBUG::Correction method: BH
+2023-11-18 17:25:34.962508 DEBUG::Standardize: TRUE
+2023-11-18 17:25:34.962654 DEBUG::Cores: 1
+2023-11-18 17:25:34.962794 INFO::Verifying options selected are valid
+2023-11-18 17:25:34.963099 INFO::Determining format of input files
+2023-11-18 17:25:34.963378 INFO::Input format is data samples as rows and metadata samples as rows
+2023-11-18 17:25:34.963828 DEBUG::A total of 25 samples were found in both the data and metadata
+2023-11-18 17:25:34.963978 DEBUG::Reordering data/metadata to use same sample ordering
+2023-11-18 17:25:34.964726 INFO::Formula for fixed effects: expr ~  DurationMenopause
+2023-11-18 17:25:34.965048 INFO::Filter data based on min abundance and min prevalence
+2023-11-18 17:25:34.965321 INFO::Total samples in data: 25
+2023-11-18 17:25:34.965575 INFO::Min samples required with min abundance for a feature not to be filtered: 7.500000
+2023-11-18 17:25:34.966498 INFO::Total filtered features: 111
+2023-11-18 17:25:34.966799 INFO::Filtered feature names from abundance and prevalence filtering: ASV91, ASV117, ASV219, ASV269, ASV370, ASV526, ASV564, ASV659, ASV673, ASV712, ASV803, ASV1045, ASV1099, ASV1291, ASV1328, ASV1554, ASV1567, ASV1569, ASV1574, ASV1679, ASV1709, ASV1856, ASV1947, ASV1971, ASV1972, ASV2058, ASV2110, ASV2115, ASV2240, ASV2243, ASV2260, ASV2288, ASV2290, ASV2343, ASV2369, ASV2395, ASV2398, ASV2409, ASV2440, ASV2444, ASV2486, ASV2508, ASV2528, ASV2564, ASV2720, ASV2733, ASV2823, ASV2856, ASV2936, ASV2969, ASV2971, ASV3159, ASV3212, ASV3222, ASV3404, ASV3491, ASV3544, ASV3547, ASV3566, ASV3669, ASV3673, ASV3679, ASV3751, ASV3820, ASV3917, ASV3926, ASV3988, ASV4083, ASV4211, ASV4267, ASV4445, ASV4453, ASV4497, ASV4548, ASV4586, ASV4589, ASV4654, ASV4885, ASV5050, ASV5074, ASV5084, ASV5256, ASV5260, ASV5277, ASV5474, ASV5477, ASV5517, ASV5727, ASV5736, ASV5986, ASV6130, ASV6134, ASV6146, ASV6193, ASV6222, ASV6247, ASV6380, ASV6424, ASV6469, ASV6605, ASV6638, ASV6665, ASV6797, ASV6801, ASV6945, ASV7069, ASV7092, ASV7267, ASV7297, ASV7972, ASV8787
+2023-11-18 17:25:34.96722 INFO::Total filtered features with variance filtering: 0
+2023-11-18 17:25:34.967499 INFO::Filtered feature names from variance filtering:
+2023-11-18 17:25:34.967753 INFO::Running selected normalization method: TSS
+2023-11-18 17:25:34.968197 INFO::Applying z-score to standardize continuous metadata
+2023-11-18 17:25:34.971055 INFO::Running selected transform method: LOG
+2023-11-18 17:25:34.971528 INFO::Running selected analysis method: LM
+2023-11-18 17:25:34.971849 INFO::Fitting model to feature number 1, ASV16
+2023-11-18 17:25:34.973094 INFO::Fitting model to feature number 2, ASV82
+2023-11-18 17:25:34.974195 INFO::Fitting model to feature number 3, ASV120
+2023-11-18 17:25:34.975256 INFO::Fitting model to feature number 4, ASV271
+2023-11-18 17:25:34.978265 INFO::Counting total values for each feature
+2023-11-18 17:25:34.978993 INFO::Writing filtered data to file results/maaslin2/family_menopause-duration/features/filtered_data.tsv
+2023-11-18 17:25:34.979707 INFO::Writing filtered, normalized data to file results/maaslin2/family_menopause-duration/features/filtered_data_norm.tsv
+2023-11-18 17:25:34.980343 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/family_menopause-duration/features/filtered_data_norm_transformed.tsv
+2023-11-18 17:25:34.980989 WARNING::Deleting existing residuals file: results/maaslin2/family_menopause-duration/fits/residuals.rds
+2023-11-18 17:25:34.981508 INFO::Writing residuals to file results/maaslin2/family_menopause-duration/fits/residuals.rds
+2023-11-18 17:25:34.982018 WARNING::Deleting existing fitted file: results/maaslin2/family_menopause-duration/fits/fitted.rds
+2023-11-18 17:25:34.982432 INFO::Writing fitted values to file results/maaslin2/family_menopause-duration/fits/fitted.rds
+2023-11-18 17:25:34.982959 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/family_menopause-duration/all_results.tsv
+2023-11-18 17:25:34.983624 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/family_menopause-duration/significant_results.tsv
+2023-11-18 17:25:34.984031 INFO::Writing heatmap of significant results to file: results/maaslin2/family_menopause-duration/heatmap.pdf
+2023-11-18 17:25:34.984581 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/family_menopause-duration
+2023-11-18 17:25:35.397143 WARNING::Input is a matrix, passing through as.data.frame() .
