@@ -1,50 +1,50 @@
-2023-11-18 17:25:58.230568 INFO::Writing function arguments to log file
-2023-11-18 17:25:58.231128 DEBUG::Function arguments
-2023-11-18 17:25:58.231553 DEBUG::Output folder: results/maaslin2/genus_DurationGNRH
-2023-11-18 17:25:58.231741 DEBUG::Min Abundance: 5.000000
-2023-11-18 17:25:58.231904 DEBUG::Min Prevalence: 0.300000
-2023-11-18 17:25:58.23206 DEBUG::Normalization: TSS
-2023-11-18 17:25:58.232217 DEBUG::Transform: LOG
-2023-11-18 17:25:58.232368 DEBUG::Analysis method: LM
-2023-11-18 17:25:58.232518 DEBUG::Max significance: 0.200000
-2023-11-18 17:25:58.232676 DEBUG::Random effects:
-2023-11-18 17:25:58.23283 DEBUG::Fixed effects: Duration_GNRH
-2023-11-18 17:25:58.23298 DEBUG::Correction method: BH
-2023-11-18 17:25:58.233129 DEBUG::Standardize: TRUE
-2023-11-18 17:25:58.233278 DEBUG::Cores: 1
-2023-11-18 17:25:58.233421 INFO::Verifying options selected are valid
-2023-11-18 17:25:58.233755 INFO::Determining format of input files
-2023-11-18 17:25:58.234059 INFO::Input format is data samples as rows and metadata samples as rows
-2023-11-18 17:25:58.234753 DEBUG::A total of 25 samples were found in both the data and metadata
-2023-11-18 17:25:58.234914 DEBUG::Reordering data/metadata to use same sample ordering
-2023-11-18 17:25:58.236395 INFO::Formula for fixed effects: expr ~  Duration_GNRH
-2023-11-18 17:25:58.236769 INFO::Filter data based on min abundance and min prevalence
-2023-11-18 17:25:58.237041 INFO::Total samples in data: 25
-2023-11-18 17:25:58.237299 INFO::Min samples required with min abundance for a feature not to be filtered: 7.500000
-2023-11-18 17:25:58.239107 INFO::Total filtered features: 292
-2023-11-18 17:25:58.239456 INFO::Filtered feature names from abundance and prevalence filtering: ASV120, ASV159, ASV269, ASV326, ASV383, ASV419, ASV443, ASV487, ASV498, ASV565, ASV636, ASV687, ASV770, ASV866, ASV904, ASV940, ASV970, ASV998, ASV1045, ASV1075, ASV1078, ASV1133, ASV1134, ASV1175, ASV1243, ASV1259, ASV1262, ASV1268, ASV1302, ASV1310, ASV1311, ASV1387, ASV1410, ASV1474, ASV1475, ASV1481, ASV1569, ASV1574, ASV1671, ASV1709, ASV1736, ASV1759, ASV1797, ASV1817, ASV1818, ASV1856, ASV1861, ASV1863, ASV1879, ASV1887, ASV1893, ASV1929, ASV1980, ASV2027, ASV2038, ASV2058, ASV2078, ASV2082, ASV2100, ASV2138, ASV2162, ASV2164, ASV2199, ASV2222, ASV2237, ASV2249, ASV2260, ASV2261, ASV2277, ASV2278, ASV2288, ASV2290, ASV2304, ASV2309, ASV2369, ASV2398, ASV2409, ASV2425, ASV2452, ASV2460, ASV2461, ASV2470, ASV2486, ASV2489, ASV2490, ASV2510, ASV2519, ASV2525, ASV2528, ASV2529, ASV2580, ASV2586, ASV2593, ASV2605, ASV2614, ASV2615, ASV2629, ASV2631, ASV2634, ASV2641, ASV2659, ASV2668, ASV2704, ASV2710, ASV2742, ASV2786, ASV2787, ASV2798, ASV2801, ASV2803, ASV2834, ASV2856, ASV2874, ASV2898, ASV2912, ASV2936, ASV2969, ASV2974, ASV2991, ASV3011, ASV3013, ASV3084, ASV3138, ASV3159, ASV3177, ASV3222, ASV3238, ASV3244, ASV3286, ASV3299, ASV3300, ASV3316, ASV3320, ASV3348, ASV3480, ASV3497, ASV3508, ASV3534, ASV3544, ASV3547, ASV3567, ASV3569, ASV3578, ASV3580, ASV3593, ASV3600, ASV3666, ASV3690, ASV3697, ASV3721, ASV3728, ASV3820, ASV3827, ASV3891, ASV3917, ASV3926, ASV3927, ASV3950, ASV3975, ASV3980, ASV3988, ASV4037, ASV4074, ASV4164, ASV4184, ASV4200, ASV4249, ASV4253, ASV4267, ASV4268, ASV4289, ASV4326, ASV4407, ASV4409, ASV4453, ASV4496, ASV4497, ASV4504, ASV4555, ASV4585, ASV4586, ASV4598, ASV4643, ASV4650, ASV4654, ASV4715, ASV4717, ASV4776, ASV4838, ASV4865, ASV4879, ASV4885, ASV4902, ASV4972, ASV5050, ASV5119, ASV5149, ASV5156, ASV5171, ASV5246, ASV5247, ASV5260, ASV5277, ASV5347, ASV5451, ASV5452, ASV5455, ASV5467, ASV5472, ASV5477, ASV5514, ASV5517, ASV5520, ASV5525, ASV5572, ASV5603, ASV5718, ASV5723, ASV5727, ASV5736, ASV5800, ASV5833, ASV5977, ASV5979, ASV5986, ASV5987, ASV5989, ASV6035, ASV6044, ASV6154, ASV6159, ASV6173, ASV6193, ASV6222, ASV6247, ASV6256, ASV6299, ASV6405, ASV6424, ASV6488, ASV6535, ASV6536, ASV6585, ASV6605, ASV6612, ASV6618, ASV6627, ASV6642, ASV6772, ASV6791, ASV6853, ASV6865, ASV6866, ASV6867, ASV6924, ASV6945, ASV7002, ASV7069, ASV7246, ASV7268, ASV7281, ASV7285, ASV7297, ASV7301, ASV7326, ASV7405, ASV7490, ASV7594, ASV7657, ASV7753, ASV7756, ASV7919, ASV7972, ASV8046, ASV8051, ASV8256, ASV8281, ASV8367, ASV8417, ASV8418, ASV8422, ASV8436, ASV8437, ASV8463, ASV8519, ASV8602, ASV8623, ASV8641, ASV8646, ASV8667, ASV8787, ASV8794
-2023-11-18 17:25:58.239988 INFO::Total filtered features with variance filtering: 0
-2023-11-18 17:25:58.240271 INFO::Filtered feature names from variance filtering:
-2023-11-18 17:25:58.240532 INFO::Running selected normalization method: TSS
-2023-11-18 17:25:58.240985 INFO::Applying z-score to standardize continuous metadata
-2023-11-18 17:25:58.243774 INFO::Running selected transform method: LOG
-2023-11-18 17:25:58.244234 INFO::Running selected analysis method: LM
-2023-11-18 17:25:58.244561 INFO::Fitting model to feature number 1, ASV14
-2023-11-18 17:25:58.245845 INFO::Fitting model to feature number 2, ASV54
-2023-11-18 17:25:58.246958 INFO::Fitting model to feature number 3, ASV66
-2023-11-18 17:25:58.248039 INFO::Fitting model to feature number 4, ASV87
-2023-11-18 17:25:58.249119 INFO::Fitting model to feature number 5, ASV205
-2023-11-18 17:25:58.250203 INFO::Fitting model to feature number 6, ASV568
-2023-11-18 17:25:58.253334 INFO::Counting total values for each feature
-2023-11-18 17:25:58.254129 INFO::Writing filtered data to file results/maaslin2/genus_DurationGNRH/features/filtered_data.tsv
-2023-11-18 17:25:58.255084 INFO::Writing filtered, normalized data to file results/maaslin2/genus_DurationGNRH/features/filtered_data_norm.tsv
-2023-11-18 17:25:58.255778 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_DurationGNRH/features/filtered_data_norm_transformed.tsv
-2023-11-18 17:25:58.256478 WARNING::Deleting existing residuals file: results/maaslin2/genus_DurationGNRH/fits/residuals.rds
-2023-11-18 17:25:58.256994 INFO::Writing residuals to file results/maaslin2/genus_DurationGNRH/fits/residuals.rds
-2023-11-18 17:25:58.25772 WARNING::Deleting existing fitted file: results/maaslin2/genus_DurationGNRH/fits/fitted.rds
-2023-11-18 17:25:58.258403 INFO::Writing fitted values to file results/maaslin2/genus_DurationGNRH/fits/fitted.rds
-2023-11-18 17:25:58.258923 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_DurationGNRH/all_results.tsv
-2023-11-18 17:25:58.259684 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_DurationGNRH/significant_results.tsv
-2023-11-18 17:25:58.260128 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_DurationGNRH/heatmap.pdf
-2023-11-18 17:25:58.260706 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_DurationGNRH
-2023-11-18 17:25:58.327019 WARNING::Input is a matrix, passing through as.data.frame() .
+2023-12-08 20:22:17.546622 INFO::Writing function arguments to log file
+2023-12-08 20:22:17.547199 DEBUG::Function arguments
+2023-12-08 20:22:17.5474 DEBUG::Output folder: results/maaslin2/genus_DurationGNRH
+2023-12-08 20:22:17.547574 DEBUG::Min Abundance: 5.000000
+2023-12-08 20:22:17.547739 DEBUG::Min Prevalence: 0.300000
+2023-12-08 20:22:17.547898 DEBUG::Normalization: TSS
+2023-12-08 20:22:17.548049 DEBUG::Transform: LOG
+2023-12-08 20:22:17.548201 DEBUG::Analysis method: LM
+2023-12-08 20:22:17.54835 DEBUG::Max significance: 0.200000
+2023-12-08 20:22:17.548505 DEBUG::Random effects:
+2023-12-08 20:22:17.548657 DEBUG::Fixed effects: Duration_GNRH
+2023-12-08 20:22:17.548807 DEBUG::Correction method: BH
+2023-12-08 20:22:17.548954 DEBUG::Standardize: TRUE
+2023-12-08 20:22:17.549227 DEBUG::Cores: 1
+2023-12-08 20:22:17.549376 INFO::Verifying options selected are valid
+2023-12-08 20:22:17.549683 INFO::Determining format of input files
+2023-12-08 20:22:17.549962 INFO::Input format is data samples as rows and metadata samples as rows
+2023-12-08 20:22:17.55062 DEBUG::A total of 25 samples were found in both the data and metadata
+2023-12-08 20:22:17.550772 DEBUG::Reordering data/metadata to use same sample ordering
+2023-12-08 20:22:17.552113 INFO::Formula for fixed effects: expr ~  Duration_GNRH
+2023-12-08 20:22:17.55244 INFO::Filter data based on min abundance and min prevalence
+2023-12-08 20:22:17.552711 INFO::Total samples in data: 25
+2023-12-08 20:22:17.552967 INFO::Min samples required with min abundance for a feature not to be filtered: 7.500000
+2023-12-08 20:22:17.554738 INFO::Total filtered features: 292
+2023-12-08 20:22:17.555084 INFO::Filtered feature names from abundance and prevalence filtering: ASV120, ASV159, ASV269, ASV326, ASV383, ASV419, ASV443, ASV487, ASV498, ASV565, ASV636, ASV687, ASV770, ASV866, ASV904, ASV940, ASV970, ASV998, ASV1045, ASV1075, ASV1078, ASV1133, ASV1134, ASV1175, ASV1243, ASV1259, ASV1262, ASV1268, ASV1302, ASV1310, ASV1311, ASV1387, ASV1410, ASV1474, ASV1475, ASV1481, ASV1569, ASV1574, ASV1671, ASV1709, ASV1736, ASV1759, ASV1797, ASV1817, ASV1818, ASV1856, ASV1861, ASV1863, ASV1879, ASV1887, ASV1893, ASV1929, ASV1980, ASV2027, ASV2038, ASV2058, ASV2078, ASV2082, ASV2100, ASV2138, ASV2162, ASV2164, ASV2199, ASV2222, ASV2237, ASV2249, ASV2260, ASV2261, ASV2277, ASV2278, ASV2288, ASV2290, ASV2304, ASV2309, ASV2369, ASV2398, ASV2409, ASV2425, ASV2452, ASV2460, ASV2461, ASV2470, ASV2486, ASV2489, ASV2490, ASV2510, ASV2519, ASV2525, ASV2528, ASV2529, ASV2580, ASV2586, ASV2593, ASV2605, ASV2614, ASV2615, ASV2629, ASV2631, ASV2634, ASV2641, ASV2659, ASV2668, ASV2704, ASV2710, ASV2742, ASV2786, ASV2787, ASV2798, ASV2801, ASV2803, ASV2834, ASV2856, ASV2874, ASV2898, ASV2912, ASV2936, ASV2969, ASV2974, ASV2991, ASV3011, ASV3013, ASV3084, ASV3138, ASV3159, ASV3177, ASV3222, ASV3238, ASV3244, ASV3286, ASV3299, ASV3300, ASV3316, ASV3320, ASV3348, ASV3480, ASV3497, ASV3508, ASV3534, ASV3544, ASV3547, ASV3567, ASV3569, ASV3578, ASV3580, ASV3593, ASV3600, ASV3666, ASV3690, ASV3697, ASV3721, ASV3728, ASV3820, ASV3827, ASV3891, ASV3917, ASV3926, ASV3927, ASV3950, ASV3975, ASV3980, ASV3988, ASV4037, ASV4074, ASV4164, ASV4184, ASV4200, ASV4249, ASV4253, ASV4267, ASV4268, ASV4289, ASV4326, ASV4407, ASV4409, ASV4453, ASV4496, ASV4497, ASV4504, ASV4555, ASV4585, ASV4586, ASV4598, ASV4643, ASV4650, ASV4654, ASV4715, ASV4717, ASV4776, ASV4838, ASV4865, ASV4879, ASV4885, ASV4902, ASV4972, ASV5050, ASV5119, ASV5149, ASV5156, ASV5171, ASV5246, ASV5247, ASV5260, ASV5277, ASV5347, ASV5451, ASV5452, ASV5455, ASV5467, ASV5472, ASV5477, ASV5514, ASV5517, ASV5520, ASV5525, ASV5572, ASV5603, ASV5718, ASV5723, ASV5727, ASV5736, ASV5800, ASV5833, ASV5977, ASV5979, ASV5986, ASV5987, ASV5989, ASV6035, ASV6044, ASV6154, ASV6159, ASV6173, ASV6193, ASV6222, ASV6247, ASV6256, ASV6299, ASV6405, ASV6424, ASV6488, ASV6535, ASV6536, ASV6585, ASV6605, ASV6612, ASV6618, ASV6627, ASV6642, ASV6772, ASV6791, ASV6853, ASV6865, ASV6866, ASV6867, ASV6924, ASV6945, ASV7002, ASV7069, ASV7246, ASV7268, ASV7281, ASV7285, ASV7297, ASV7301, ASV7326, ASV7405, ASV7490, ASV7594, ASV7657, ASV7753, ASV7756, ASV7919, ASV7972, ASV8046, ASV8051, ASV8256, ASV8281, ASV8367, ASV8417, ASV8418, ASV8422, ASV8436, ASV8437, ASV8463, ASV8519, ASV8602, ASV8623, ASV8641, ASV8646, ASV8667, ASV8787, ASV8794
+2023-12-08 20:22:17.555611 INFO::Total filtered features with variance filtering: 0
+2023-12-08 20:22:17.555891 INFO::Filtered feature names from variance filtering:
+2023-12-08 20:22:17.556158 INFO::Running selected normalization method: TSS
+2023-12-08 20:22:17.556605 INFO::Applying z-score to standardize continuous metadata
+2023-12-08 20:22:17.559625 INFO::Running selected transform method: LOG
+2023-12-08 20:22:17.560341 INFO::Running selected analysis method: LM
+2023-12-08 20:22:17.560732 INFO::Fitting model to feature number 1, ASV14
+2023-12-08 20:22:17.562285 INFO::Fitting model to feature number 2, ASV54
+2023-12-08 20:22:17.563601 INFO::Fitting model to feature number 3, ASV66
+2023-12-08 20:22:17.564816 INFO::Fitting model to feature number 4, ASV87
+2023-12-08 20:22:17.565989 INFO::Fitting model to feature number 5, ASV205
+2023-12-08 20:22:17.567101 INFO::Fitting model to feature number 6, ASV568
+2023-12-08 20:22:17.57079 INFO::Counting total values for each feature
+2023-12-08 20:22:17.571815 INFO::Writing filtered data to file results/maaslin2/genus_DurationGNRH/features/filtered_data.tsv
+2023-12-08 20:22:17.573074 INFO::Writing filtered, normalized data to file results/maaslin2/genus_DurationGNRH/features/filtered_data_norm.tsv
+2023-12-08 20:22:17.574057 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_DurationGNRH/features/filtered_data_norm_transformed.tsv
+2023-12-08 20:22:17.575024 WARNING::Deleting existing residuals file: results/maaslin2/genus_DurationGNRH/fits/residuals.rds
+2023-12-08 20:22:17.575889 INFO::Writing residuals to file results/maaslin2/genus_DurationGNRH/fits/residuals.rds
+2023-12-08 20:22:17.576658 WARNING::Deleting existing fitted file: results/maaslin2/genus_DurationGNRH/fits/fitted.rds
+2023-12-08 20:22:17.577187 INFO::Writing fitted values to file results/maaslin2/genus_DurationGNRH/fits/fitted.rds
+2023-12-08 20:22:17.57772 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_DurationGNRH/all_results.tsv
+2023-12-08 20:22:17.578536 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_DurationGNRH/significant_results.tsv
+2023-12-08 20:22:17.579016 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_DurationGNRH/heatmap.pdf
+2023-12-08 20:22:17.57961 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_DurationGNRH
+2023-12-08 20:22:17.659022 WARNING::Input is a matrix, passing through as.data.frame() .

@@ -17,6 +17,7 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = TRUE, message = FALSE)
 library(knitr)
+library(DESeq2)
 library(tidyverse)
 library(phyloseq)
 library(rstatix)
@@ -666,7 +667,7 @@ ggsave(maaslin_res_genus_cycleday, filename = "results/maaslin2/genus_CycleDay_p
        height = 5, width = 6)
 ```
 
-*Gardnerella* is highest in the early days of the menstrual cycle while *Lactobacillus* during the middle of the cycle. This seems to correspond to Vomstein et al 2022.
+*Gardnerella* is highest in the early days of the menstrual cycle while *Lactobacillus* during the middle of the cycle. This seems to correspond to *Vomstein et al 2022*.
 
 ### Influence of sexual activity on microbiome composition
 
@@ -676,8 +677,12 @@ ps_rel_genus = tax_glom(ps_samples, taxrank = "Genus") %>%
   transform_sample_counts(function(x) x/sum(x) * 100)
 ps_rel_genus_sexuallyactive = subset_samples(ps_rel_genus, sample_data(ps_rel_genus)$SexuallyActive %in% c("yes", "no")) # for 3 patients, this information is not available
 
+ps_abs_genus = tax_glom(ps_samples, taxrank = "Genus") 
+ps_abs_genus_sexuallyactive = subset_samples(ps_abs_genus, sample_data(ps_abs_genus)$SexuallyActive %in% c("yes", "no"))
+
 ps_rel_genus_sexuallyactive
 
+# Via Maaslin2
 genus_SexuallyActive = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyactive),
          input_metadata = as(sample_data(ps_rel_genus_sexuallyactive), "data.frame"),
          output = "results/maaslin2/genus_SexuallyActive",
@@ -708,9 +713,37 @@ maaslin_res_genus_sexactive = ggplot(filter(psmelt_rel_genus_sexuallyactive, OTU
 maaslin_res_genus_sexactive
 ggsave(maaslin_res_genus_sexactive, filename = "results/maaslin2/genus_SexuallyActive_panelplot.png",
        height = 5, width = 6)
+
+# Via Deseq2
+sexactive_ds = phyloseq_to_deseq2(ps_abs_genus_sexuallyactive, ~SexuallyActive)
+cts = counts(sexactive_ds)
+geoMeans = apply(cts, 1, function(row) if (all(row == 0)) 0 else exp(mean(log(row[row != 0]))))
+sexactive_ds = estimateSizeFactors(sexactive_ds, geoMeans=geoMeans)
+sexactive_ds = DESeq(sexactive_ds, test = "Wald", fitType = "parametric")
+res = results(sexactive_ds, cooksCutoff = FALSE)
+alpha = 0.5
+sigtab = res[which(res$padj < alpha), ]
+sigtab = cbind(as(sigtab, "data.frame"), as(tax_table(ps_abs_genus_sexuallyactive)[rownames(sigtab), ], "matrix"))
+sigtab = as.data.frame(sigtab) %>%
+  rownames_to_column("feature")
+
+sigtab
+ 
+# this does not detect any significant difference
+
+
+# Wilcoxon
+psmelt_rel_genus_sexuallyactive %>%
+  group_by(OTU) %>%
+  rstatix::t_test(data = ., Abundance~SexuallyActive) %>%
+  rstatix::adjust_pvalue(method = "fdr") %>%
+  filter(p.adj < 0.1)
+
+# using simple parametric statistical test (t-test) no significant diff.
+
 ```
 
-Sexual activity is associated with lower levels of *Prevotella and Streptococcus.*
+Although Maaslin2 detects significant changes in some taxa, this might not be statistically relevant due to the extremely skewed distribution of data and non-suitability of a linear model for comparison of 2 groups. Likewise, using a simple parametric statistical test such as the t-test is sub-optimal. This approach fails to detect any significantly altered taxa.
 
 ### Influence of the duration of amenorrhea on microbiome composition
 
@@ -865,6 +898,8 @@ genus_SexOfPartner2  = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyacti
          min_prevalence = 0.2,
          max_significance = 0.2,
          fixed_effects = c("SexOfPartner", "grp"))
+
+
 
 tax_table(ps_rel_genus_sexuallyactive) %>%
   as.data.frame() %>%
