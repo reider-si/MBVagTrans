@@ -5,6 +5,7 @@ format:
   html:
     code-fold: true
     toc: true
+    fig-format: pdf
   pdf:
     toc: true
     number-sections: true
@@ -26,6 +27,10 @@ library(vegan)
 library(pairwiseAdonis)
 library(ggpubr)
 theme_set(theme_bw())
+
+# set custom color palette
+custom_pal = c("#199E77", "#D86013", "#7440BE")
+
 ```
 
 # Introduction
@@ -69,7 +74,8 @@ tukey = adiv$data %>%
 adiv +
   geom_boxplot(aes(fill = grp),alpha = 0.7) +
   labs(x = "", fill = "Group")+
-  expand_limits(y = 0) 
+  scale_y_continuous(expand = expansion(mult = c(0, 0.25)))  +
+  scale_fill_manual(values = custom_pal)
 
 kable(select(tukey, variable, group1,group2,p.adj, p.adj.signif))
 ```
@@ -241,8 +247,12 @@ deseq_res_fig = ggplot(ps_sig_melt2, aes(x = grp, y=Abundance)) +
       axis.ticks.x=element_blank()) +
   labs(x = "", fill = "Group", y= "Abundance (%)") +
   theme(legend.position = "bottom") +
-    expand_limits(y = 0) 
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
+  scale_fill_manual(values = custom_pal)
 
+deseq_res_fig
+ggsave(filename = "MbVagTrans_Results_files/figure-html/deseq_taxa_final.pdf", plot = deseq_res_fig, 
+       device = "pdf", width = 8, height = 8)
 
 # summary statistics
 summarystat1 = ps_sig_melt2 %>%
@@ -301,7 +311,7 @@ genusplot = ggplot(genus, aes(x = grp, y = Abundance/25, fill = Taxonomy)) +
   geom_col(position = "stack") +
   theme(legend.position = "right") +
   labs(y = "Abundance (%)", x= "", caption = "taxonomic level: genus") +
-  rotate_x_text()
+  rotate_x_text() 
 
 # Family Level
 family_rel = tax_glom(ps_rel, taxrank="Family", NArm = F)
@@ -366,8 +376,9 @@ phylumplot = ggplot(phylum, aes(x = grp, y = Abundance/25, fill = Taxonomy)) +
 On the phylum level, the taxonomic distribution is dominated by *Firmicutes* (these correspond to *Lactobacilli*, see below). The *Trans* group also shows an increase in *Bacteroidota* compared to the other 2 groups.
 
 ```{r phylum plot, fig.width=4, height = 5}
+phylumplot = phylumplot + scale_x_discrete(limits = rev(levels(phylum$grp))) + coord_flip()
 phylumplot
-ggsave(plot = phylumplot, filename = "results/microbiome/taxplots_phylum.pdf", width = 4, height = 5)
+ggsave(plot = phylumplot, filename = "results/microbiome/taxplots_phylum.pdf", width = 7, height = 3)
 ```
 
 ## Class level
@@ -468,7 +479,8 @@ adiv_menopause$data %>%
   ggplot(aes(x = DurationMenopause, y = value)) + 
   geom_point()+
   geom_smooth(method ="lm") +
-  facet_wrap(~variable, scales = "free_y")
+  facet_wrap(~variable, scales = "free_y") 
+
 
 BC_menopause_genus = vegan::vegdist(otu_table(ps_menopause_genus))
 
@@ -536,8 +548,8 @@ maaslin_res_genus_ghat = ggplot(filter(psmelt_trans_genus, OTU %in% filter(genus
        caption = "Maaslin2 results")
 
 maaslin_res_genus_ghat
-ggsave(maaslin_res_genus_ghat, filename = "results/maaslin2/genus_GHAT_Length_panelplot.png",
-       height = 5, width = 6)
+ggsave(maaslin_res_genus_ghat, filename = "results/maaslin2/genus_GHAT_Length_panelplot.pdf",
+       height = 4, width =6)
 
 
 ## Alpha diversity by duration of gaht
@@ -708,11 +720,14 @@ maaslin_res_genus_sexactive = ggplot(filter(psmelt_rel_genus_sexuallyactive, OTU
   theme(legend.position = "none")+
   labs(x = "Sexually Active",
        y = "Genus Abundance (%)",
-       caption = "Maaslin2 results")
+       caption = "Maaslin2 results")+
+    scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
+  scale_fill_manual(values = c("black", "lightgrey"))
+
 
 maaslin_res_genus_sexactive
-ggsave(maaslin_res_genus_sexactive, filename = "results/maaslin2/genus_SexuallyActive_panelplot.png",
-       height = 5, width = 6)
+ggsave(maaslin_res_genus_sexactive, filename = "results/maaslin2/genus_SexuallyActive_panelplot.pdf",
+       height = 3, width = 4)
 
 # Via Deseq2
 sexactive_ds = phyloseq_to_deseq2(ps_abs_genus_sexuallyactive, ~SexuallyActive)
@@ -797,12 +812,16 @@ corr_menopause = adiv_menopause %>%
   rstatix::cor_test(value, DurationCombined, method = "pearson")
 kable(corr_menopause)
 
-ggplot(adiv_menopause, aes(x = DurationCombined, y = value)) +
+comb_menopause_plot = ggplot(adiv_menopause, aes(x = DurationCombined, y = value)) +
   geom_point(aes(color = grp)) +
   geom_smooth(method = "lm", color = "darkgrey") +
   facet_wrap(~variable, scales = "free") +
-  labs(x = "Duration of Amenorrhea in postmenopausal and trans group (months)", y = "Alpha diversity value")
+  labs(x = "Duration of Amenorrhea in postmenopausal and trans group (months)", y = "Alpha diversity value") + 
+  scale_color_manual(values = custom_pal[c(1,3)])
 
+
+ggsave(plot = comb_menopause_plot,device = "pdf", 
+       filename = "MbVagTrans_Results_files/figure-html/duration-menopause_comb.pdf", height = 3)
 
 ## Maaslin2 analysis of abundance with duration of amenorrhea
 ps_menopause_rel_genus = tax_glom(ps_menopause_rel, taxrank = "Genus")
@@ -828,7 +847,7 @@ tax_table(ps_menopause_rel_genus) %>%
 psmelt_rel_genus_durationComb = psmelt(ps_menopause_rel_genus)
 maaslin_res_genus_durationComb = ggplot(filter(psmelt_rel_genus_durationComb, OTU %in% filter(genus_MenoPauseDurationMonths$results, qval < 0.2)$feature),
                                 aes(x = DurationCombined, y = Abundance,color = grp)) +
-  geom_jitter(size = 3) +
+  geom_jitter(size = 2) +
   facet_wrap(~Genus, scales = "free") +
   scale_y_continuous(limits = function(x){c(0, max(0.1, x))}) +
   theme(legend.position = "none")+
@@ -897,7 +916,7 @@ genus_SexOfPartner2  = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyacti
          min_abundance = 5,
          min_prevalence = 0.2,
          max_significance = 0.2,
-         fixed_effects = c("SexOfPartner", "grp"))
+         fixed_effects = c("SexOfPartner", "grp", "SexOfPartner*grp"))
 
 
 
@@ -906,7 +925,6 @@ tax_table(ps_rel_genus_sexuallyactive) %>%
   rownames_to_column("ASV") %>%
   filter(ASV %in% filter(genus_SexOfPartner2$results, qval < 0.2)$feature)
 
-# plot abundance of Provetella
 maaslin_res_genus_sexpartner = ggplot(filter(psmelt_rel_genus_sexuallyactive, OTU %in% filter(genus_SexOfPartner2$results, qval < 0.2)$feature),
                                 aes(x = SexOfPartner, y = Abundance,fill = SexOfPartner)) +
   geom_jitter() +
@@ -916,10 +934,13 @@ maaslin_res_genus_sexpartner = ggplot(filter(psmelt_rel_genus_sexuallyactive, OT
   theme(legend.position = "none")+
   labs(x = "Sex of Partner",
        y = "Genus Abundance (%)",
-       caption = "Maaslin2 results")
+       caption = "Maaslin2 results") +
+      scale_y_continuous(expand = expansion(mult = c(0, 0.2))) 
+
+  
 
 maaslin_res_genus_sexpartner
-ggsave(maaslin_res_genus_sexpartner, filename = "results/maaslin2/genus_SexOfPartner_panelplot.png",
+ggsave(maaslin_res_genus_sexpartner, filename = "results/maaslin2/genus_SexOfPartner_panelplot.pdf",
        height = 5, width = 6)
 
 
