@@ -1,0 +1,41 @@
+tax,SexuallyActive,mean,median,sd,IQR
+Actinobacteriota|Actinobacteria|Actinomycetales|Actinomycetaceae|Actinomyces,yes,0.4515714182262659,0,0.8341393691418012,0.1657874905802562
+Actinobacteriota|Actinobacteria|Actinomycetales|Actinomycetaceae|Actinomyces,no,0.6318816299467771,0,1.8447013067078017,0.14995336112797134
+Actinobacteriota|Actinobacteria|Bifidobacteriales|Bifidobacteriaceae|Alloscardovia,yes,1.8506273247320737,0.2567723712928489,3.5356939006893553,2.0664476086162833
+Actinobacteriota|Actinobacteria|Bifidobacteriales|Bifidobacteriaceae|Alloscardovia,no,2.3979990944887453,0.06991784653032686,6.662790117857998,0.3911767845408634
+Actinobacteriota|Actinobacteria|Bifidobacteriales|Bifidobacteriaceae|Bifidobacterium,yes,6.502566193427879,0,16.696574892650638,0
+Actinobacteriota|Actinobacteria|Bifidobacteriales|Bifidobacteriaceae|Bifidobacterium,no,2.6653002744404284,0.04063388866314506,6.903054528579019,0.32845368697384225
+Actinobacteriota|Actinobacteria|Bifidobacteriales|Bifidobacteriaceae|Gardnerella,yes,17.544583300732004,1.2967004750288869,28.056371152358206,15.261044176706829
+Actinobacteriota|Actinobacteria|Bifidobacteriales|Bifidobacteriaceae|Gardnerella,no,2.98957234086284,0.3222523744911805,5.537317398831091,2.134489936377882
+Actinobacteriota|Actinobacteria|Corynebacteriales|Corynebacteriaceae|Corynebacterium,yes,0.7097516227866777,0.4600219058050383,0.7518496042398651,1.1397892794282172
+Actinobacteriota|Actinobacteria|Corynebacteriales|Corynebacteriaceae|Corynebacterium,no,3.0680029930715493,0.8168761220825852,4.7826622476891965,3.606577321570058
+Actinobacteriota|Coriobacteriia|Coriobacteriales|Atopobiaceae|Atopobium,yes,4.299379452335865,1.476441134933881,8.04061558528669,4.175118949824036
+Actinobacteriota|Coriobacteriia|Coriobacteriales|Atopobiaceae|Atopobium,no,3.7039339092019743,0.19828155981493722,11.571987201503122,1.8187521088118552
+Bacteroidota|Bacteroidia|Bacteroidales|Porphyromonadaceae|Porphyromonas,yes,2.9558115725368164,0.0678334011667345,5.6089613998589964,2.978559506997047
+Bacteroidota|Bacteroidia|Bacteroidales|Porphyromonadaceae|Porphyromonas,no,0.5061830232475492,0.21590232281119714,0.8270750734147689,0.5411304089752655
+Bacteroidota|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella,yes,17.052013404832135,11.48713981821698,16.617205789033058,27.858457839835868
+Bacteroidota|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella,no,5.26089927963133,1.582119537920643,9.01279789076112,3.3732291214324235
+Bacteroidota|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella_9,yes,0,0,0,0
+Bacteroidota|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella_9,no,0.8563853272212978,0,2.589874249593454,0
+Campylobacterota|Campylobacteria|Campylobacterales|Campylobacteraceae|Campylobacter,yes,1.7054130010914679,0,2.7712225197903986,2.542046475799204
+Campylobacterota|Campylobacteria|Campylobacterales|Campylobacteraceae|Campylobacter,no,0.31227102092534426,0.16121940495383263,0.440693814102451,0.3740498584277892
+Firmicutes|Bacilli|Lactobacillales|Lactobacillaceae|Lactobacillus,yes,21.643223986634965,7.484914623186545,33.40200843476919,19.36485873265014
+Firmicutes|Bacilli|Lactobacillales|Lactobacillaceae|Lactobacillus,no,30.999448694046485,10.925373134328359,35.78155972609565,51.89535784428324
+Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus,yes,5.416859476504148,0.8289374529012812,8.60762505033405,6.7711893705458515
+Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus,no,13.661975552680545,0.6264628941208866,23.193841462666157,14.116762332773385
+Firmicutes|Bacilli|Staphylococcales|Gemellaceae|Gemella,yes,0.08064418383319202,0,0.21107258167719267,0
+Firmicutes|Bacilli|Staphylococcales|Gemellaceae|Gemella,no,1.1863437175615141,0,2.919869869065061,0.2959727314604008
+Firmicutes|Bacilli|Staphylococcales|Staphylococcaceae|Staphylococcus,yes,0.06797127667045581,0,0.08843669567390088,0.14064697609001406
+Firmicutes|Bacilli|Staphylococcales|Staphylococcaceae|Staphylococcus,no,9.647174666959708,0.05955926146515784,25.438816899242184,0.29090328448401753
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Anaerococcus,yes,3.7178689008673653,1.7305585980284774,5.837453175005318,3.353035696045384
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Anaerococcus,no,2.4766238690349844,1.1840796019900497,4.08299466909545,2.1993884410259126
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Ezakiella,yes,1.2100546404517472,0.13143483023001096,2.0085447100970297,1.7890191239975324
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Ezakiella,no,0.3417072812502607,0.05243838489774515,0.6274444453634969,0.42601503748247116
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Finegoldia,yes,3.0180997111611636,0.8790436005625879,4.612434259668623,2.5656257371622693
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Finegoldia,no,4.129008439284927,0.5427408412483039,6.3775692918887685,4.0525316088386205
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Peptoniphilus,yes,2.7495015015317623,1.6575392479006936,3.4291806993247165,3.932108943441703
+Firmicutes|Clostridia|Peptostreptococcales-Tissierellales|Family XI|Peptoniphilus,no,1.6134962825704033,0.508298755186722,2.2925562790407144,1.3752927830543784
+Firmicutes|Negativicutes|Veillonellales-Selenomonadales|Veillonellaceae|Dialister,yes,1.984621243812303,0,3.246243740870009,3.0293896006028636
+Firmicutes|Negativicutes|Veillonellales-Selenomonadales|Veillonellaceae|Dialister,no,0.6004546250949364,0.5418633106100332,0.6291093799946522,0.8241676258857378
+Proteobacteria|Gammaproteobacteria|Enterobacterales|Enterobacteriaceae|Escherichia-Shigella,yes,0.34689698489316906,0,0.8655632783233081,0.06419309282321223
+Proteobacteria|Gammaproteobacteria|Enterobacterales|Enterobacteriaceae|Escherichia-Shigella,no,5.691556934932842,0,16.84353049734462,2.164924979992833

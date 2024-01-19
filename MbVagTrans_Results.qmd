@@ -760,6 +760,77 @@ psmelt_rel_genus_sexuallyactive %>%
 
 Although Maaslin2 detects significant changes in some taxa, this might not be statistically relevant due to the extremely skewed distribution of data and non-suitability of a linear model for comparison of 2 groups. Likewise, using a simple parametric statistical test such as the t-test is sub-optimal. This approach fails to detect any significantly altered taxa.
 
+
+Next, we analyse and describe the taxonomic composition within the *trans* and control groups by sexual activity. There are no significant statistical differences and the sample size is small. Therefore, the top 10 abundant taxa are listed for sexually active and non-active subgroups:
+
+```{r sexactive_toptaxa}
+# Trans Group taxa selection
+ps_rel_genus_sexuallyactive_trans = subset_samples(ps_rel_genus_sexuallyactive, grp =="03_trans")
+top <- names(sort(taxa_sums(ps_rel_genus_sexuallyactive_trans), decreasing = TRUE))[1:20]
+psmelt_rel_genus_sexuallyactive_trans.top <- prune_taxa(top, ps_rel_genus_sexuallyactive_trans) %>%
+  psmelt() %>%
+  mutate(tax = paste(Phylum, Class, Order, Family, Genus,sep = "|")) %>%
+  group_by(tax, SexuallyActive)
+
+# Plot
+genus_sexactive_trans_top20 = ggplot(psmelt_rel_genus_sexuallyactive_trans.top, aes(x = tax, y = Abundance, fill = SexuallyActive)) +
+  geom_boxplot(position="dodge", alpha = 0.5) +
+  geom_point(aes(color = SexuallyActive), position = position_dodge(width = 0.7), alpha = 0.8) +
+  scale_fill_manual(values = c("black", "lightgrey")) +
+  scale_color_manual(values = c("black", "lightgrey")) +
+  coord_flip() +
+  theme_bw() +
+  labs(title = "Trans-men group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
+  
+# Summarize
+Genus_Sexuallyactive_Trans_top20 = psmelt_rel_genus_sexuallyactive_trans.top %>% 
+  summarize(mean = mean(Abundance, na.rm=T),
+           median = median(Abundance, na.rm =T),
+           sd = sd(Abundance, na.rm=T),
+           IQR = IQR(Abundance ,na.rm=T))
+
+knitr::kable(Genus_Sexuallyactive_Trans_top20, digits = 2)
+
+
+# Postmenopausal group
+ps_rel_genus_sexuallyactive_post = subset_samples(ps_rel_genus_sexuallyactive, grp =="01_postmenopausal")
+top2 <- names(sort(taxa_sums(ps_rel_genus_sexuallyactive_post), decreasing = TRUE))[1:20]
+psmelt_rel_genus_sexuallyactive_post.top <- prune_taxa(top2, ps_rel_genus_sexuallyactive_post) %>%
+  psmelt() %>%
+  mutate(tax = paste(Phylum, Class, Order, Family, Genus,sep = "|")) %>%
+  group_by(tax, SexuallyActive)
+
+# Plot
+genus_sexactive_post_top20 = ggplot(psmelt_rel_genus_sexuallyactive_post.top, aes(x = tax, y = Abundance, fill = SexuallyActive)) +
+  geom_boxplot(position="dodge", alpha = 0.5) +
+  geom_point(aes(color = SexuallyActive), position = position_dodge(width = 0.7), alpha = 0.8) +
+  scale_fill_manual(values = c("black", "lightgrey")) +
+  scale_color_manual(values = c("black", "lightgrey")) +
+  coord_flip() +
+  theme_bw() +
+  labs(title = "Postmenopausal group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
+
+ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Postmenopausal.pdf", plot = genus_sexactive_post_top20,
+       height = 8, width = 11)
+ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Trans.pdf", plot = genus_sexactive_trans_top20,
+       height = 8, width = 11)
+
+# Summarize
+Genus_Sexuallyactive_Post_top20 = psmelt_rel_genus_sexuallyactive_post.top %>% 
+  summarize(mean = mean(Abundance, na.rm=T),
+           median = median(Abundance, na.rm =T),
+           sd = sd(Abundance, na.rm=T),
+           IQR = IQR(Abundance ,na.rm=T))
+
+knitr::kable(Genus_Sexuallyactive_Post_top20, digits = 2)
+
+genus_sexactive_trans_top20
+genus_sexactive_post_top20
+
+write_csv(Genus_Sexuallyactive_Post_top20, file = "results/Genus_SexuallyActive_Descriptive_Postmenopausal.csv")
+write_csv(Genus_Sexuallyactive_Trans_top20, file = "results/Genus_SexuallyActive_Descriptive_Trans.csv")
+```
+
 ### Influence of the duration of amenorrhea on microbiome composition
 
 Both postmenopausal women as well as trans men undergoing GAHT experience amenorrhea. This section explores a potential interaction between time since last menstruation and composition of the vaginal microbiome.
