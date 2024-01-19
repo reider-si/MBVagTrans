@@ -780,6 +780,7 @@ genus_sexactive_trans_top20 = ggplot(psmelt_rel_genus_sexuallyactive_trans.top, 
   scale_color_manual(values = c("black", "lightgrey")) +
   coord_flip() +
   theme_bw() +
+  lims(y = c(0,100)) + 
   labs(title = "Trans-men group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
   
 # Summarize
@@ -808,6 +809,7 @@ genus_sexactive_post_top20 = ggplot(psmelt_rel_genus_sexuallyactive_post.top, ae
   scale_color_manual(values = c("black", "lightgrey")) +
   coord_flip() +
   theme_bw() +
+  lims(y = c(0,100)) + 
   labs(title = "Postmenopausal group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
 
 ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Postmenopausal.pdf", plot = genus_sexactive_post_top20,
@@ -829,6 +831,26 @@ genus_sexactive_post_top20
 
 write_csv(Genus_Sexuallyactive_Post_top20, file = "results/Genus_SexuallyActive_Descriptive_Postmenopausal.csv")
 write_csv(Genus_Sexuallyactive_Trans_top20, file = "results/Genus_SexuallyActive_Descriptive_Trans.csv")
+
+# Analysis in Trans group with male sexual partner only
+genus_Sexofpartner = psmelt_rel_genus_sexuallyactive_trans.top %>%
+  filter(!is.na(SexOfPartner)) %>%
+  mutate(SexOfPartner2 = ifelse(SexOfPartner %in% c("M", "M+F"), "M", "F only"))
+genus_sexactive_trans_malepartner_top20 = ggplot(genus_Sexofpartner, 
+                                                 aes(x = tax, y = Abundance, fill = SexuallyActive)) +
+  geom_boxplot(position="dodge", alpha = 0.5) +
+  geom_point(aes(color = SexuallyActive), position = position_dodge(width = 0.7), alpha = 0.8) +
+  scale_fill_manual(values = c("black", "lightgrey")) +
+  scale_color_manual(values = c("black", "lightgrey")) +
+  coord_flip() +
+  theme_bw() +
+  facet_wrap(~SexOfPartner2) +
+  lims(y = c(0,100)) + 
+  labs(title = "Trans-men group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
+  
+ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Trans_SexOfPartner.pdf",
+       genus_sexactive_trans_malepartner_top20,
+       height = 8, width = 11)
 ```
 
 ### Influence of the duration of amenorrhea on microbiome composition
