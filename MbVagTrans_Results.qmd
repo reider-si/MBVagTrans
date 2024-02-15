@@ -50,6 +50,11 @@ kable(mutate(taxdistri, Abundance = round(Abundance, digits = 2)))
 
 ```{r get phyloseq object}
 ps_samples = readRDS("intermediate/ps_samples.rds")
+
+sample_data(ps_samples)$grp = factor(sample_data(ps_samples)$grp, 
+                                     labels = c("01_postmenopausal",
+                                                "02_premenopausal",
+                                                "03_trans-men"))
 ```
 
 # Diversity Analysis
@@ -98,11 +103,11 @@ No comparison is significant.
 
 ```{r adiv ghat}
 adiv$data %>%
-  filter(grp =="03_trans") %>%
+  filter(grp =="03_trans-men") %>%
   group_by(variable) %>%
   cor_test(value, GHAT_Length) %>%
   select(variable, cor, statistic, p, conf.low, conf.high) %>%
-  kable(digits = 3, caption = "Pearson Correlation of a-diversity measures with length of GAHT in the Trans patient group")
+  kable(digits = 3, caption = "Pearson Correlation of a-diversity measures with length of GAHT in the trans-men patient group")
 ```
 
 In this analysis, a significant effect on Shannon index with length of hormone replacement therapy could be observed.
@@ -195,11 +200,11 @@ kable(adonis_pw_wUF, digits = 3, caption = "Weighted Unifrac")
 library(DESeq2)
 
 dds = phyloseq_to_deseq2(ps_filtered, ~ grp)
-dds$grp<-relevel(dds$grp,ref="03_trans")
+dds$grp<-relevel(dds$grp,ref="03_trans-men")
 ds <- estimateSizeFactors(dds, type="poscounts")
 ds = DESeq(ds, test="Wald", fitType="parametric")
 alpha = 0.05 
-res_premenopausal = results(ds, contrast = c("grp", "02_premenopausal", "03_trans"))
+res_premenopausal = results(ds, contrast = c("grp", "02_premenopausal", "03_trans-men"))
 taxa_sig_premenopausal = dplyr::filter(as.data.frame(res_premenopausal), padj < 0.05) %>%
   rownames_to_column("ASV")
 
@@ -211,17 +216,17 @@ diffabund_pre = left_join(taxa_sig_premenopausal, taxa_table, by = "ASV") %>%
   select(-Species) %>%
   write_csv2("results/microbiome/deseq_diff_trans-premenopausal.csv")
 
-kable(diffabund_pre, digits = 3, row.names = F, caption = "Differential abundance between premenopausal women and trans patients (pre vs trans)")
+kable(diffabund_pre, digits = 3, row.names = F, caption = "Differential abundance between premenopausal women and trans-men")
 
 # repeat analysis for postmenopausal group
-res_postmenopausal = results(ds, contrast = c("grp", "01_postmenopausal", "03_trans"))
+res_postmenopausal = results(ds, contrast = c("grp", "01_postmenopausal", "03_trans-men"))
 taxa_sig_postmenopausal = dplyr::filter(as.data.frame(res_postmenopausal), padj < 0.05) %>%
   rownames_to_column("ASV")
 
 diffabund_post = left_join(taxa_sig_postmenopausal, taxa_table, by = "ASV") %>%
   write_csv2("results/microbiome/deseq_diff_trans-postmenopausal.csv")
 
-kable(diffabund_post, digits = 3, row.names = F, caption = "Differential abundance between postmenopausal women and trans patients (post vs trans)")
+kable(diffabund_post, digits = 3, row.names = F, caption = "Differential abundance between postmenopausal women and trans-men")
 
 ```
 
@@ -279,11 +284,11 @@ kable(summarystat1)
 kable(summarystat2)
 ```
 
-This analysis reveals, that the *Trans* group is characterized by a loss of *Lactobacillus* and an increase in bacteria more commonly associated with the intestinal flora (e.g. *Campylobacter, Anaerococcus, Dialister, Prevotella)* compared to the premenopausal group.
+This analysis reveals, that the *Trans-men* group is characterized by a loss of *Lactobacillus* and an increase in bacteria more commonly associated with the intestinal flora (e.g. *Campylobacter, Anaerococcus, Dialister, Prevotella)* compared to the premenopausal group.
 
-Comparing the *Trans* to the *postmenopausal* group only revealed an even larger reduction in *Lactobacillus*.
+Comparing the *Trans-men* to the *postmenopausal* group only revealed an even larger reduction in *Lactobacillus*.
 
-Thus, overall the *trans* group is strinkingly similar in its taxonomic composition compared to postmenopausal women.
+Thus, overall the *trans-men* group is strinkingly similar in its taxonomic composition compared to postmenopausal women.
 
 ```{r plot deseq2, fig.width=9, fig.height=12}
 deseq_res_fig
@@ -373,7 +378,7 @@ phylumplot = ggplot(phylum, aes(x = grp, y = Abundance/25, fill = Taxonomy)) +
 
 ## Phylum level
 
-On the phylum level, the taxonomic distribution is dominated by *Firmicutes* (these correspond to *Lactobacilli*, see below). The *Trans* group also shows an increase in *Bacteroidota* compared to the other 2 groups.
+On the phylum level, the taxonomic distribution is dominated by *Firmicutes* (these correspond to *Lactobacilli*, see below). The *Trans-men* group also shows an increase in *Bacteroidota* compared to the other 2 groups.
 
 ```{r phylum plot, fig.width=4, height = 5}
 phylumplot = phylumplot + scale_x_discrete(limits = rev(levels(phylum$grp))) + coord_flip()
@@ -498,11 +503,11 @@ There is no significant correlation of duration of menopause (years) with alpha 
 
 ### Duration of gender-affirming hormone therapy (GAHT)
 
-This analysis is only performed in the TRANS group.
+This analysis is only performed in the trans-men group.
 
 ```{r trans testosterone}
 # only 03_trans samples
-ps_trans = subset_samples(ps_samples, grp =="03_trans") %>%
+ps_trans = subset_samples(ps_samples, grp =="03_trans-men") %>%
   transform_sample_counts(function(x) x/sum(x) * 100) # relative abundances are necessary
 
 asv_GHAT = Maaslin2(input_data = otu_table(ps_trans),
@@ -553,7 +558,7 @@ ggsave(maaslin_res_genus_ghat, filename = "results/maaslin2/genus_GHAT_Length_pa
 
 
 ## Alpha diversity by duration of gaht
-ps_trans_abs = subset_samples(ps_samples, grp =="03_trans")
+ps_trans_abs = subset_samples(ps_samples, grp =="03_trans-men")
 ps_trans_genus = tax_glom(ps_trans_abs, taxrank ="Genus") %>%
   transform_sample_counts(function(x) x/sum(x) * 100)
 
@@ -595,7 +600,7 @@ p_gaht_beta
 
 There is a significant effect of duration of GAHT on the shannon index value in the trans group and on overall community composition although this seems to depend on a single outlier with a duration of 150 of hormone therapy. On the genus level, there are 3 taxa (Anaerococcus, Dialister and Prevotella) who are inversely correlated to duration of testosterone supplementation.
 
-### Absolute Height of Testosterone in TRANS group
+### Absolute Height of Testosterone in the trans-men group
 
 ```{r testosterone height}
 
@@ -612,7 +617,7 @@ genus_testosterone = Maaslin2(input_data = otu_table(ps_trans_genus),
 
 No significant associations.
 
-### Duration of GnRH therapy in TRANS group
+### Duration of GnRH therapy in trans-men group
 
 ```{r gnrh duration trans}
 summary(sample_data(ps_trans_genus)$Duration_GNRH) # only 10 values!
@@ -761,11 +766,11 @@ psmelt_rel_genus_sexuallyactive %>%
 Although Maaslin2 detects significant changes in some taxa, this might not be statistically relevant due to the extremely skewed distribution of data and non-suitability of a linear model for comparison of 2 groups. Likewise, using a simple parametric statistical test such as the t-test is sub-optimal. This approach fails to detect any significantly altered taxa.
 
 
-Next, we analyse and describe the taxonomic composition within the *trans* and control groups by sexual activity. There are no significant statistical differences and the sample size is small. Therefore, the top 10 abundant taxa are listed for sexually active and non-active subgroups:
+Next, we analyse and describe the taxonomic composition within the *trans-men* and control groups by sexual activity. There are no significant statistical differences and the sample size is small. Therefore, the top 10 abundant taxa are listed for sexually active and non-active subgroups:
 
 ```{r sexactive_toptaxa}
 # Trans Group taxa selection
-ps_rel_genus_sexuallyactive_trans = subset_samples(ps_rel_genus_sexuallyactive, grp =="03_trans")
+ps_rel_genus_sexuallyactive_trans = subset_samples(ps_rel_genus_sexuallyactive, grp =="03_trans-men")
 top <- names(sort(taxa_sums(ps_rel_genus_sexuallyactive_trans), decreasing = TRUE))[1:20]
 psmelt_rel_genus_sexuallyactive_trans.top <- prune_taxa(top, ps_rel_genus_sexuallyactive_trans) %>%
   psmelt() %>%
@@ -813,9 +818,9 @@ genus_sexactive_post_top20 = ggplot(psmelt_rel_genus_sexuallyactive_post.top, ae
   labs(title = "Postmenopausal group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
 
 ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Postmenopausal.pdf", plot = genus_sexactive_post_top20,
-       height = 8, width = 11)
+       height = 6, width = 10)
 ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Trans.pdf", plot = genus_sexactive_trans_top20,
-       height = 8, width = 11)
+       height = 6, width = 10)
 
 # Summarize
 Genus_Sexuallyactive_Post_top20 = psmelt_rel_genus_sexuallyactive_post.top %>% 
@@ -875,12 +880,12 @@ adiv_menopause =  plot_richness(ps_menopause, measures = c("Observed", "Shannon"
 adiv_menopause = adiv_menopause$data %>%
   select(samples, grp, DurationMenopause, DurationAmenorrhea, DurationCombined, variable, value)
 
-corr_trans = filter(adiv_menopause, grp =="03_trans") %>%
+corr_trans = filter(adiv_menopause, grp =="03_trans-men") %>%
   group_by(variable) %>%
   rstatix::cor_test(value,DurationAmenorrhea)
 kable(corr_trans)
 
-ggplot(filter(adiv_menopause, grp =="03_trans"), aes(x = DurationAmenorrhea, y = value)) +
+ggplot(filter(adiv_menopause, grp =="03_trans-men"), aes(x = DurationAmenorrhea, y = value)) +
   geom_point() +
   geom_smooth(method = "lm", color = "darkred") +
   facet_wrap(~variable, scales = "free") +
@@ -890,7 +895,7 @@ ggplot(filter(adiv_menopause, grp =="01_postmenopausal"), aes(x = DurationMenopa
   geom_point() +
   geom_smooth(method = "lm") +
   facet_wrap(~variable, scales = "free") +
-  labs(x = "Duration of Amenorrhea in Trans group", y = "Alpha diversity value")
+  labs(x = "Duration of Amenorrhea in trans-men group", y = "Alpha diversity value")
 
 corr_postmeno = filter(adiv_menopause, grp =="01_postmenopausal") %>%
   group_by(variable) %>%
@@ -909,7 +914,7 @@ comb_menopause_plot = ggplot(adiv_menopause, aes(x = DurationCombined, y = value
   geom_point(aes(color = grp)) +
   geom_smooth(method = "lm", color = "darkgrey") +
   facet_wrap(~variable, scales = "free") +
-  labs(x = "Duration of Amenorrhea in postmenopausal and trans group (months)", y = "Alpha diversity value") + 
+  labs(x = "Duration of Amenorrhea in postmenopausal and trans-men (months)", y = "Alpha diversity value") + 
   scale_color_manual(values = custom_pal[c(1,3)])
 
 
@@ -1038,7 +1043,7 @@ ggsave(maaslin_res_genus_sexpartner, filename = "results/maaslin2/genus_SexOfPar
 
 
 # M/F distinction only in trans - filter for this group
-ps_rel_genus_sexuallyactive_trans = subset_samples(ps_rel_genus_sexuallyactive, grp =="03_trans")
+ps_rel_genus_sexuallyactive_trans = subset_samples(ps_rel_genus_sexuallyactive, grp =="03_trans-men")
 genus_SexOfPartnerTrans = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyactive_trans),
          input_metadata = as(sample_data(ps_rel_genus_sexuallyactive_trans), "data.frame"),
          output = "results/maaslin2/genus_SexOfPartnerTrans",
