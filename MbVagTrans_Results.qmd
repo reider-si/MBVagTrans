@@ -76,11 +76,14 @@ tukey = adiv$data %>%
   group_by(variable) %>%
   tukey_hsd(value~grp)
 
-adiv +
-  geom_boxplot(aes(fill = grp),alpha = 0.7) +
+ggplot(adiv$data, aes(x = grp, y = value, fill = grp)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_point() +
+  facet_wrap(~variable, scales = "free_y") +
   labs(x = "", fill = "Group")+
-  scale_y_continuous(expand = expansion(mult = c(0, 0.25)))  +
-  scale_fill_manual(values = custom_pal)
+  expand_limits(y=c(0,0,0))+
+  scale_fill_manual(values = custom_pal) 
+  
 
 kable(select(tukey, variable, group1,group2,p.adj, p.adj.signif))
 ```
@@ -203,7 +206,7 @@ dds = phyloseq_to_deseq2(ps_filtered, ~ grp)
 dds$grp<-relevel(dds$grp,ref="03_trans-men")
 ds <- estimateSizeFactors(dds, type="poscounts")
 ds = DESeq(ds, test="Wald", fitType="parametric")
-alpha = 0.05 
+alpha = 0.01
 res_premenopausal = results(ds, contrast = c("grp", "02_premenopausal", "03_trans-men"))
 taxa_sig_premenopausal = dplyr::filter(as.data.frame(res_premenopausal), padj < 0.05) %>%
   rownames_to_column("ASV")
@@ -310,7 +313,7 @@ genus_rel # 383 genera
 genus = psmelt(genus_rel) %>%
   mutate(Taxonomy = paste0("p_", Phylum, ";c_", Class, ";o_", Order, ";f_", Family, ";g_", Genus)) %>%
   select(Sample, Taxonomy, grp, Age:Estradiole, Abundance)
-genus$Taxonomy[genus$Abundance < 10] <- "< 10 % abund."
+genus$Taxonomy[genus$Abundance < 15] <- "< 15 % abund."
   
 genusplot = ggplot(genus, aes(x = grp, y = Abundance/25, fill = Taxonomy)) + 
   geom_col(position = "stack") +
@@ -521,9 +524,8 @@ asv_GHAT = Maaslin2(input_data = otu_table(ps_trans),
 tax_table(ps_trans) %>%
   as.data.frame() %>%
   rownames_to_column("ASV") %>%
-  filter(ASV %in% asv_GHAT$results$feature)
+  filter(ASV %in% filter(asv_GHAT$results, qval <0.2)$feature)
 
-# all ASVs map to Genus Prevotella
 ps_trans_genus = tax_glom(ps_trans, taxrank = "Genus")
 genus_GHAT = Maaslin2(input_data = otu_table(ps_trans_genus),
          input_metadata = as(sample_data(ps_trans_genus), "data.frame"),
@@ -539,7 +541,7 @@ tax_table(ps_trans_genus) %>%
   rownames_to_column("ASV") %>%
   filter(ASV %in% filter(genus_GHAT$results, qval < 0.2)$feature)
 
-# plot correlation for these 3 ASVs
+# plot correlation for these 2 genera
 psmelt_trans_genus = psmelt(ps_trans_genus)
 maaslin_res_genus_ghat = ggplot(filter(psmelt_trans_genus, OTU %in% filter(genus_GHAT$results, qval < 0.2)$feature),
                                 aes(x = GHAT_Length, y = Abundance)) +
@@ -598,7 +600,7 @@ p_gaht_beta
 
 ```
 
-There is a significant effect of duration of GAHT on the shannon index value in the trans group and on overall community composition although this seems to depend on a single outlier with a duration of 150 of hormone therapy. On the genus level, there are 3 taxa (Anaerococcus, Dialister and Prevotella) who are inversely correlated to duration of testosterone supplementation.
+There is a significant effect of duration of GAHT on the shannon index value in the trans group and on overall community composition although this seems to depend on a single outlier with a duration of 150 of hormone therapy. On the genus level, there are 2 taxa (Dialister and Prevotella) who are inversely correlated to duration of testosterone supplementation.
 
 ### Absolute Height of Testosterone in the trans-men group
 
@@ -741,7 +743,7 @@ geoMeans = apply(cts, 1, function(row) if (all(row == 0)) 0 else exp(mean(log(ro
 sexactive_ds = estimateSizeFactors(sexactive_ds, geoMeans=geoMeans)
 sexactive_ds = DESeq(sexactive_ds, test = "Wald", fitType = "parametric")
 res = results(sexactive_ds, cooksCutoff = FALSE)
-alpha = 0.5
+alpha = 0.1
 sigtab = res[which(res$padj < alpha), ]
 sigtab = cbind(as(sigtab, "data.frame"), as(tax_table(ps_abs_genus_sexuallyactive)[rownames(sigtab), ], "matrix"))
 sigtab = as.data.frame(sigtab) %>%
@@ -749,8 +751,6 @@ sigtab = as.data.frame(sigtab) %>%
 
 sigtab
  
-# this does not detect any significant difference
-
 
 # Wilcoxon
 psmelt_rel_genus_sexuallyactive %>%
@@ -761,11 +761,20 @@ psmelt_rel_genus_sexuallyactive %>%
 
 # using simple parametric statistical test (t-test) no significant diff.
 
+# generate a plot of HT002 abundance per group
+data_rel = transform_sample_counts(ps_abs_genus_sexuallyactive, function(x) x/sum(x)*100)
+data_psmelt = psmelt(data_rel)
+
+filter(data_psmelt, OTU %in% sigtab$feature) %>%
+  ggplot(aes(x = grp, y = Abundance, fill = SexuallyActive)) +
+  geom_boxplot(position = position_dodge()) +
+  scale_y_log10()
+
 ```
 
 Although Maaslin2 detects significant changes in some taxa, this might not be statistically relevant due to the extremely skewed distribution of data and non-suitability of a linear model for comparison of 2 groups. Likewise, using a simple parametric statistical test such as the t-test is sub-optimal. This approach fails to detect any significantly altered taxa.
 
-
+However, Genus *HT002* of family Lactobacillaceae reaches borderline significance (q = 0.054). Some studies use a p-value cutoff of q < 0.01 for these analyses. However, this might be counfounded by all patients in the premenopausal group being sexually active (i.e. association with premenopausal roup per se and not with seuxal activity)
 Next, we analyse and describe the taxonomic composition within the *trans-men* and control groups by sexual activity. There are no significant statistical differences and the sample size is small. Therefore, the top 10 abundant taxa are listed for sexually active and non-active subgroups:
 
 ```{r sexactive_toptaxa}
@@ -917,6 +926,7 @@ comb_menopause_plot = ggplot(adiv_menopause, aes(x = DurationCombined, y = value
   labs(x = "Duration of Amenorrhea in postmenopausal and trans-men (months)", y = "Alpha diversity value") + 
   scale_color_manual(values = custom_pal[c(1,3)])
 
+comb_menopause_plot
 
 ggsave(plot = comb_menopause_plot,device = "pdf", 
        filename = "MbVagTrans_Results_files/figure-html/duration-menopause_comb.pdf", height = 3)
@@ -996,9 +1006,7 @@ kable(adonis_pw_uf, digits = 3, caption ="Unweigthed Unifrac")
 kable(adonis_pw_wUF, digits = 3, caption = "Weighted Unifrac")
 ```
 
-Adonis identifies significant influence of sex of partner on bray curtis dissimilarities overall. Pairwise uncorrected p value is only significant for comparison of M vs M+F and borderline sig for comaprison of M vs F.
-
-Using unweighted Unicfrac, there is a uncorrected singificant p value of 0.021 for the comparison of male vs female.
+Adonis identifies significant influence of sex of partner oall indices of beta diversity. Pairwise comparisons remain significant for all groups (p = 0.03)
 
 ```{r maaslin2}
 genus_SexOfPartner = Maaslin2(input_data = otu_table(ps_rel_genus_sexuallyactive),

@@ -15,7 +15,7 @@ file_id = readxl::read_xlsx("22010/22010_Analysis/22010_Results.xlsx") %>%
   select(IMGM = "IMGM ID", CID = "Customer-ID", grp = "study group") %>%
   filter(!is.na(IMGM)) %>%
   mutate(grp = factor(grp, labels = c("01_postmenopausal", "02_premenopausal", "03_trans")))
-file_id = rbind(file_id, c("22010-PBS01-IKO", 0, "control"))
+file_id = rbind(file_id, c("22010-PBS01-IKO", "0", NA))
 
 covar =  read.csv2("22010 Metadaten.csv") %>%
   dplyr::select(CID = "Probenidentifikationsnummer",

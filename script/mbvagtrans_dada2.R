@@ -1,6 +1,6 @@
 # Script for 16S Analysis of MBVag Trans project (2023)
 # Raw data are 16S sequencing results (Fastq files) in project folder 22010/22010_RawData/, this folder is not included in git
-
+library(dada2)
 library(tidyverse)
 library(DECIPHER)
 library(Biostrings)
@@ -28,7 +28,8 @@ filtRs <- file.path("intermediate", "fq_filtered", paste0(sample.names, "_R_filt
 names(filtFs) <- sample.names
 names(filtRs) <- sample.names
 
-out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,240),
+out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, trimLeft = c(17,21),
+                     truncLen=c(245,245),
                      maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
                      compress=TRUE, multithread=TRUE) 
 head(out)
@@ -61,7 +62,7 @@ saveRDS(seqtab, file = "results/dada2/seqtab.rds")
 table(nchar(getSequences(seqtab))) 
 seqtab.nochim <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE, verbose=TRUE)
 dim(seqtab.nochim)
-sum(seqtab.nochim)/sum(seqtab) # overall frequence of non-chimeric reads is 0.702
+sum(seqtab.nochim)/sum(seqtab) # overall frequence of non-chimeric reads is 87.5 %
 saveRDS(seqtab.nochim, file = "results/dada2/seqtab_nochim.rds")
 
 # track reads
