@@ -1,60 +1,60 @@
-2024-03-06 21:59:28.578053 INFO::Writing function arguments to log file
-2024-03-06 21:59:28.578482 DEBUG::Function arguments
-2024-03-06 21:59:28.578873 DEBUG::Output folder: results/maaslin2/genus_SexOfPartnergrp
-2024-03-06 21:59:28.57901 DEBUG::Min Abundance: 5.000000
-2024-03-06 21:59:28.579143 DEBUG::Min Prevalence: 0.200000
-2024-03-06 21:59:28.579268 DEBUG::Normalization: TSS
-2024-03-06 21:59:28.57939 DEBUG::Transform: LOG
-2024-03-06 21:59:28.579511 DEBUG::Analysis method: LM
-2024-03-06 21:59:28.579636 DEBUG::Max significance: 0.200000
-2024-03-06 21:59:28.57976 DEBUG::Random effects:
-2024-03-06 21:59:28.579882 DEBUG::Fixed effects: SexOfPartner,grp,SexOfPartner*grp
-2024-03-06 21:59:28.580001 DEBUG::Correction method: BH
-2024-03-06 21:59:28.58012 DEBUG::Standardize: TRUE
-2024-03-06 21:59:28.580235 DEBUG::Cores: 1
-2024-03-06 21:59:28.580346 INFO::Verifying options selected are valid
-2024-03-06 21:59:28.580592 INFO::Determining format of input files
-2024-03-06 21:59:28.580815 INFO::Input format is data samples as rows and metadata samples as rows
-2024-03-06 21:59:28.581337 DEBUG::A total of 72 samples were found in both the data and metadata
-2024-03-06 21:59:28.581463 DEBUG::Reordering data/metadata to use same sample ordering
-2024-03-06 21:59:28.582721 WARNING::Feature name not found in metadata so not applied to formula as fixed effect: SexOfPartner*grp
-2024-03-06 21:59:28.583102 INFO::Formula for fixed effects: expr ~  SexOfPartner + grp
-2024-03-06 21:59:28.583371 INFO::Factor detected for categorial metadata 'SexOfPartner'. Provide a reference argument or manually set factor ordering to change reference level.
-2024-03-06 21:59:28.583591 INFO::Factor detected for categorial metadata 'grp'. Provide a reference argument or manually set factor ordering to change reference level.
-2024-03-06 21:59:28.583786 INFO::Filter data based on min abundance and min prevalence
-2024-03-06 21:59:28.583988 INFO::Total samples in data: 72
-2024-03-06 21:59:28.584188 INFO::Min samples required with min abundance for a feature not to be filtered: 14.400000
-2024-03-06 21:59:28.58578 INFO::Total filtered features: 316
-2024-03-06 21:59:28.58607 INFO::Filtered feature names from abundance and prevalence filtering: ASV5, ASV11, ASV12, ASV13, ASV17, ASV20, ASV21, ASV22, ASV23, ASV24, ASV30, ASV31, ASV34, ASV35, ASV38, ASV47, ASV48, ASV50, ASV51, ASV53, ASV57, ASV59, ASV63, ASV68, ASV69, ASV71, ASV73, ASV88, ASV95, ASV97, ASV104, ASV115, ASV119, ASV125, ASV128, ASV131, ASV136, ASV140, ASV147, ASV148, ASV151, ASV152, ASV154, ASV155, ASV170, ASV172, ASV174, ASV183, ASV191, ASV196, ASV197, ASV200, ASV201, ASV202, ASV204, ASV207, ASV208, ASV209, ASV218, ASV224, ASV225, ASV228, ASV249, ASV254, ASV255, ASV256, ASV259, ASV264, ASV267, ASV276, ASV277, ASV280, ASV284, ASV289, ASV291, ASV306, ASV307, ASV312, ASV315, ASV319, ASV325, ASV331, ASV347, ASV349, ASV353, ASV356, ASV358, ASV362, ASV363, ASV367, ASV371, ASV375, ASV378, ASV384, ASV390, ASV392, ASV395, ASV398, ASV405, ASV407, ASV410, ASV414, ASV417, ASV421, ASV431, ASV432, ASV440, ASV443, ASV455, ASV459, ASV466, ASV470, ASV473, ASV475, ASV483, ASV494, ASV518, ASV526, ASV532, ASV556, ASV557, ASV558, ASV570, ASV571, ASV573, ASV586, ASV601, ASV605, ASV608, ASV610, ASV612, ASV615, ASV618, ASV628, ASV637, ASV641, ASV650, ASV653, ASV660, ASV671, ASV674, ASV683, ASV685, ASV686, ASV690, ASV693, ASV699, ASV709, ASV711, ASV728, ASV734, ASV740, ASV744, ASV760, ASV764, ASV785, ASV791, ASV793, ASV803, ASV808, ASV821, ASV823, ASV824, ASV829, ASV838, ASV840, ASV849, ASV853, ASV855, ASV860, ASV864, ASV881, ASV891, ASV892, ASV913, ASV918, ASV925, ASV927, ASV936, ASV948, ASV956, ASV967, ASV979, ASV980, ASV984, ASV1000, ASV1004, ASV1009, ASV1011, ASV1038, ASV1039, ASV1040, ASV1044, ASV1050, ASV1055, ASV1068, ASV1069, ASV1070, ASV1083, ASV1087, ASV1088, ASV1089, ASV1103, ASV1109, ASV1111, ASV1115, ASV1117, ASV1121, ASV1123, ASV1132, ASV1134, ASV1136, ASV1145, ASV1172, ASV1176, ASV1194, ASV1196, ASV1197, ASV1200, ASV1201, ASV1203, ASV1221, ASV1222, ASV1235, ASV1236, ASV1238, ASV1242, ASV1249, ASV1251, ASV1253, ASV1255, ASV1260, ASV1275, ASV1282, ASV1284, ASV1285, ASV1286, ASV1291, ASV1304, ASV1312, ASV1316, ASV1317, ASV1321, ASV1322, ASV1331, ASV1344, ASV1361, ASV1382, ASV1383, ASV1412, ASV1414, ASV1426, ASV1428, ASV1438, ASV1439, ASV1440, ASV1483, ASV1489, ASV1499, ASV1501, ASV1503, ASV1517, ASV1520, ASV1534, ASV1535, ASV1536, ASV1537, ASV1539, ASV1550, ASV1565, ASV1601, ASV1602, ASV1615, ASV1617, ASV1624, ASV1627, ASV1647, ASV1669, ASV1672, ASV1724, ASV1732, ASV1734, ASV1767, ASV1769, ASV1774, ASV1778, ASV1783, ASV1812, ASV1857, ASV1859, ASV1862, ASV1869, ASV1887, ASV1926, ASV1935, ASV1980, ASV2008, ASV2029, ASV2033, ASV2047, ASV2071, ASV2087, ASV2119, ASV2159, ASV2214, ASV2267, ASV2269, ASV2301, ASV2322, ASV2328, ASV2329, ASV2331, ASV2387, ASV2395, ASV2396, ASV2480
-2024-03-06 21:59:28.586477 INFO::Total filtered features with variance filtering: 0
-2024-03-06 21:59:28.586711 INFO::Filtered feature names from variance filtering:
-2024-03-06 21:59:28.586921 INFO::Running selected normalization method: TSS
-2024-03-06 21:59:28.587307 INFO::Applying z-score to standardize continuous metadata
-2024-03-06 21:59:28.58961 INFO::Running selected transform method: LOG
-2024-03-06 21:59:28.590031 INFO::Running selected analysis method: LM
-2024-03-06 21:59:28.590302 INFO::Fitting model to feature number 1, ASV1
-2024-03-06 21:59:28.591541 INFO::Fitting model to feature number 2, ASV3
-2024-03-06 21:59:28.59259 INFO::Fitting model to feature number 3, ASV4
-2024-03-06 21:59:28.593622 INFO::Fitting model to feature number 4, ASV6
-2024-03-06 21:59:28.596537 INFO::Counting total values for each feature
-2024-03-06 21:59:28.597343 INFO::Writing filtered data to file results/maaslin2/genus_SexOfPartnergrp/features/filtered_data.tsv
-2024-03-06 21:59:28.598179 INFO::Writing filtered, normalized data to file results/maaslin2/genus_SexOfPartnergrp/features/filtered_data_norm.tsv
-2024-03-06 21:59:28.598923 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_SexOfPartnergrp/features/filtered_data_norm_transformed.tsv
-2024-03-06 21:59:28.599692 WARNING::Deleting existing residuals file: results/maaslin2/genus_SexOfPartnergrp/fits/residuals.rds
-2024-03-06 21:59:28.600093 INFO::Writing residuals to file results/maaslin2/genus_SexOfPartnergrp/fits/residuals.rds
-2024-03-06 21:59:28.600514 WARNING::Deleting existing fitted file: results/maaslin2/genus_SexOfPartnergrp/fits/fitted.rds
-2024-03-06 21:59:28.600832 INFO::Writing fitted values to file results/maaslin2/genus_SexOfPartnergrp/fits/fitted.rds
-2024-03-06 21:59:28.601183 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_SexOfPartnergrp/all_results.tsv
-2024-03-06 21:59:28.601771 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_SexOfPartnergrp/significant_results.tsv
-2024-03-06 21:59:28.602153 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_SexOfPartnergrp/heatmap.pdf
-2024-03-06 21:59:28.627989 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_SexOfPartnergrp
-2024-03-06 21:59:28.628815 INFO::Plotting associations from most to least significant, grouped by metadata
-2024-03-06 21:59:28.629126 INFO::Plotting data for metadata number 1, grp
-2024-03-06 21:59:28.629656 INFO::Creating boxplot for categorical data, grp vs ASV3
-2024-03-06 21:59:28.693932 INFO::Creating boxplot for categorical data, grp vs ASV6
-2024-03-06 21:59:28.750983 INFO::Creating boxplot for categorical data, grp vs ASV1
-2024-03-06 21:59:28.808518 INFO::Creating boxplot for categorical data, grp vs ASV1
-2024-03-06 21:59:28.866289 INFO::Creating boxplot for categorical data, grp vs ASV3
-2024-03-06 21:59:29.227206 INFO::Plotting data for metadata number 2, SexOfPartner
-2024-03-06 21:59:29.228589 INFO::Creating boxplot for categorical data, SexOfPartner vs ASV6
-2024-03-06 21:59:29.818752 WARNING::Input is a matrix, passing through as.data.frame() .
+2024-03-08 14:06:36.294445 INFO::Writing function arguments to log file
+2024-03-08 14:06:36.29538 DEBUG::Function arguments
+2024-03-08 14:06:36.295622 DEBUG::Output folder: results/maaslin2/genus_SexOfPartnergrp
+2024-03-08 14:06:36.29581 DEBUG::Min Abundance: 5.000000
+2024-03-08 14:06:36.296003 DEBUG::Min Prevalence: 0.200000
+2024-03-08 14:06:36.29617 DEBUG::Normalization: TSS
+2024-03-08 14:06:36.296334 DEBUG::Transform: LOG
+2024-03-08 14:06:36.296497 DEBUG::Analysis method: LM
+2024-03-08 14:06:36.296665 DEBUG::Max significance: 0.200000
+2024-03-08 14:06:36.296833 DEBUG::Random effects:
+2024-03-08 14:06:36.296994 DEBUG::Fixed effects: SexOfPartner,grp,SexOfPartner*grp
+2024-03-08 14:06:36.297151 DEBUG::Correction method: BH
+2024-03-08 14:06:36.297315 DEBUG::Standardize: TRUE
+2024-03-08 14:06:36.297466 DEBUG::Cores: 1
+2024-03-08 14:06:36.297618 INFO::Verifying options selected are valid
+2024-03-08 14:06:36.298226 INFO::Determining format of input files
+2024-03-08 14:06:36.298973 INFO::Input format is data samples as rows and metadata samples as rows
+2024-03-08 14:06:36.299901 DEBUG::A total of 72 samples were found in both the data and metadata
+2024-03-08 14:06:36.30009 DEBUG::Reordering data/metadata to use same sample ordering
+2024-03-08 14:06:36.301733 WARNING::Feature name not found in metadata so not applied to formula as fixed effect: SexOfPartner*grp
+2024-03-08 14:06:36.302444 INFO::Formula for fixed effects: expr ~  SexOfPartner + grp
+2024-03-08 14:06:36.302945 INFO::Factor detected for categorial metadata 'SexOfPartner'. Provide a reference argument or manually set factor ordering to change reference level.
+2024-03-08 14:06:36.303394 INFO::Factor detected for categorial metadata 'grp'. Provide a reference argument or manually set factor ordering to change reference level.
+2024-03-08 14:06:36.303802 INFO::Filter data based on min abundance and min prevalence
+2024-03-08 14:06:36.304225 INFO::Total samples in data: 72
+2024-03-08 14:06:36.304641 INFO::Min samples required with min abundance for a feature not to be filtered: 14.400000
+2024-03-08 14:06:36.306867 INFO::Total filtered features: 317
+2024-03-08 14:06:36.3074 INFO::Filtered feature names from abundance and prevalence filtering: ASV5, ASV11, ASV12, ASV13, ASV17, ASV20, ASV21, ASV22, ASV23, ASV24, ASV30, ASV31, ASV32, ASV35, ASV36, ASV47, ASV48, ASV50, ASV51, ASV53, ASV58, ASV60, ASV63, ASV68, ASV69, ASV71, ASV73, ASV88, ASV96, ASV98, ASV104, ASV115, ASV119, ASV120, ASV121, ASV126, ASV136, ASV140, ASV147, ASV148, ASV151, ASV152, ASV154, ASV155, ASV170, ASV171, ASV173, ASV175, ASV184, ASV193, ASV194, ASV199, ASV200, ASV201, ASV204, ASV205, ASV206, ASV210, ASV211, ASV212, ASV222, ASV229, ASV230, ASV233, ASV252, ASV257, ASV258, ASV259, ASV263, ASV267, ASV270, ASV279, ASV280, ASV283, ASV287, ASV292, ASV294, ASV309, ASV316, ASV319, ASV323, ASV329, ASV335, ASV351, ASV356, ASV359, ASV361, ASV365, ASV366, ASV370, ASV375, ASV379, ASV382, ASV388, ASV393, ASV395, ASV398, ASV401, ASV408, ASV410, ASV413, ASV417, ASV421, ASV425, ASV435, ASV436, ASV443, ASV446, ASV458, ASV462, ASV469, ASV473, ASV476, ASV478, ASV486, ASV497, ASV520, ASV528, ASV534, ASV558, ASV559, ASV560, ASV572, ASV573, ASV575, ASV588, ASV602, ASV606, ASV609, ASV611, ASV613, ASV617, ASV620, ASV630, ASV639, ASV643, ASV652, ASV655, ASV662, ASV673, ASV676, ASV685, ASV687, ASV688, ASV693, ASV696, ASV702, ASV712, ASV714, ASV731, ASV737, ASV743, ASV747, ASV763, ASV767, ASV788, ASV794, ASV796, ASV806, ASV811, ASV826, ASV828, ASV829, ASV834, ASV843, ASV845, ASV855, ASV859, ASV861, ASV866, ASV870, ASV888, ASV898, ASV899, ASV920, ASV925, ASV932, ASV934, ASV943, ASV955, ASV974, ASV986, ASV987, ASV991, ASV1007, ASV1011, ASV1016, ASV1018, ASV1045, ASV1046, ASV1047, ASV1051, ASV1057, ASV1062, ASV1075, ASV1076, ASV1077, ASV1090, ASV1094, ASV1095, ASV1096, ASV1110, ASV1116, ASV1118, ASV1122, ASV1124, ASV1128, ASV1130, ASV1139, ASV1141, ASV1143, ASV1152, ASV1179, ASV1183, ASV1201, ASV1203, ASV1204, ASV1207, ASV1208, ASV1210, ASV1228, ASV1229, ASV1242, ASV1243, ASV1245, ASV1249, ASV1256, ASV1258, ASV1260, ASV1262, ASV1267, ASV1282, ASV1289, ASV1291, ASV1292, ASV1293, ASV1298, ASV1311, ASV1319, ASV1323, ASV1324, ASV1328, ASV1329, ASV1338, ASV1351, ASV1368, ASV1389, ASV1390, ASV1419, ASV1421, ASV1433, ASV1435, ASV1445, ASV1446, ASV1447, ASV1475, ASV1490, ASV1496, ASV1506, ASV1508, ASV1510, ASV1524, ASV1527, ASV1541, ASV1542, ASV1543, ASV1544, ASV1546, ASV1557, ASV1558, ASV1572, ASV1608, ASV1609, ASV1622, ASV1624, ASV1631, ASV1634, ASV1654, ASV1676, ASV1679, ASV1731, ASV1739, ASV1741, ASV1774, ASV1776, ASV1781, ASV1785, ASV1790, ASV1805, ASV1819, ASV1864, ASV1866, ASV1869, ASV1876, ASV1894, ASV1933, ASV1942, ASV1987, ASV2015, ASV2036, ASV2054, ASV2078, ASV2094, ASV2126, ASV2159, ASV2166, ASV2221, ASV2274, ASV2276, ASV2329, ASV2335, ASV2336, ASV2394, ASV2402, ASV2403, ASV2469, ASV2487
+2024-03-08 14:06:36.308115 INFO::Total filtered features with variance filtering: 0
+2024-03-08 14:06:36.308949 INFO::Filtered feature names from variance filtering:
+2024-03-08 14:06:36.309458 INFO::Running selected normalization method: TSS
+2024-03-08 14:06:36.310257 INFO::Applying z-score to standardize continuous metadata
+2024-03-08 14:06:36.315206 INFO::Running selected transform method: LOG
+2024-03-08 14:06:36.315963 INFO::Running selected analysis method: LM
+2024-03-08 14:06:36.316617 INFO::Fitting model to feature number 1, ASV1
+2024-03-08 14:06:36.318561 INFO::Fitting model to feature number 2, ASV3
+2024-03-08 14:06:36.320678 INFO::Fitting model to feature number 3, ASV4
+2024-03-08 14:06:36.323027 INFO::Fitting model to feature number 4, ASV6
+2024-03-08 14:06:36.327326 INFO::Counting total values for each feature
+2024-03-08 14:06:36.328579 INFO::Writing filtered data to file results/maaslin2/genus_SexOfPartnergrp/features/filtered_data.tsv
+2024-03-08 14:06:36.329724 INFO::Writing filtered, normalized data to file results/maaslin2/genus_SexOfPartnergrp/features/filtered_data_norm.tsv
+2024-03-08 14:06:36.331173 INFO::Writing filtered, normalized, transformed data to file results/maaslin2/genus_SexOfPartnergrp/features/filtered_data_norm_transformed.tsv
+2024-03-08 14:06:36.332427 WARNING::Deleting existing residuals file: results/maaslin2/genus_SexOfPartnergrp/fits/residuals.rds
+2024-03-08 14:06:36.333317 INFO::Writing residuals to file results/maaslin2/genus_SexOfPartnergrp/fits/residuals.rds
+2024-03-08 14:06:36.334252 WARNING::Deleting existing fitted file: results/maaslin2/genus_SexOfPartnergrp/fits/fitted.rds
+2024-03-08 14:06:36.335042 INFO::Writing fitted values to file results/maaslin2/genus_SexOfPartnergrp/fits/fitted.rds
+2024-03-08 14:06:36.335705 INFO::Writing all results to file (ordered by increasing q-values): results/maaslin2/genus_SexOfPartnergrp/all_results.tsv
+2024-03-08 14:06:36.336764 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.200000 ) to file (ordered by increasing q-values): results/maaslin2/genus_SexOfPartnergrp/significant_results.tsv
+2024-03-08 14:06:36.337466 INFO::Writing heatmap of significant results to file: results/maaslin2/genus_SexOfPartnergrp/heatmap.pdf
+2024-03-08 14:06:36.399651 INFO::Writing association plots (one for each significant association) to output folder: results/maaslin2/genus_SexOfPartnergrp
+2024-03-08 14:06:36.401596 INFO::Plotting associations from most to least significant, grouped by metadata
+2024-03-08 14:06:36.40244 INFO::Plotting data for metadata number 1, grp
+2024-03-08 14:06:36.403408 INFO::Creating boxplot for categorical data, grp vs ASV3
+2024-03-08 14:06:36.759301 INFO::Creating boxplot for categorical data, grp vs ASV6
+2024-03-08 14:06:36.882698 INFO::Creating boxplot for categorical data, grp vs ASV1
+2024-03-08 14:06:36.99596 INFO::Creating boxplot for categorical data, grp vs ASV1
+2024-03-08 14:06:37.102301 INFO::Creating boxplot for categorical data, grp vs ASV3
+2024-03-08 14:06:37.822144 INFO::Plotting data for metadata number 2, SexOfPartner
+2024-03-08 14:06:37.823852 INFO::Creating boxplot for categorical data, SexOfPartner vs ASV6
+2024-03-08 14:06:39.014947 WARNING::Input is a matrix, passing through as.data.frame() .

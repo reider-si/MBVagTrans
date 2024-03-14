@@ -67,6 +67,8 @@ In this dataset, alpha diversity is markedly different between the group of inte
 
 ```{r alpha diversity}
 adiv = plot_richness(ps_samples, x = "grp", measures = c("Observed", "InvSimpson", "Shannon"))
+adiv$data = adiv$data %>%
+  mutate(grp = factor(grp, labels = c("postmenopausal", "premenopausal", "trans-men")))
 
 aov = adiv$data %>%
   group_by(variable) %>%
@@ -74,17 +76,23 @@ aov = adiv$data %>%
 
 tukey = adiv$data %>%
   group_by(variable) %>%
-  tukey_hsd(value~grp)
+  tukey_hsd(value~grp) 
 
-ggplot(adiv$data, aes(x = grp, y = value, fill = grp)) +
-  geom_boxplot(alpha = 0.7) +
-  geom_point() +
-  facet_wrap(~variable, scales = "free_y") +
-  labs(x = "", fill = "Group")+
-  expand_limits(y=c(0,0,0))+
-  scale_fill_manual(values = custom_pal) 
+
+adiv_plot = ggboxplot(adiv$data, x= "grp", y = "value", 
+          fill = "grp", facet.by="variable", 
+          scales = "free_y", alpha = 0.6) +
+  labs(x = "", y = "Alpha diversity value", fill = "Group") +
+  geom_point(alpha = 0.4) +
+  scale_fill_manual(values = custom_pal) +
+  theme_bw() + 
+  rotate_x_text() +
+  theme(legend.position = "right") +
+  stat_pvalue_manual(tukey, y.position = c(200,240,280,3.5,4,4.5,40,47,54),
+                     tip.length = 0,bracket.size = 0.8)
+
+adiv_plot
   
-
 kable(select(tukey, variable, group1,group2,p.adj, p.adj.signif))
 ```
 
@@ -106,7 +114,7 @@ No comparison is significant.
 
 ```{r adiv ghat}
 adiv$data %>%
-  filter(grp =="03_trans-men") %>%
+  filter(grp =="trans-men") %>%
   group_by(variable) %>%
   cor_test(value, GHAT_Length) %>%
   select(variable, cor, statistic, p, conf.low, conf.high) %>%
@@ -175,7 +183,8 @@ plot_ordinations = cowplot::plot_grid(p1 + theme(legend.position="none"),
 ```
 
 ```{r export plot, fig.height=8, fig.width=9}
-cowplot::plot_grid(plot_ordinations, legend_b, ncol = 1, rel_heights = c(1, .1))
+bdiv_plot = cowplot::plot_grid(plot_ordinations, legend_b, ncol = 1, rel_heights = c(1, .1), labels = AUTO)
+ggsave(plot = bdiv_plot, "results/figure_panels/fig2.pdf", width = 8, height = 6)
 ```
 
 ```{r adonis bdiv}
@@ -236,31 +245,89 @@ kable(diffabund_post, digits = 3, row.names = F, caption = "Differential abundan
 ```{r plot deseq2 taxa}
 asvs = unique(c(diffabund_pre$ASV, diffabund_post$ASV)) # get asvs identified by Deseq2
 
-# next, melt the phyloseq object into a data.frame and filter OTUs for significant ASVs as identified by DESEQ2
+# melt the phyloseq object into a data.frame and filter OTUs for significant ASVs as identified by DESEQ2
 ps_sig_melt = psmelt(ps_filtered_rel) %>%
   filter(OTU %in% asvs)
 
 # Summarize Abundance at the genus level for plotting, almost no species are assigned in this dataset
 ps_sig_melt2 = ps_sig_melt %>%
-  group_by(Sample, Genus, grp) %>%
-  summarize(Abundance = sum(Abundance))
+  mutate(Species = ifelse(is.na(Species), "spp.", Species)) %>%
+  mutate(Tax = paste0(OTU, ": ", Genus, " ", Species)) %>%
+  filter(!is.na(Genus)) %>%
+  group_by(Sample, Tax, grp) %>%
+  summarize(Abundance = sum(Abundance)) 
+
+# Filter least abundant taxa
+taxa_abund= ps_sig_melt2 %>%
+  group_by(Tax) %>%
+  summarize(abund = mean(Abundance))
+
+# only taxa with an average abundance of > 0.75 % are included in the publication figure to promote clarity
+taxa_abund_paper = taxa_abund %>%
+  filter(abund > 0.75)
+
+# sort by ASV_TAX
+ps_sig_melt2 %>%
+  mutate(Tax = factor(Tax))
+
+# build dataframe for automatic significance annotation
+asvs_selection = taxa_abund_paper %>%
+  mutate(ASV = stringi::stri_extract(Tax, regex = "ASV\\d+")) 
+
+signif_pre = diffabund_pre %>%
+  dplyr::filter(ASV %in% asvs_selection$ASV) %>%
+  select(ASV, baseMean:padj) %>%
+  rstatix::add_significance("padj") %>%
+  left_join(asvs_selection, by = "ASV") %>%
+  mutate(term = "grp", 
+         group1 ="02_premenopausal",
+         group2 = "03_trans-men") %>%
+  select(Tax, term, group1, group2, baseMean:padj.signif)
+
+signif_post = diffabund_post %>%
+  dplyr::filter(ASV %in% asvs_selection$ASV) %>%
+  select(ASV, baseMean:padj) %>%
+  rstatix::add_significance("padj") %>%
+  left_join(asvs_selection, by = "ASV") %>%
+  mutate(term = "grp", 
+         group1 ="01_postmenopausal",
+         group2 = "03_trans-men") %>%
+  select(Tax, term, group1, group2, baseMean:padj.signif)
+
+signif_table = rbind(signif_pre, signif_post) %>% data.frame() %>% arrange(Tax) 
+
+kable(signif_table, digits = 3, caption = "Results from DAA testing (DESeq2")
 
 # Plot the final figure panel
-deseq_res_fig = ggplot(ps_sig_melt2, aes(x = grp, y=Abundance)) + 
+deseq_res_fig = ggplot(filter(ps_sig_melt2, Tax %in% taxa_abund_paper$Tax), aes(x = grp, y=Abundance)) + 
   geom_jitter(width = 0.3, alpha = 0.6) +
   geom_boxplot(aes(fill = grp), alpha = 0.5, outlier.shape = NA) +
-  facet_wrap(~Genus, scales = "free", ncol = 3) +
-  scale_y_sqrt() +
+  facet_wrap(~Tax, scales = "free", ncol = 4) +
   theme(axis.text.x=element_blank(),
       axis.ticks.x=element_blank()) +
   labs(x = "", fill = "Group", y= "Abundance (%)") +
   theme(legend.position = "bottom") +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
-  scale_fill_manual(values = custom_pal)
+  scale_fill_manual(values = custom_pal) +
+  scale_y_log10(expand = expansion(mult = c(0, 0.5)), labels = scales::comma)+
+    theme(strip.text.x = element_text(size = 7))
 
-deseq_res_fig
-ggsave(filename = "MbVagTrans_Results_files/figure-html/deseq_taxa_final.pdf", plot = deseq_res_fig, 
-       device = "pdf", width = 8, height = 8)
+
+deseq_res_fig 
+
+deseq_res_fig_supplement = ggplot(filter(ps_sig_melt2, Tax %in% taxa_abund$Tax), aes(x = grp, y=Abundance)) + 
+  geom_jitter(width = 0.3, alpha = 0.6) +
+  geom_boxplot(aes(fill = grp), alpha = 0.5, outlier.shape = NA) +
+  facet_wrap(~Tax, scales = "free", ncol = 4) +
+  theme(axis.text.x=element_blank(),
+      axis.ticks.x=element_blank()) +
+  labs(x = "", fill = "Group", y= "Abundance (%)") +
+  theme(legend.position = "bottom") +
+  scale_fill_manual(values = custom_pal) +
+  scale_y_log10(expand = expansion(mult = c(0, 0.5)), labels = scales::comma) +
+  theme(strip.text.x = element_text(size = 7))
+
+ggsave(filename = "results/microbiome/deseq_taxa_final.pdf", plot = deseq_res_fig, 
+       device = "pdf", width = 8.5, height = 9)
 
 # summary statistics
 summarystat1 = ps_sig_melt2 %>%
@@ -386,7 +453,8 @@ On the phylum level, the taxonomic distribution is dominated by *Firmicutes* (th
 ```{r phylum plot, fig.width=4, height = 5}
 phylumplot = phylumplot + scale_x_discrete(limits = rev(levels(phylum$grp))) + coord_flip()
 phylumplot
-ggsave(plot = phylumplot, filename = "results/microbiome/taxplots_phylum.pdf", width = 7, height = 3)
+ggsave(plot = phylumplot, filename = "results/microbiome/taxplots_phylum.pdf", width = 7, height = 2.5)
+
 ```
 
 ## Class level
@@ -556,8 +624,9 @@ maaslin_res_genus_ghat = ggplot(filter(psmelt_trans_genus, OTU %in% filter(genus
 
 maaslin_res_genus_ghat
 ggsave(maaslin_res_genus_ghat, filename = "results/maaslin2/genus_GHAT_Length_panelplot.pdf",
-       height = 4, width =6)
+       height = 4, width =5)
 
+prevotella 3 dialister 17
 
 ## Alpha diversity by duration of gaht
 ps_trans_abs = subset_samples(ps_samples, grp =="03_trans-men")
@@ -793,7 +862,7 @@ genus_sexactive_trans_top20 = ggplot(psmelt_rel_genus_sexuallyactive_trans.top, 
   scale_fill_manual(values = c("black", "lightgrey")) +
   scale_color_manual(values = c("black", "lightgrey")) +
   coord_flip() +
-  theme_bw() +
+  theme_bw(base_size= 9) +
   lims(y = c(0,100)) + 
   labs(title = "Trans-men group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
   
@@ -822,15 +891,19 @@ genus_sexactive_post_top20 = ggplot(psmelt_rel_genus_sexuallyactive_post.top, ae
   scale_fill_manual(values = c("black", "lightgrey")) +
   scale_color_manual(values = c("black", "lightgrey")) +
   coord_flip() +
-  theme_bw() +
+  theme_bw(base_size = 9) +
   lims(y = c(0,100)) + 
   labs(title = "Postmenopausal group", y = "Abundance (%)", x = "", color = "Sexually Active", fill = "Sexually Active")
 
 ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Postmenopausal.pdf", plot = genus_sexactive_post_top20,
-       height = 6, width = 10)
+       height = 5.5, width = 8.5)
 ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Trans.pdf", plot = genus_sexactive_trans_top20,
-       height = 6, width = 10)
+       height = 5.5, width = 8.5)
 
+genus_sexactive_comb_top20 = cowplot::plot_grid(genus_sexactive_post_top20, genus_sexactive_trans_top20,
+                                                ncol = 1, align = "vh", labels = "AUTO")
+ggsave(filename = "results/Genus_SexuallyActive_Descriptive_Complete.pdf", plot = genus_sexactive_comb_top20,
+       height = 11, width = 8.5)
 # Summarize
 Genus_Sexuallyactive_Post_top20 = psmelt_rel_genus_sexuallyactive_post.top %>% 
   summarize(mean = mean(Abundance, na.rm=T),
@@ -914,6 +987,7 @@ kable(corr_postmeno)
 # correlations are not signficiant for trans and postmenopausal group separately
 
 # Next, both groups are combined: in months
+adiv_menopause$grp = factor(adiv_menopause$grp, labels = c("postmenopausal", "trans-men"))
 corr_menopause = adiv_menopause %>%
   group_by(variable) %>%
   rstatix::cor_test(value, DurationCombined, method = "pearson")
@@ -923,13 +997,19 @@ comb_menopause_plot = ggplot(adiv_menopause, aes(x = DurationCombined, y = value
   geom_point(aes(color = grp)) +
   geom_smooth(method = "lm", color = "darkgrey") +
   facet_wrap(~variable, scales = "free") +
-  labs(x = "Duration of Amenorrhea in postmenopausal and trans-men (months)", y = "Alpha diversity value") + 
+  labs(x = "Duration of Amenorrhea in postmenopausal and trans-men (months)", y = "Alpha diversity value",
+       color = "Group") + 
   scale_color_manual(values = custom_pal[c(1,3)])
 
 comb_menopause_plot
 
 ggsave(plot = comb_menopause_plot,device = "pdf", 
        filename = "MbVagTrans_Results_files/figure-html/duration-menopause_comb.pdf", height = 3)
+
+# Figure 1 complete
+Fig1 = cowplot::plot_grid(adiv_plot, comb_menopause_plot, align = "hv", ncol = 1, labels = c("A", "B"))
+
+ggsave("results/figure_panels/fig1.pdf", width = 6, height =7)
 
 ## Maaslin2 analysis of abundance with duration of amenorrhea
 ps_menopause_rel_genus = tax_glom(ps_menopause_rel, taxrank = "Genus")

@@ -81,11 +81,14 @@ track_long = as.data.frame(track) %>%
 trackplot = ggplot(track_long, aes(x = step, y = number)) +
   geom_boxplot() +
   geom_jitter()+
-  theme_bw(base_size = 14) +
-  scale_y_log10()
+  theme_bw(base_size = 14) + 
+  rotate_x_text() +
+  labs(x = "Step of dada2 pipeline", y = "Sequence number")+
+  expand_limits(y = 0)
 
 write_excel_csv2(as.data.frame(track), file = "results/dada2/track.csv")
-ggsave(trackplot, filename = "results/dada2/trackplot.png", width = 7, height = 5)
+ggsave(trackplot, filename = "results/dada2/trackplot.png", width = 3.5, height = 3.5)
+ggsave(trackplot, filename = "results/dada2/trackplot.pdf", width = 3.5, height = 3.5)
 
 # summarize percentage of nonchimeric reads as part of merged
 nonchim_retained= track %>%
@@ -97,7 +100,7 @@ nonchim_retained= track %>%
 
 x = summary(nonchim_retained$retain) %>% broom::tidy()
 write_excel_csv2(x, file = "results/dada2/nochim_sumstat.csv")
-# chimera statistics are ok
+# chimera statistics look ok
 
 taxa <- assignTaxonomy(seqtab.nochim, "resources/silva_nr99_v138.1_train_set.fa", multithread=TRUE)
 taxa <- addSpecies(taxa, "resources/silva_species_assignment_v138.1.fa")
