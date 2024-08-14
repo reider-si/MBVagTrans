@@ -110,6 +110,28 @@ adiv$data %>%
 
 No comparison is significant.
 
+A subset of TM patients received GnRh-A. Therefore, we next test for differences regarding this medication.
+```{r adiv gnrha}
+adiv$data %>%
+  filter(grp =="trans-men")  %>%
+  group_by(variable) %>%
+  t_test(value ~ GNRHA) 
+  kable()
+  
+```
+A student's t-test does not show any significant differences in indices of a-diversity for vaginal microbial swaps from TM with and without GNRHa. This is illustrated:
+```{r adiv_gnrha fig}
+gnrha_adiv = adiv$data %>% filter(grp=="trans-men")
+ggboxplot(gnrha_adiv, x= "GNRHA", y = "value", 
+          fill = "GNRHA", facet.by="variable", 
+          scales = "free_y", alpha = 0.6) +
+  labs(x = "", y = "Alpha diversity value", fill = "GNRHa") +
+  geom_point(alpha = 0.4) +
+  theme_bw() + 
+  rotate_x_text() +
+  theme(legend.position = "right")
+```
+
 #### Length of GAHT within patient group
 
 ```{r adiv ghat}
@@ -206,6 +228,27 @@ kable(adonis_pw_uf, digits = 3, caption ="Unweigthed Unifrac")
 kable(adonis_pw_wUF, digits = 3, caption = "Weighted Unifrac")
 ```
 
+
+```{r adonis bdiv gnrha}
+subsetted_ps = subset_samples(ps_filtered_rel, grp=="03_trans-men", !is.na(GNRHA))
+D_BC2 <- phyloseq::distance(subsetted_ps, "bray")
+D_UF2 <- phyloseq::distance(subsetted_ps,  "unifrac")
+D_wUF2 <- phyloseq::distance(subsetted_ps, "wunifrac")
+
+adonis_bc2 = vegan::adonis2(D_BC2 ~ phyloseq::sample_data(subsetted_ps)$GNRHA)
+adonis_pw_bc = pairwise.adonis(D_BC2, 
+                              phyloseq::sample_data(subsetted_ps)$GNRHA)
+
+adonis_uf = vegan::adonis2(D_UF ~ phyloseq::sample_data(ps_filtered_rel)$grp)
+adonis_pw_uf = pairwise.adonis(D_UF, phyloseq::sample_data(ps_filtered_rel)$grp)
+
+adonis_wUF = vegan::adonis2(D_wUF ~ phyloseq::sample_data(ps_filtered_rel)$grp)
+adonis_pw_wUF = pairwise.adonis(D_wUF, phyloseq::sample_data(ps_filtered_rel)$grp)
+
+kable(adonis_pw_bc, digits = 3, caption = "Bray-Curtis")
+kable(adonis_pw_uf, digits = 3, caption ="Unweigthed Unifrac")
+kable(adonis_pw_wUF, digits = 3, caption = "Weighted Unifrac")
+```
 # Differential abundance
 
 ```{r deseq2}
@@ -246,8 +289,43 @@ kable(diffabund_post, digits = 3, row.names = F, caption = "Differential abundan
 asvs = unique(c(diffabund_pre$ASV, diffabund_post$ASV)) # get asvs identified by Deseq2
 
 # melt the phyloseq object into a data.frame and filter OTUs for significant ASVs as identified by DESEQ2
-ps_sig_melt = psmelt(ps_filtered_rel) %>%
-  filter(OTU %in% asvs)
+
+ps_filtered_rel_deseqplot = ps_rel
+
+# add otuid as separate column to the tax table
+tax_table(ps_filtered_rel_deseqplot) <- cbind(tax_table(ps_filtered_rel_deseqplot), 
+    rownames(tax_table(ps_filtered_rel_deseqplot)))
+colnames(tax_table(ps_filtered_rel_deseqplot)) <- 
+  c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTUID")
+
+# subset phyloseq for sign. asvs (n = 63)
+ps_filtered_rel_deseqplot = subset_taxa(ps_filtered_rel_deseqplot, OTUID %in% asvs)
+
+# Add a concetenated taxonomy to tax_table
+myranks2 = c("Genus", "Species")
+mylabels2 = apply(tax_table(ps_filtered_rel_deseqplot)[, myranks2], 1, paste, sep="", collapse=" ")
+# Add concatenated labels as a new rank after Species
+tax_table(ps_filtered_rel_deseqplot) <- cbind(tax_table(ps_filtered_rel_deseqplot), taxlab=mylabels2)
+
+asv_heatmap_grp = plot_heatmap(ps_filtered_rel_deseqplot, taxa.label = "taxlab", sample.label = "grp", na.value ="white",low = "white", high = "orange", sample.order = "grp", trans="log10")
+asv_heatmap_clust = plot_heatmap(ps_filtered_rel_deseqplot, taxa.label = "taxlab", sample.label = "grp", na.value ="white",low = "white", high = "orange",  trans="log10")
+
+library(microViz)
+htmp_asvs = ps_filtered_rel_deseqplot %>%
+  tax_fix() %>%
+  tax_transform("compositional", rank = "Genus") %>%
+  comp_heatmap(
+    sample_anno = sampleAnnotation(
+      Group = anno_sample_cat(
+        var = "grp", col = custom_pal, box_col = NA, border_col = "black",
+        legend_title = "Group")))
+
+htmp_asvs = htmp_asvs %>% ComplexHeatmap::draw(
+  annotation_legend_list = attr(htmp_asvs, "AnnoLegends"))
+pdf(file = "results/microbiome/heatmap_genus-cluster.pdf", height = 6, width = 6)
+htmp_asvs
+dev.off()
+
 
 # Summarize Abundance at the genus level for plotting, almost no species are assigned in this dataset
 ps_sig_melt2 = ps_sig_melt %>%
@@ -371,22 +449,17 @@ ggsave(deseq_res_fig, width = 7, height = 8, filename = "results/microbiome/dese
 The following plots illustrate taxonomic composition at all levels of the taxonomy, The taxon table is filtered to only differentiate the most abundant taxa at each level (depending on the level).
 
 ```{r tax abundance plot}
+ps_samples <- ps_samples %>% subset_taxa( Family!= "Mitochondria" | is.na(Family) & Class!="Chloroplast" | is.na(Class) ) 
 ps.ns = prune_taxa(taxa_sums(ps_samples) >1, ps_samples) # remove singleton ASVs
 ps_rel = transform_sample_counts(ps.ns, function(x) x/sum(x) *100) # transform to rel counts
 
 # Generate agglomerated phyloseq objects
 genus_rel = tax_glom(ps_rel, taxrank="Genus", NArm = F)
-genus_rel # 383 genera
+genus_rel # 401 genera
 genus = psmelt(genus_rel) %>%
   mutate(Taxonomy = paste0("p_", Phylum, ";c_", Class, ";o_", Order, ";f_", Family, ";g_", Genus)) %>%
   select(Sample, Taxonomy, grp, Age:Estradiole, Abundance)
 genus$Taxonomy[genus$Abundance < 15] <- "< 15 % abund."
-  
-genusplot = ggplot(genus, aes(x = grp, y = Abundance/25, fill = Taxonomy)) + 
-  geom_col(position = "stack") +
-  theme(legend.position = "right") +
-  labs(y = "Abundance (%)", x= "", caption = "taxonomic level: genus") +
-  rotate_x_text() 
 
 # Family Level
 family_rel = tax_glom(ps_rel, taxrank="Family", NArm = F)
@@ -395,12 +468,6 @@ family = psmelt(family_rel) %>%
   mutate(Taxonomy = paste0("p_", Phylum, ";c_", Class, ";o_", Order, ";f_", Family)) %>%
   select(Sample, Taxonomy, grp, Age:Estradiole, Abundance)
 family$Taxonomy[family$Abundance < 15] <- "< 15 % abund."
-  
-familyplot = ggplot(family, aes(x = grp, y = Abundance/25, fill = Taxonomy)) + 
-  geom_col(position = "stack") +
-  theme(legend.position = "right") +
-  labs(y = "Abundance (%)", x= "", caption = "taxonomic level: family") +
-  rotate_x_text()
 
 # Order Level
 order_rel = tax_glom(ps_rel, taxrank="Order", NArm = F)
@@ -410,11 +477,6 @@ order = psmelt(order_rel) %>%
   select(Sample, Taxonomy, grp, Age:Estradiole, Abundance)
 order$Taxonomy[order$Abundance < 20] <- "< 20 % abund."
   
-orderplot = ggplot(order, aes(x = grp, y = Abundance/25, fill = Taxonomy)) + 
-  geom_col(position = "stack") +
-  theme(legend.position = "right") +
-  labs(y = "Abundance (%)", x= "", caption = "taxonomic level: order") +
-  rotate_x_text()
 
 # Class Level
 class_rel = tax_glom(ps_rel, taxrank="Class", NArm = F)
@@ -492,6 +554,47 @@ ggsave(plot = genusplot, filename = "results/microbiome/taxplots_genus.pdf", wid
 ggsave(plot = genusplot, filename = "results/microbiome/taxplots_family.png", width = 15, height = 6)
 
 ```
+
+As requested during peer review, these data are preseneted also in the form of a heatmap
+```{r}
+# Phyla as heatmap per sample
+# filter phyla which only occur in single samples
+phylum_rel_filt = filter_taxa(phylum_rel, function (x) {sum(x > 1) > 3}, prune=TRUE)
+  phylum_heatmap_grp = plot_heatmap(phylum_rel_filt, taxa.label = "Phylum", sample.label = "grp", na.value = "white",low = "white", high = "darkorange", sample.order = "grp", trans="identity",first.taxa = "ASV1")
+phylum_heatmap_clust = plot_heatmap(phylum_rel_filt, taxa.label = "Phylum", sample.label = "grp", na.value = "white",low = "white", high = "darkorange",  trans="identity",first.taxa = "ASV1")
+
+genus_rel_filt = filter_taxa(genus_rel, function (x) {sum(x > 1) > 3}, prune=TRUE) 
+myranks = c("Phylum", "Family", "Genus")
+mylabels = apply(tax_table(genus_rel_filt)[, myranks], 1, paste, sep="", collapse="|")
+# Add concatenated labels as a new rank after Species
+tax_table(genus_rel_filt) <- cbind(tax_table(genus_rel_filt), taxlab=mylabels)
+genus_heatmap_grp = plot_heatmap(genus_rel_filt, taxa.label = "taxlab", sample.label = "grp", na.value ="white",low = "white", high = "orange", sample.order = "grp", trans="log10")
+genus_heatmap_clust = plot_heatmap(genus_rel_filt, taxa.label = "taxlab", sample.label = "grp", na.value ="white",low = "white", high = "orange",  trans="log10")
+
+
+
+phylum_heatmap_grp = plot_heatmap(phylum_rel_filt, taxa.label = "Phylum", sample.label = "grp", na.value = "white",low = "white", high = "darkorange", sample.order = "grp", trans="identity",first.taxa = "ASV1")
+
+ggsave(plot = phylum_heatmap_grp, filename = "results/microbiome/heatmap_phylum-grp.pdf", width = 6, height = 3)
+ggsave(plot = genus_heatmap_grp, filename = "results/microbiome/heatmap_genus-grp.pdf", width = 8, height = 8)
+
+# Alternatively, package microViz was used to generate heatmaps with dendrogram and group
+library(microViz)
+htmp_phylum = phylum_rel_filt %>%
+  tax_transform("compositional", rank = "Phylum") %>%
+  comp_heatmap(
+    sample_anno = sampleAnnotation(
+      Group = anno_sample_cat(
+        var = "grp", col = custom_pal, box_col = NA, border_col = "black",
+        legend_title = "Group")))
+htmp_phylum = htmp_phylum %>% ComplexHeatmap::draw(
+  annotation_legend_list = attr(htmp_phylum, "AnnoLegends"))
+pdf(file = "results/microbiome/heatmap_phylum-cluster.pdf", height = 4, width = 6)
+htmp_phylum
+dev.off()
+```
+
+
 
 # Secondary analyses
 
@@ -625,8 +728,6 @@ maaslin_res_genus_ghat = ggplot(filter(psmelt_trans_genus, OTU %in% filter(genus
 maaslin_res_genus_ghat
 ggsave(maaslin_res_genus_ghat, filename = "results/maaslin2/genus_GHAT_Length_panelplot.pdf",
        height = 4, width =5)
-
-prevotella 3 dialister 17
 
 ## Alpha diversity by duration of gaht
 ps_trans_abs = subset_samples(ps_samples, grp =="03_trans-men")
@@ -850,6 +951,26 @@ Next, we analyse and describe the taxonomic composition within the *trans-men* a
 # Trans Group taxa selection
 ps_rel_genus_sexuallyactive_trans = subset_samples(ps_rel_genus_sexuallyactive, grp =="03_trans-men")
 top <- names(sort(taxa_sums(ps_rel_genus_sexuallyactive_trans), decreasing = TRUE))[1:20]
+ps_rel_genus_sexuallyactive_trans20 = prune_taxa(top, ps_rel_genus_sexuallyactive_trans)
+myranks = c("Phylum", "Family", "Genus")
+mylabels = apply(tax_table(ps_rel_genus_sexuallyactive_trans20)[, myranks], 1, paste, sep="", collapse="|")
+# Add concatenated labels as a new rank after Species
+tax_table(ps_rel_genus_sexuallyactive_trans20) <- cbind(tax_table(ps_rel_genus_sexuallyactive_trans20), taxlab=mylabels)
+
+genus_htmp_sexactive_trans = plot_heatmap(ps_rel_genus_sexuallyactive_trans20, taxa.label = "taxlab", sample.label = "SexuallyActive", na.value = "white",low = "white", high = "darkorange", sample.order = "SexuallyActive", trans="identity",first.taxa = "ASV1")
+genus_htmp_sexactive_trans_clust = plot_heatmap(ps_rel_genus_sexuallyactive_trans20, taxa.label = "taxlab", sample.label = "SexuallyActive", na.value = "white",low = "white", high = "darkorange",  trans="identity",first.taxa = "ASV1")
+
+htmp_sexactive_trans = ps_rel_genus_sexuallyactive_trans20 %>%
+  tax_transform("compositional", rank = "Genus") %>%
+  comp_heatmap(
+    sample_anno = sampleAnnotation(
+      Group = anno_sample_cat(
+        var = "SexuallyActive", col = custom_pal, box_col = NA, border_col = "black",
+        legend_title = "Sexually Active")))
+htmp_sexactive_trans = htmp_sexactive_trans %>% ComplexHeatmap::draw(
+  annotation_legend_list = attr(htmp_sexactive_trans, "AnnoLegends"))
+
+
 psmelt_rel_genus_sexuallyactive_trans.top <- prune_taxa(top, ps_rel_genus_sexuallyactive_trans) %>%
   psmelt() %>%
   mutate(tax = paste(Phylum, Class, Order, Family, Genus,sep = "|")) %>%
@@ -879,6 +1000,72 @@ knitr::kable(Genus_Sexuallyactive_Trans_top20, digits = 2)
 # Postmenopausal group
 ps_rel_genus_sexuallyactive_post = subset_samples(ps_rel_genus_sexuallyactive, grp =="01_postmenopausal")
 top2 <- names(sort(taxa_sums(ps_rel_genus_sexuallyactive_post), decreasing = TRUE))[1:20]
+
+# Heatmap
+ps_rel_genus_sexuallyactive_post20 = prune_taxa(top2, ps_rel_genus_sexuallyactive_post)
+myranks = c("Phylum", "Family", "Genus")
+mylabels = apply(tax_table(ps_rel_genus_sexuallyactive_post20)[, myranks], 1, paste, sep="", collapse="|")
+# Add concatenated labels as a new rank after Species
+tax_table(ps_rel_genus_sexuallyactive_post20) <- cbind(tax_table(ps_rel_genus_sexuallyactive_post20), taxlab=mylabels)
+
+genus_htmp_sexactive_post = plot_heatmap(ps_rel_genus_sexuallyactive_post20, taxa.label = "taxlab", sample.label = "SexuallyActive", na.value = "white",low = "white", high = "darkorange", sample.order = "SexuallyActive", trans="identity",first.taxa = "ASV1")
+genus_htmp_sexactive_post_clust = plot_heatmap(ps_rel_genus_sexuallyactive_post20, taxa.label = "taxlab", sample.label = "SexuallyActive", na.value = "white",low = "white", high = "darkorange",  trans="identity",first.taxa = "ASV1") 
+
+htmp_sexactive_post = ps_rel_genus_sexuallyactive_post20 %>%
+  tax_transform("compositional", rank = "Genus") %>%
+  comp_heatmap(
+    sample_anno = sampleAnnotation(
+      Group = anno_sample_cat(
+        var = "SexuallyActive", col = custom_pal, box_col = NA, border_col = "black",
+        legend_title = "Sexually Active")))
+htmp_sexactive_post = htmp_sexactive_post %>% ComplexHeatmap::draw(
+  annotation_legend_list = attr(htmp_sexactive_post, "AnnoLegends"))
+
+htmp_sexactive_trans = ps_rel_genus_sexuallyactive_trans20 %>%
+  tax_transform("compositional", rank = "Genus") %>%
+  comp_heatmap(
+    sample_anno = sampleAnnotation(
+      Group = anno_sample_cat(
+        var = "SexuallyActive", col = custom_pal, box_col = NA, border_col = "black",
+        legend_title = "Sexually Active")))
+htmp_sexactive_trans = htmp_sexactive_trans %>% ComplexHeatmap::draw(
+  annotation_legend_list = attr(htmp_sexactive_trans, "AnnoLegends"))
+
+post_selected = phyloseq(otu_table(ps_rel_genus_sexuallyactive_post20),
+                         tax_table(ps_rel_genus_sexuallyactive_post20),
+                         sample_data(ps_rel_genus_sexuallyactive_post20))
+trans_selected = phyloseq(otu_table(ps_rel_genus_sexuallyactive_trans20),
+                          tax_table(ps_rel_genus_sexuallyactive_trans20),
+                          sample_data(ps_rel_genus_sexuallyactive_trans20))
+merged_ps = merge_phyloseq(post_selected,trans_selected)
+   
+htmp_sexactive_combined = merged_ps %>%
+  tax_transform("compositional", rank = "Genus") %>%
+  comp_heatmap(
+    sample_anno = sampleAnnotation(
+      Sex = anno_sample_cat(
+        var = "SexuallyActive", col = c("lightgrey", "darkgrey"), box_col = NA, border_col = "black",
+        legend_title = "Sexually Active"),
+      Group = anno_sample_cat(
+        var = "grp", col = custom_pal, box_col = NA, border_col = "black", legend_title = "Group")
+      ))
+htmp_sexactive_combined = htmp_sexactive_combined %>% ComplexHeatmap::draw(
+  annotation_legend_list = attr(htmp_sexactive_combined, "AnnoLegends"))
+                        
+pdf("results/microbiome/htmp_sexactive_combined.pdf",width = 6, height = 6)
+htmp_sexactive_combined
+dev.off()
+
+png("results/microbiome/htmp_sexactive_combined.png",width = 6, height = 6)
+htmp_sexactive_combined
+dev.off()
+
+# Heatmap by genus
+fig6_heatmaps = cowplot::plot_grid(genus_htmp_sexactive_post, genus_htmp_sexactive_trans, ncol = 1, align = "vh")
+
+ggsave(plot = fig6_heatmaps, filename = "results/microbiome/sexuallyactive_heatmaps.pdf",
+       width = 8, height = 8)
+
 psmelt_rel_genus_sexuallyactive_post.top <- prune_taxa(top2, ps_rel_genus_sexuallyactive_post) %>%
   psmelt() %>%
   mutate(tax = paste(Phylum, Class, Order, Family, Genus,sep = "|")) %>%
@@ -964,20 +1151,20 @@ adiv_menopause = adiv_menopause$data %>%
 
 corr_trans = filter(adiv_menopause, grp =="03_trans-men") %>%
   group_by(variable) %>%
-  rstatix::cor_test(value,DurationAmenorrhea)
+  rstatix::cor_test(value,DurationCombined)
 kable(corr_trans)
 
-ggplot(filter(adiv_menopause, grp =="03_trans-men"), aes(x = DurationAmenorrhea, y = value)) +
+plot_trans = ggplot(filter(adiv_menopause, grp =="03_trans-men"), aes(x = DurationCombined, y = value)) +
   geom_point() +
   geom_smooth(method = "lm", color = "darkred") +
   facet_wrap(~variable, scales = "free") +
-  labs(x = "Duration of Amenorrhea in postmenopausal group", y = "Alpha diversity value")
+  labs(x = "Duration of Amenorrhea in trans-men group", y = "Alpha diversity value")
 
-ggplot(filter(adiv_menopause, grp =="01_postmenopausal"), aes(x = DurationMenopause, y = value)) +
+plot_postmeno = ggplot(filter(adiv_menopause, grp =="01_postmenopausal"), aes(x = DurationCombined, y = value)) +
   geom_point() +
   geom_smooth(method = "lm") +
   facet_wrap(~variable, scales = "free") +
-  labs(x = "Duration of Amenorrhea in trans-men group", y = "Alpha diversity value")
+  labs(x = "Duration of Amenorrhea in postmenopausal group", y = "Alpha diversity value")
 
 corr_postmeno = filter(adiv_menopause, grp =="01_postmenopausal") %>%
   group_by(variable) %>%
@@ -985,6 +1172,7 @@ corr_postmeno = filter(adiv_menopause, grp =="01_postmenopausal") %>%
 kable(corr_postmeno)
 
 # correlations are not signficiant for trans and postmenopausal group separately
+cowplot::plot_grid(plot_trans, plot_postmeno, ncol = 1)
 
 # Next, both groups are combined: in months
 adiv_menopause$grp = factor(adiv_menopause$grp, labels = c("postmenopausal", "trans-men"))
@@ -992,14 +1180,6 @@ corr_menopause = adiv_menopause %>%
   group_by(variable) %>%
   rstatix::cor_test(value, DurationCombined, method = "pearson")
 kable(corr_menopause)
-
-comb_menopause_plot = ggplot(adiv_menopause, aes(x = DurationCombined, y = value)) +
-  geom_point(aes(color = grp)) +
-  geom_smooth(method = "lm", color = "darkgrey") +
-  facet_wrap(~variable, scales = "free") +
-  labs(x = "Duration of Amenorrhea in postmenopausal and trans-men (months)", y = "Alpha diversity value",
-       color = "Group") + 
-  scale_color_manual(values = custom_pal[c(1,3)])
 
 comb_menopause_plot
 
